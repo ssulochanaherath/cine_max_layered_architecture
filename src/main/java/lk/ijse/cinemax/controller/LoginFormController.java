@@ -35,7 +35,7 @@ public class LoginFormController {
         Parent rootNode = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
         Scene scene = new Scene(rootNode);
         Stage newStage = new Stage();
-        newStage.setTitle("Signup Form");
+        newStage.setTitle("Dashboard Form");
         newStage.setScene(scene);
         newStage.show();
 

@@ -9,29 +9,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="675.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.LoginFormController">
+<AnchorPane prefHeight="722.0" prefWidth="1062.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.LoginFormController">
    <children>
-      <ImageView cache="true" depthTest="DISABLE" fitHeight="675.0" fitWidth="1100.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="750.0" fitWidth="1087.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/new-theater.png" />
          </image>
       </ImageView>
-      <Label layoutX="274.0" layoutY="137.0" text="Cinemax" textFill="WHITE">
+      <Label layoutX="310.0" layoutY="146.0" text="Cinemax" textFill="WHITE">
          <font>
             <Font name="System Bold" size="96.0" />
          </font>
       </Label>
-      <TextField fx:id="txtId" layoutX="359.0" layoutY="302.0" prefHeight="35.0" prefWidth="294.0" promptText="User Name">
+      <TextField fx:id="txtId" layoutX="396.0" layoutY="356.0" prefHeight="35.0" prefWidth="294.0" promptText="User Name">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </TextField>
-      <TextField fx:id="txtPassword" layoutX="359.0" layoutY="361.0" prefHeight="35.0" prefWidth="294.0" promptText="Password">
+      <TextField fx:id="txtPassword" layoutX="396.0" layoutY="415.0" prefHeight="35.0" prefWidth="294.0" promptText="Password">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </TextField>
-      <Button layoutX="470.0" layoutY="438.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="35.0" prefWidth="72.0" style="-fx-background-color: #7f8fa6;" text="Login">
+      <Button layoutX="507.0" layoutY="492.0" mnemonicParsing="false" onAction="#btnLoginOnAction" prefHeight="35.0" prefWidth="72.0" style="-fx-background-color: #7f8fa6;" text="Login">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
@@ -40,7 +40,7 @@
          </cursor>
       </Button>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="74.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="14.0" layoutY="625.0" mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #ecf0f1;" text="Sign Up">
+      <Button layoutX="14.0" layoutY="674.0" mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="35.0" prefWidth="80.0" style="-fx-background-color: #ecf0f1;" text="Sign Up">
          <font>
             <Font name="System Bold Italic" size="13.0" />
          </font>
