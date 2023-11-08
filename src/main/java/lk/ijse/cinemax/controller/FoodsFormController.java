@@ -1,5 +1,4 @@
 package lk.ijse.cinemax.controller;
 
-public class CustomerFormController {
-
+public class FoodsFormController {
 }

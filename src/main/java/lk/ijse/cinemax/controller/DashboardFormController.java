@@ -41,7 +41,7 @@ public class DashboardFormController {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/customer_form.fxml"));
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
         Scene scene = new Scene(rootNode);
         Stage newStage = new Stage();
         newStage.setTitle("Customer Form");
@@ -51,7 +51,18 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnMoviesOnAction(ActionEvent event) {
+    public void btnMoviesOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/movies_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Movies Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
     }
 
     public void btnTicketOnAction(ActionEvent event) {

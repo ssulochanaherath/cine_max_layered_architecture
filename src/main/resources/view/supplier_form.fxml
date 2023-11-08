@@ -8,20 +8,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="724.0" prefWidth="1080.0" style="-fx-background-color: #192a56;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.CustomerFormController">
+<AnchorPane prefHeight="724.0" prefWidth="1080.0" style="-fx-background-color: #192a56;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.SupplierFormController">
     <children>
         <Label layoutX="370.0" layoutY="11.0" text="CineMax" textFill="#fffefe">
             <font>
                 <Font name="Arial Black" size="55.0" />
             </font>
         </Label>
-        <Button cache="true" depthTest="ENABLE" layoutX="44.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #192a56;" text="Customer Manage" textFill="WHITE">
+        <Button cache="true" depthTest="ENABLE" layoutX="25.0" layoutY="132.0" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Customer Manage">
             <cursor>
                 <Cursor fx:constant="HAND" />
-            </cursor>
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font></Button>
+            </cursor></Button>
         <ImageView fitHeight="36.0" fitWidth="40.0" layoutX="31.0" layoutY="34.0" onMouseClicked="#btnDashboardOnAction">
             <image>
                 <Image url="@../images/home-button.png" />
@@ -50,10 +47,13 @@
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor></Button>
-        <Button layoutX="25.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnSupplierOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Supplier Manage">
+        <Button layoutX="47.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnSupplierOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #192a56;" text="Supplier Manage" textFill="WHITE">
             <cursor>
                 <Cursor fx:constant="HAND" />
-            </cursor></Button>
+            </cursor>
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></Button>
         <Button layoutX="25.0" layoutY="559.0" mnemonicParsing="false" onAction="#btnItemOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Item Manage">
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -64,7 +64,7 @@
             </cursor></Button>
         <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="31.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/customer-white.png" />
+                <Image url="@../icons/customer.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="30.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
@@ -79,7 +79,7 @@
         </ImageView>
         <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="33.0" layoutY="483.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/supplier-50.png" />
+                <Image url="@../icons/supplier-white.png" />
             </image>
         </ImageView>
         <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="33.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">

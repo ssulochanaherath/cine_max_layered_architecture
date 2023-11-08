@@ -23,6 +23,9 @@
          <image>
             <Image url="@../images/home-button.png" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <ImageView fitHeight="28.0" fitWidth="30.0" layoutX="1021.0" layoutY="38.0" onMouseClicked="#btnLogOutOnAction">
          <image>
@@ -36,19 +39,19 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="28.0" layoutY="301.0" mnemonicParsing="false" onAction="#btnFoodOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Foods &amp; Beverages">
+      <Button layoutX="25.0" layoutY="301.0" mnemonicParsing="false" onAction="#btnFoodOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Foods &amp; Beverages">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="28.0" layoutY="386.0" mnemonicParsing="false" onAction="#btnTicketOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Ticket">
+      <Button layoutX="25.0" layoutY="386.0" mnemonicParsing="false" onAction="#btnTicketOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Ticket">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="28.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnSupplierOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Supplier Manage">
+      <Button layoutX="25.0" layoutY="474.0" mnemonicParsing="false" onAction="#btnSupplierOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Supplier Manage">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button layoutX="28.0" layoutY="559.0" mnemonicParsing="false" onAction="#btnItemOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Item Manage">
+      <Button layoutX="25.0" layoutY="559.0" mnemonicParsing="false" onAction="#btnItemOnAction" prefHeight="46.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="Item Manage">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
