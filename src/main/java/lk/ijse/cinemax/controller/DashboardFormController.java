@@ -65,19 +65,73 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnTicketOnAction(ActionEvent event) {
+    public void btnTicketOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/ticket_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Ticket Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
     }
 
-    public void btnSupplierOnAction(ActionEvent event) {
+    public void btnSupplierOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/supplier_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Supplier Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
     }
 
-    public void btnItemOnAction(ActionEvent event) {
+    public void btnItemOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/item_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Item Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
     }
 
-    public void btnReportOnAction(ActionEvent event) {
+    public void btnReportOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/report_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Ticket Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
     }
 
-    public void btnFoodOnAction(ActionEvent event) {
+    public void btnFoodOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
 
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/foods_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Foods Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
     }
 }
