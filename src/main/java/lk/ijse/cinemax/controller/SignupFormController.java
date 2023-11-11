@@ -6,11 +6,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.model.SignUpModel;
+import lk.ijse.cinemax.dto.SignUpDto;
 
 import java.awt.*;
+import java.sql.SQLException;
 
 public class SignupFormController {
 
@@ -19,18 +23,33 @@ public class SignupFormController {
     public TextField txtUserName;
     public TextField txtPassword;
 
-    public void btnCreateAccountOnAction(ActionEvent event) throws Exception{
-        Node source = (Node) event.getSource();
-        Stage oldStage = (Stage) source.getScene().getWindow();
+    private SignUpModel signUpModel = new SignUpModel();
 
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/login_form.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage newStage = new Stage();
-        newStage.setTitle("Login Form");
-        newStage.setScene(scene);
-        newStage.show();
+    public void btnCreateAccountOnAction(ActionEvent event) throws SQLException {
+        String fristName = txtFristName.getText();
+        String lastName = txtLastName.getText();
+        String userName = txtUserName.getText();
+        String password = txtPassword.getText();
 
-        oldStage.close();
+        var dto = new SignUpDto(fristName,lastName,userName,password);
+
+        try {
+            boolean isSaved = signUpModel.saveUser(dto);
+
+            if (isSaved) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Successfully Created An Account!").show();
+                clearFields();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+    }
+
+    public void clearFields() {
+        txtFristName.setText("");
+        txtLastName.setText("");
+        txtUserName.setText("");
+        txtPassword.setText("");
     }
 
     public void btnSignInOnAction(ActionEvent event) throws Exception{
