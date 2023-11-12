@@ -1,6 +1,5 @@
 package lk.ijse.cinemax.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -23,7 +22,7 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnCustomerOnAction(ActionEvent event) throws Exception{
+    public void btnCustomerOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -51,7 +50,7 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnMoviesOnAction(ActionEvent event) throws Exception{
+    public void btnMoviesOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -65,7 +64,7 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnTicketOnAction(ActionEvent event) throws Exception{
+    public void btnTicketOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -79,7 +78,7 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnSupplierOnAction(ActionEvent event) throws Exception{
+    public void btnSupplierOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -93,7 +92,7 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnItemOnAction(ActionEvent event) throws Exception{
+    public void btnItemOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -107,7 +106,7 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnReportOnAction(ActionEvent event) throws Exception{
+    public void btnReportOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -121,7 +120,7 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnFoodOnAction(ActionEvent event) throws Exception{
+    public void btnFoodOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 

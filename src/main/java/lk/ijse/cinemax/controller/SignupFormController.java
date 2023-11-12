@@ -1,5 +1,6 @@
 package lk.ijse.cinemax.controller;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,20 +19,23 @@ import java.sql.SQLException;
 
 public class SignupFormController {
 
+    public TextField txtUserId;
     public TextField txtFristName;
     public TextField txtLastName;
     public TextField txtUserName;
     public TextField txtPassword;
 
+
     private SignUpModel signUpModel = new SignUpModel();
 
     public void btnCreateAccountOnAction(ActionEvent event) throws SQLException {
+        String userId = txtUserId.getText();
         String fristName = txtFristName.getText();
         String lastName = txtLastName.getText();
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
-        var dto = new SignUpDto(fristName,lastName,userName,password);
+        var dto = new SignUpDto(userId,fristName,lastName,userName,password);
 
         try {
             boolean isSaved = signUpModel.saveUser(dto);
@@ -46,6 +50,7 @@ public class SignupFormController {
     }
 
     public void clearFields() {
+        txtUserId.setText("");
         txtFristName.setText("");
         txtLastName.setText("");
         txtUserName.setText("");

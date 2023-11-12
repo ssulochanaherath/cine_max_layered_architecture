@@ -1,6 +1,8 @@
 package lk.ijse.cinemax.dto;
 
 public class SignUpDto {
+
+    private String userId;
     private String fristName;
     private String lastName;
     private String userName;
@@ -9,11 +11,20 @@ public class SignUpDto {
     public SignUpDto() {
     }
 
-    public SignUpDto(String fristName, String lastName, String userName, String password) {
+    public SignUpDto(String userId, String fristName, String lastName, String userName, String password) {
+        this.userId = userId;
         this.fristName = fristName;
         this.lastName = lastName;
         this.userName = userName;
-        Password = password;
+        this.Password = password;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getFristName() {
