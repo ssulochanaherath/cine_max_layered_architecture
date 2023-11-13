@@ -5,20 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-public class MoviesFormController {
-    public ImageView missionIMpossible;
-    public ImageView avengers;
-    public ImageView piratesOfTheCaribbean;
-    public ImageView topGun;
-    public ImageView shedlockHolmes;
-    public ImageView hobbit;
-    public TextField txtMovieName;
-
+public class SherlockHolmesFormController {
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
@@ -145,90 +135,32 @@ public class MoviesFormController {
         oldStage.close();
     }
 
-    public void btnMissionImpossibleOnAction(MouseEvent event) throws Exception{
+    public void btnNextOnAction(ActionEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/mission_impossible_form.fxml"));
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/seats_form.fxml"));
         Scene scene = new Scene(rootNode);
         Stage newStage = new Stage();
-        newStage.setTitle("Mission Impossible Form");
+        newStage.setTitle("Seats Form");
         newStage.setScene(scene);
         newStage.show();
 
         oldStage.close();
     }
 
-    public void btnAvengersOnAction(MouseEvent event) throws Exception{
+    public void btnBackOnAction(ActionEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/avengers_form.fxml"));
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/movies_form.fxml"));
         Scene scene = new Scene(rootNode);
         Stage newStage = new Stage();
-        newStage.setTitle("Avengers Form");
+        newStage.setTitle("Movies Form");
         newStage.setScene(scene);
         newStage.show();
 
         oldStage.close();
-    }
 
-    public void btnPiratesOfTheCarribeanOnAction(MouseEvent event) throws Exception{
-        Node source = (Node) event.getSource();
-        Stage oldStage = (Stage) source.getScene().getWindow();
-
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/pirates_caribean_form.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage newStage = new Stage();
-        newStage.setTitle("Pirates of the Caribbean Form");
-        newStage.setScene(scene);
-        newStage.show();
-
-        oldStage.close();
-    }
-
-    public void btnTopGunOnAction(MouseEvent event) throws Exception{
-        Node source = (Node) event.getSource();
-        Stage oldStage = (Stage) source.getScene().getWindow();
-
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/topgun_form.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage newStage = new Stage();
-        newStage.setTitle("Top Gun Form");
-        newStage.setScene(scene);
-        newStage.show();
-
-        oldStage.close();
-    }
-
-    public void btnSherlockHolmesOnAction(MouseEvent event) throws Exception{
-        Node source = (Node) event.getSource();
-        Stage oldStage = (Stage) source.getScene().getWindow();
-
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/sherlock_holmes_form.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage newStage = new Stage();
-        newStage.setTitle("Sherlock Holmes Form");
-        newStage.setScene(scene);
-        newStage.show();
-
-        oldStage.close();
-    }
-
-    public void btnHobbitOnAction(MouseEvent event) throws Exception{
-        Node source = (Node) event.getSource();
-        Stage oldStage = (Stage) source.getScene().getWindow();
-
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/hobbit_form.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage newStage = new Stage();
-        newStage.setTitle("The Hobbit Form");
-        newStage.setScene(scene);
-        newStage.show();
-
-        oldStage.close();
-    }
-
-    public void btnSearchOnAction(MouseEvent mouseEvent) {
     }
 }

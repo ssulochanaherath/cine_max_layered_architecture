@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -36,8 +33,10 @@ public class CustomerFormController {
     public JFXTextField txtCustomerName;
     public JFXTextField txtCustomerTelephone;
     public JFXTextField txtCustomerAddress;
-    public JFXTextField txtUserId;
+//    public JFXTextField txtUserId;
     public TextField txtCustomerSearch;
+
+    public JFXComboBox<String> txtUserId;
 
     private CustomerModel cusModel = new CustomerModel();
 
@@ -168,7 +167,7 @@ public class CustomerFormController {
     }
 
     public void btnSaveOnAction(ActionEvent event) {
-        String userId = txtUserId.getText();
+        String userId = txtUserId.getValue();
         String customerId = txtCustomerId.getText();
         String customerName = txtCustomerName.getText();
         String customerAddress = txtCustomerAddress.getText();
@@ -192,6 +191,22 @@ public class CustomerFormController {
     public void initialize() {
         setCellValueFctory();
         loadAllCustomer();
+        loadAllUserIds();
+    }
+
+    private void loadAllUserIds() {
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<CustomerDto> idLIst = cusModel.loadAllCusomerIds();
+
+            for (CustomerDto dto : idLIst) {
+                obList.add(dto.getUserId());
+            }
+            txtUserId.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
     }
 
     private void loadAllCustomer() {
@@ -228,15 +243,16 @@ public class CustomerFormController {
     }
 
     private void clearFields() {
-        txtUserId.clear();
+        txtUserId.setValue(null);
         txtCustomerId.clear();
         txtCustomerName.clear();
         txtCustomerAddress.clear();
         txtCustomerTelephone.clear();
+        txtCustomerSearch.clear();
     }
 
     public void btnUpdateOnAction(ActionEvent event) {
-        String userId = txtUserId.getText();
+        String userId = txtUserId.getValue();
         String customerId = txtCustomerId.getText();
         String customerName = txtCustomerName.getText();
         String customerAddress = txtCustomerAddress.getText();
@@ -284,7 +300,7 @@ public class CustomerFormController {
             CustomerDto customerDto = cusModel.searchCustomer(seachId);
 
             if (customerDto != null) {
-                txtUserId.setText(customerDto.getUserId());
+                txtUserId.setValue(customerDto.getUserId());
                 txtCustomerId.setText(customerDto.getCustomerId());
                 txtCustomerName.setText(customerDto.getCustomerName());
                 txtCustomerAddress.setText(customerDto.getCustomerAddress());

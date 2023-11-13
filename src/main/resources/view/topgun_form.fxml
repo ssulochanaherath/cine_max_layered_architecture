@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="724.0" prefWidth="1080.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.TopGunFormController">
+    <children>
+        <Label layoutX="20.0" onMouseClicked="#btnDashboardOnAction" text="CineMax">
+            <font>
+                <Font name="Laksaman" size="49.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+        </Label>
+        <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="1024.0" layoutY="38.0" onMouseClicked="#btnLogOutOnAction">
+            <image>
+                <Image url="@../icons/logout.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#130f40" height="603.0" layoutX="18.0" layoutY="103.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="146.0" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="125.0" onMouseClicked="#btnCustomerOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/customer-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="210.0" onMouseClicked="#btnMoviesOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/movies-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="295.0" onMouseClicked="#btnFoodOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/popcorn-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="359.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="380.0" onMouseClicked="#btnTicketOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/ticket-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="465.0" onMouseClicked="#btnSupplierOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/supplier-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="550.0" onMouseClicked="#btnItemOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/item-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="635.0" onMouseClicked="#btnReportOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/report-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#1e1e1e" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0">
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor></Rectangle>
+        <Label layoutX="197.0" layoutY="109.0" textFill="WHITE">
+            <font>
+                <Font name="Laksaman Bold" size="26.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="245.0" fitWidth="167.0" layoutX="206.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/Top-Gun-Maverick.jpg" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <Label layoutX="389.0" layoutY="125.0" prefHeight="64.0" prefWidth="286.0" text="Top Gun : Maverick" textFill="WHITE">
+            <font>
+                <Font name="Laksaman Bold" size="30.0" />
+            </font>
+        </Label>
+        <Label layoutX="389.0" layoutY="184.0" text="2022" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0" />
+            </font>
+        </Label>
+        <Label layoutX="389.0" layoutY="194.0" prefHeight="28.0" prefWidth="238.0" text="Action / Adventure" textFill="WHITE">
+            <font>
+                <Font name="Laksaman Bold" size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="206.0" layoutY="403.0" prefHeight="35.0" prefWidth="138.0" text="Plot summary" textFill="WHITE">
+            <font>
+                <Font name="Laksaman Bold" size="20.0" />
+            </font>
+        </Label>
+        <JFXTextArea layoutX="207.0" layoutY="446.0" prefHeight="71.0" prefWidth="844.0" style="-fx-background-color: #bdc3c7;" text="                After more than thirty years of service as one of the Navy’s top aviators, and dodging the advancement in rank that would ground him, Pete “Maverick” Mitchell finds himself training a detachment of TOP GUN graduates for a specialized mission the likes of which no living pilot has ever seen." />
+        <JFXButton buttonType="RAISED" layoutX="989.0" layoutY="658.0" onAction="#btnNextOnAction" style="-fx-background-color: #9b59b6;" text="Next" textFill="WHITE" />
+        <JFXButton buttonType="RAISED" layoutX="206.0" layoutY="658.0" onAction="#btnBackOnAction" style="-fx-background-color: #2ecc71;" text="Back" textFill="WHITE" />
+        <ImageView fitHeight="149.0" fitWidth="238.0" layoutX="384.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/ratings.jpeg" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>
