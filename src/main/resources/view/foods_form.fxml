@@ -29,7 +29,7 @@
         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#130f40" height="603.0" layoutX="18.0" layoutY="103.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="146.0" />
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="125.0" onMouseClicked="#btnCustomerOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/customer-white.png" />
+                <Image url="@../icons/customer-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -37,15 +37,15 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="210.0" onMouseClicked="#btnMoviesOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/movies-white.png" />
+                <Image url="@../icons/movies-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="64.0" layoutY="289.0" onMouseClicked="#btnFoodOnAction" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="41.0" fitWidth="45.0" layoutX="70.0" layoutY="295.0" onMouseClicked="#btnFoodOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/pop-corn-white.png" />
+                <Image url="@../icons/popcorn-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -54,7 +54,7 @@
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="359.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="380.0" onMouseClicked="#btnTicketOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/tickets-white.png" />
+                <Image url="@../icons/ticket-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -62,7 +62,7 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="465.0" onMouseClicked="#btnSupplierOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/supplier-white.png" />
+                <Image url="@../icons/supplier-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -70,7 +70,7 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="550.0" onMouseClicked="#btnItemOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/item-white.png" />
+                <Image url="@../icons/item-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -78,7 +78,7 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="635.0" onMouseClicked="#btnReportOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/report-white.png" />
+                <Image url="@../icons/report-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />

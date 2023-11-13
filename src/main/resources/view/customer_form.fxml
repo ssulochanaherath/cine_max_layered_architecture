@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -31,9 +32,9 @@
             </cursor>
         </ImageView>
         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#130f40" height="603.0" layoutX="18.0" layoutY="103.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="146.0" />
-        <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="63.0" layoutY="126.0" onMouseClicked="#btnCustomerOnAction" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="74.0" layoutY="135.0" onMouseClicked="#btnCustomerOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/customer-white.png" />
+                <Image url="@../icons/customer-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -41,7 +42,7 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="50.0" layoutX="73.0" layoutY="210.0" onMouseClicked="#btnMoviesOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/movies-white.png" />
+                <Image url="@../icons/movies-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -49,7 +50,7 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="295.0" onMouseClicked="#btnFoodOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/pop-corn-white.png" />
+                <Image url="@../icons/popcorn-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -58,7 +59,7 @@
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="359.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="380.0" onMouseClicked="#btnTicketOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/tickets-white.png" />
+                <Image url="@../icons/ticket-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -66,7 +67,7 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="465.0" onMouseClicked="#btnSupplierOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/supplier-white.png" />
+                <Image url="@../icons/supplier-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -74,7 +75,7 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="550.0" onMouseClicked="#btnItemOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/item-white.png" />
+                <Image url="@../icons/item-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -82,7 +83,7 @@
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="635.0" onMouseClicked="#btnReportOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/report-white.png" />
+                <Image url="@../icons/report-new.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -99,69 +100,53 @@
             <Font name="Laksaman Bold" size="26.0" />
          </font>
       </Label>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1017.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../icons/customer.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="197.0" layoutY="183.0" prefHeight="11.0" prefWidth="78.0" text="User ID :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="585.0" layoutY="183.0" prefHeight="19.0" prefWidth="106.0" text="Customer ID :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtCustomerId" layoutX="715.0" layoutY="181.0" />
-      <Label layoutX="197.0" layoutY="261.0" prefHeight="11.0" prefWidth="78.0" text=" Name :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtCustomerName" layoutX="273.0" layoutY="259.0" prefHeight="24.0" prefWidth="158.0" />
-      <Label layoutX="756.0" layoutY="261.0" prefHeight="19.0" prefWidth="92.0" text="Telephone :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtCustomerTelephone" layoutX="854.0" layoutY="259.0" />
-      <Label layoutX="470.0" layoutY="261.0" prefHeight="11.0" prefWidth="78.0" text="Address :">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtCustomerAddress" layoutX="548.0" layoutY="259.0" />
-      <JFXButton buttonType="RAISED" layoutX="663.0" layoutY="330.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Save" textFill="WHITE">
+      <Label layoutX="765.0" layoutY="175.0" prefHeight="11.0" prefWidth="78.0" text="User ID :" />
+      <Label layoutX="200.0" layoutY="175.0" prefHeight="19.0" prefWidth="106.0" text="Customer ID :" />
+      <JFXTextField fx:id="txtCustomerId" layoutX="319.0" layoutY="170.0" prefHeight="24.0" prefWidth="170.0" />
+      <Label layoutX="200.0" layoutY="225.0" prefHeight="19.0" prefWidth="63.0" text=" Name :" />
+      <JFXTextField fx:id="txtCustomerName" layoutX="278.0" layoutY="220.0" prefHeight="24.0" prefWidth="210.0" />
+      <Label layoutX="200.0" layoutY="325.0" prefHeight="19.0" prefWidth="92.0" text="Telephone :" />
+      <JFXTextField fx:id="txtCustomerTelephone" layoutX="306.0" layoutY="320.0" prefHeight="24.0" prefWidth="186.0" />
+      <Label layoutX="200.0" layoutY="275.0" prefHeight="11.0" prefWidth="78.0" text="Address :" />
+      <JFXTextField fx:id="txtCustomerAddress" layoutX="292.0" layoutY="270.0" prefHeight="24.0" prefWidth="198.0" />
+      <JFXButton buttonType="RAISED" layoutX="622.0" layoutY="344.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #1abc9c;" text="Save" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="763.0" layoutY="330.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Update" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="722.0" layoutY="344.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Update" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="863.0" layoutY="330.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Delete" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="822.0" layoutY="344.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #e74c3c;" text="Delete" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="963.0" layoutY="330.0" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Clear" textFill="WHITE">
+      <JFXButton buttonType="RAISED" layoutX="922.0" layoutY="344.0" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #8e44ad;" text="Clear" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXTextField fx:id="txtUserId" layoutX="275.0" layoutY="181.0" />
-      <TableView fx:id="tblCustomer" layoutX="206.0" layoutY="380.0" prefHeight="301.0" prefWidth="826.0">
+      <TableView fx:id="tblCustomer" layoutX="206.0" layoutY="416.0" prefHeight="266.0" prefWidth="826.0">
         <columns>
-          <TableColumn fx:id="colUserId" prefWidth="114.40000915527344" text="Customer ID" />
-          <TableColumn fx:id="colCustomerId" prefWidth="112.0" text="Name" />
-            <TableColumn fx:id="colCustomerName" prefWidth="181.5999755859375" text="Address" />
-            <TableColumn fx:id="colCustomerAddress" prefWidth="200.0" text="Telephone" />
-            <TableColumn fx:id="colCustomerTele" prefWidth="220.79986572265625" text="User ID" />
+          <TableColumn fx:id="colUserId" prefWidth="155.1999969482422" text="Customer ID" />
+          <TableColumn fx:id="colCustomerId" prefWidth="157.60003662109375" text="Name" />
+            <TableColumn fx:id="colCustomerName" prefWidth="188.0" text="Address" />
+            <TableColumn fx:id="colCustomerAddress" prefWidth="182.39996337890625" text="Telephone" />
+            <TableColumn fx:id="colCustomerTele" prefWidth="148.79986572265625" text="User ID" />
         </columns>
       </TableView>
+      <TextField fx:id="txtCustomerSearch" layoutX="709.0" layoutY="34.0" prefHeight="35.0" prefWidth="210.0" promptText="Search Customers" />
+      <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="930.0" layoutY="31.0" onMouseClicked="#btnSearchCustomerOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/search.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <JFXTextField fx:id="txtUserId" layoutX="838.0" layoutY="170.0" />
     </children>
 </AnchorPane>

@@ -12,12 +12,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.cinemax.dto.CustomerDto;
+import lk.ijse.cinemax.dto.SignUpDto;
 import lk.ijse.cinemax.dto.tm.CustomerTm;
 import lk.ijse.cinemax.model.CustomerModel;
+import lk.ijse.cinemax.model.SignUpModel;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -34,6 +37,7 @@ public class CustomerFormController {
     public JFXTextField txtCustomerTelephone;
     public JFXTextField txtCustomerAddress;
     public JFXTextField txtUserId;
+    public TextField txtCustomerSearch;
 
     private CustomerModel cusModel = new CustomerModel();
 
@@ -224,17 +228,73 @@ public class CustomerFormController {
     }
 
     private void clearFields() {
+        txtUserId.clear();
+        txtCustomerId.clear();
+        txtCustomerName.clear();
+        txtCustomerAddress.clear();
+        txtCustomerTelephone.clear();
     }
 
     public void btnUpdateOnAction(ActionEvent event) {
+        String userId = txtUserId.getText();
+        String customerId = txtCustomerId.getText();
+        String customerName = txtCustomerName.getText();
+        String customerAddress = txtCustomerAddress.getText();
+        String customerTelephone = txtCustomerTelephone.getText();
+
+        var dto = new CustomerDto(userId,customerId,customerName,customerAddress,customerTelephone);
+
+        try {
+            boolean isUpdated = cusModel.updateCustomer(dto);
+            if (isUpdated) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Successfully Updated Customer!").show();
+                clearFields();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
+        initialize();
     }
 
     public void btnDeleteOnAction(ActionEvent event) {
+        String customerId = txtCustomerId.getText();
+
+        try {
+            boolean isDeleted = cusModel.deleteCustomer(customerId);
+            if (isDeleted) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Successfully Deleted Customer!").show();
+                loadAllCustomer();
+                clearFields();
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Try Again!").show();
+            }
+        } catch (SQLException e) {
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 
     public void btnClearOnAction(ActionEvent event) {
+        clearFields();
     }
 
-    public void cmbUserIdOnAction(ActionEvent event) {
+    public void btnSearchCustomerOnAction(MouseEvent mouseEvent) {
+        String seachId = txtCustomerSearch.getText();
+
+        try {
+            CustomerDto customerDto = cusModel.searchCustomer(seachId);
+
+            if (customerDto != null) {
+                txtUserId.setText(customerDto.getUserId());
+                txtCustomerId.setText(customerDto.getCustomerId());
+                txtCustomerName.setText(customerDto.getCustomerName());
+                txtCustomerAddress.setText(customerDto.getCustomerAddress());
+                txtCustomerTelephone.setText(customerDto.getCustomerTelephone());
+            } else {
+                new Alert(Alert.AlertType.WARNING, "Customer not Found!").show();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        }
     }
 }

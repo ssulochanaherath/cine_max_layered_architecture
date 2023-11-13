@@ -5,9 +5,34 @@ import lk.ijse.cinemax.dto.SignUpDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignUpModel {
+    public static List<SignUpDto> loadAllUserIds() throws  SQLException{
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM user";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+
+        List<SignUpDto> dtoList = new ArrayList<>();
+
+        ResultSet resultSet = pstm.executeQuery();
+        while (resultSet.next()){
+            dtoList.add(new SignUpDto(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3),
+                            resultSet.getString(4),
+                            resultSet.getString(5)
+                    )
+            );
+        }
+        return dtoList;
+    }
+
     public boolean saveUser(SignUpDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 

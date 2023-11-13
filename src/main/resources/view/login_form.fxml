@@ -19,24 +19,24 @@
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="74.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" />
-      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="700.0" layoutX="14.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="413.0" />
-      <JFXButton buttonType="RAISED" layoutX="177.0" layoutY="379.0" onAction="#btnLoginOnAction" prefHeight="40.0" prefWidth="87.0" style="-fx-background-color: #0652DD;" text="Login" textFill="WHITE">
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="WHITE" height="649.0" layoutX="33.0" layoutY="38.0" stroke="BLACK" strokeType="INSIDE" width="354.0" />
+      <JFXButton buttonType="RAISED" layoutX="167.0" layoutY="386.0" onAction="#btnLoginOnAction" prefHeight="40.0" prefWidth="87.0" style="-fx-background-color: #0652DD;" text="Login" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="173.0" layoutY="604.0" onAction="#btnSignUpOnAction" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #bdc3c7;" text="Sign Up">
+      <JFXButton buttonType="RAISED" layoutX="163.0" layoutY="611.0" onAction="#btnSignUpOnAction" prefHeight="34.0" prefWidth="95.0" style="-fx-background-color: #bdc3c7;" text="Sign Up">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="143.0" layoutY="555.0" text="Don't have an Account?" />
-      <Label layoutX="165.0" layoutY="71.0" text="Login">
+      <Label layoutX="133.0" layoutY="562.0" text="Don't have an Account?" />
+      <Label layoutX="155.0" layoutY="78.0" text="Login">
          <font>
             <Font name="Laksaman Bold" size="44.0" />
          </font>
       </Label>
-      <JFXPasswordField fx:id="txtPassword" layoutX="101.0" layoutY="297.0" prefHeight="24.0" prefWidth="238.0" promptText="Password" />
-      <JFXTextField fx:id="txtUserName" layoutX="101.0" layoutY="221.0" prefHeight="24.0" prefWidth="238.0" promptText="User Name" />
+      <JFXPasswordField fx:id="txtPassword" layoutX="91.0" layoutY="304.0" prefHeight="24.0" prefWidth="238.0" promptText="Password" />
+      <JFXTextField fx:id="txtUserName" layoutX="91.0" layoutY="228.0" prefHeight="24.0" prefWidth="238.0" promptText="User Name" />
    </children>
 </AnchorPane>
