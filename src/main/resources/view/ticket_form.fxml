@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -95,10 +100,29 @@
                 <Font name="Laksaman Bold" size="26.0" />
             </font>
         </Label>
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1017.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../icons/ticket-new.png" />
-            </image>
-        </ImageView>
+      <Label layoutX="531.0" layoutY="181.0" text="Customer ID :" />
+      <JFXComboBox fx:id="cmbCustomerIds" layoutX="639.0" layoutY="177.0" onAction="#cmbLoadCustomerIds" prefHeight="24.0" prefWidth="110.0" />
+      <Label layoutX="216.0" layoutY="181.0" text="Ticket ID :" />
+      <JFXTextField fx:id="txtTicketId" layoutX="306.0" layoutY="177.0" />
+      <Label layoutX="834.0" layoutY="181.0" text="Movie ID :" />
+      <JFXComboBox fx:id="cmbMovieId" layoutX="913.0" layoutY="177.0" onAction="#cmbLoadMovieIds" prefHeight="24.0" prefWidth="110.0" />
+      <Label layoutX="216.0" layoutY="245.0" text="Seat No :" />
+      <JFXComboBox fx:id="cmbSeatIds" layoutX="292.0" layoutY="241.0" onAction="#cmbLoadSeatNos" prefHeight="24.0" prefWidth="99.0" />
+      <Label layoutX="807.0" layoutY="245.0" text="Price :" />
+      <JFXTextField fx:id="txtTicketPrice" layoutX="867.0" layoutY="241.0" />
+      <JFXButton layoutX="944.0" layoutY="312.0" onAction="#btnTicketBookingOnAction" prefHeight="35.0" prefWidth="81.0" style="-fx-background-color: #192a56;" text="Booking" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <TableView fx:id="tblTickets" layoutX="211.0" layoutY="380.0" prefHeight="307.0" prefWidth="822.0">
+        <columns>
+          <TableColumn fx:id="colTicketId" prefWidth="144.8000030517578" text="Ticket ID" />
+          <TableColumn fx:id="colCustomerId" prefWidth="177.60000610351562" text="Customer ID" />
+            <TableColumn fx:id="colMovieId" prefWidth="172.0" text="Movie ID" />
+            <TableColumn fx:id="colSeatId" prefWidth="165.5999755859375" text="Seat No" />
+            <TableColumn fx:id="colTicketPrice" prefWidth="166.39984130859375" text="Price" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>

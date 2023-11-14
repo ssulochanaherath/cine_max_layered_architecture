@@ -229,8 +229,108 @@ public class MoviesFormController {
         oldStage.close();
     }
 
-    public void btnSearchOnAction(MouseEvent mouseEvent) {
+    public void btnSearchOnAction(MouseEvent event) {
+        String txtMovie = txtMovieName.getText();
+
+        if ("Mission Impossible".equals(txtMovie)) {
+            try {
+                Node source = (Node) event.getSource();
+                Stage oldStage = (Stage) source.getScene().getWindow();
+
+                Parent rootNode = FXMLLoader.load(getClass().getResource("/view/mission_impossible_form.fxml"));
+                Scene scene = new Scene(rootNode);
+                Stage newStage = new Stage();
+                newStage.setTitle("Avengers Form");
+                newStage.setScene(scene);
+                newStage.show();
+
+                oldStage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if ("Avengers".equals(txtMovie)) {
+            try {
+                Node source = (Node) event.getSource();
+                Stage oldStage = (Stage) source.getScene().getWindow();
+
+                Parent rootNode = FXMLLoader.load(getClass().getResource("/view/avengers_form.fxml"));
+                Scene scene = new Scene(rootNode);
+                Stage newStage = new Stage();
+                newStage.setTitle("Avengers Form");
+                newStage.setScene(scene);
+                newStage.show();
+
+                oldStage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if ("Pirates of the Caribbean".equals(txtMovie)) {
+            try {
+                Node source = (Node) event.getSource();
+                Stage oldStage = (Stage) source.getScene().getWindow();
+
+                Parent rootNode = FXMLLoader.load(getClass().getResource("/view/pirates_caribean_form.fxml"));
+                Scene scene = new Scene(rootNode);
+                Stage newStage = new Stage();
+                newStage.setTitle("Avengers Form");
+                newStage.setScene(scene);
+                newStage.show();
+
+                oldStage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if ("Top Gun".equals(txtMovie)) {
+            try {
+                Node source = (Node) event.getSource();
+                Stage oldStage = (Stage) source.getScene().getWindow();
+
+                Parent rootNode = FXMLLoader.load(getClass().getResource("/view/topgun_form.fxml"));
+                Scene scene = new Scene(rootNode);
+                Stage newStage = new Stage();
+                newStage.setTitle("Avengers Form");
+                newStage.setScene(scene);
+                newStage.show();
+
+                oldStage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if ("Sherlock Holmes".equals(txtMovie)) {
+            try {
+                Node source = (Node) event.getSource();
+                Stage oldStage = (Stage) source.getScene().getWindow();
+
+                Parent rootNode = FXMLLoader.load(getClass().getResource("/view/sherlock_holmes_form.fxml"));
+                Scene scene = new Scene(rootNode);
+                Stage newStage = new Stage();
+                newStage.setTitle("Avengers Form");
+                newStage.setScene(scene);
+                newStage.show();
+
+                oldStage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else if ("Hobbit".equals(txtMovie)) {
+            try {
+                Node source = (Node) event.getSource();
+                Stage oldStage = (Stage) source.getScene().getWindow();
+
+                Parent rootNode = FXMLLoader.load(getClass().getResource("/view/hobbit_form.fxml"));
+                Scene scene = new Scene(rootNode);
+                Stage newStage = new Stage();
+                newStage.setTitle("Avengers Form");
+                newStage.setScene(scene);
+                newStage.show();
+
+                oldStage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
+
 
     public void btnMovieManagementOnAction(ActionEvent event) throws Exception{
         Node source = (Node) event.getSource();
