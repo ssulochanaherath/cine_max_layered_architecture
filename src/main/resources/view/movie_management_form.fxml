@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="724.0" prefWidth="1080.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.TicketFormController">
+<AnchorPane prefHeight="724.0" prefWidth="1080.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.MovieManagementFormController">
     <children>
         <Label layoutX="20.0" onMouseClicked="#btnDashboardOnAction" text="CineMax">
             <font>
@@ -27,7 +32,7 @@
             </cursor>
         </ImageView>
         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#130f40" height="603.0" layoutX="18.0" layoutY="103.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="146.0" />
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="74.0" layoutY="129.0" onMouseClicked="#btnCustomerOnAction" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="74.0" layoutY="135.0" onMouseClicked="#btnCustomerOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../icons/customer-new.png" />
             </image>
@@ -84,21 +89,61 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#efeded" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
+        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d1ccc0" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
         <Label layoutX="197.0" layoutY="103.0">
             <font>
                 <Font name="Laksaman Bold" size="32.0" />
             </font>
         </Label>
-        <Label layoutX="197.0" layoutY="109.0" text="Tickets">
+        <Label layoutX="197.0" layoutY="109.0" text="Movie Management">
             <font>
                 <Font name="Laksaman Bold" size="26.0" />
             </font>
         </Label>
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1017.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
+        <Label layoutX="252.0" layoutY="199.0" prefHeight="19.0" prefWidth="77.0" text="Movie ID :" />
+        <JFXTextField fx:id="txtMovieId" layoutX="343.0" layoutY="200.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="700.0" layoutY="199.0" prefHeight="19.0" prefWidth="63.0" text=" Name :" />
+        <JFXTextField fx:id="txtMovieName" layoutX="778.0" layoutY="197.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="706.0" layoutY="261.0" prefHeight="19.0" prefWidth="52.0" text="Year :" />
+        <JFXTextField fx:id="txtYear" layoutX="781.0" layoutY="256.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="252.0" layoutY="261.0" prefHeight="16.0" prefWidth="52.0" text="Genre :" />
+        <JFXTextField fx:id="txtMovieGenre" layoutX="343.0" layoutY="256.0" prefHeight="24.0" prefWidth="170.0" />
+        <JFXButton buttonType="RAISED" layoutX="622.0" layoutY="344.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #1abc9c;" text="Save" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="722.0" layoutY="344.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Update" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="822.0" layoutY="344.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #e74c3c;" text="Delete" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="922.0" layoutY="344.0" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #8e44ad;" text="Clear" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <TableView fx:id="tblMovies" layoutX="206.0" layoutY="416.0" prefHeight="266.0" prefWidth="826.0">
+            <columns>
+                <TableColumn fx:id="colMovieId" prefWidth="238.40000915527344" text="Movie ID" />
+                <TableColumn fx:id="colMovieName" prefWidth="166.39996337890625" text="Name" />
+                <TableColumn fx:id="colMovieGenre" prefWidth="172.79998779296875" text="Genre" />
+                <TableColumn fx:id="colYear" prefWidth="249.60009765625" text="Year" />
+            </columns>
+        </TableView>
+        <TextField fx:id="txtMovieSearch" layoutX="709.0" layoutY="34.0" prefHeight="35.0" prefWidth="210.0" promptText="Search Movies" />
+        <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="930.0" layoutY="31.0" onMouseClicked="#btnSearchMovieOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/ticket-new.png" />
+                <Image url="@../icons/search.png" />
             </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
         </ImageView>
     </children>
 </AnchorPane>

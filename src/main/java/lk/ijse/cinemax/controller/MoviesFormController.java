@@ -231,4 +231,18 @@ public class MoviesFormController {
 
     public void btnSearchOnAction(MouseEvent mouseEvent) {
     }
+
+    public void btnMovieManagementOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/movie_management_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Movie Mangement Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
+    }
 }

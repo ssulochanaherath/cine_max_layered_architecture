@@ -97,7 +97,7 @@
         </Label>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1017.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/pop-corn.png" />
+                <Image url="@../icons/popcorn-new.png" />
             </image>
         </ImageView>
     </children>
