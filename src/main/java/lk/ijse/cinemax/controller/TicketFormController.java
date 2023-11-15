@@ -175,9 +175,36 @@ public class TicketFormController {
             cmbLoadCustomerIds(null); // Load customer IDs into cmbCustomerIds
             cmbLoadMovieIds(null);    // Load movie IDs into cmbMovieId
             cmbLoadSeatNos(null);      // Load row IDs into cmbRowIds
+
+            generateTicketId();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void generateTicketId() {
+        try {
+            // Retrieve the last generated ticket ID from the database or file
+            String lastTicketId = ticketModel.getLastTicketId();
+
+            // Generate the next ticket ID
+            String newTicketId = generateNextId(lastTicketId, "T");
+
+            // Set the generated ID to the txtTicketId field
+            txtTicketId.setText(newTicketId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String generateNextId(String lastId, String prefix) {
+        if (lastId == null || lastId.isEmpty()) {
+            return prefix + "001";
+        }
+
+        int numericPart = Integer.parseInt(lastId.substring(1)) + 1;
+        return String.format("%s%03d", prefix, numericPart);
     }
 
     private void loadAllTickets() {

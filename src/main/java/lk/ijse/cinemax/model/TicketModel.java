@@ -6,10 +6,7 @@ import lk.ijse.cinemax.dto.MovieDto;
 import lk.ijse.cinemax.dto.SeatDto;
 import lk.ijse.cinemax.dto.TicketDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,5 +114,22 @@ public class TicketModel {
             );
         }
         return ticketDtoList;
+    }
+
+    public String getLastTicketId() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String query = "SELECT ticketId FROM tickets ORDER BY ticketId DESC LIMIT 1";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            if (resultSet.next()) {
+                return resultSet.getString("ticketId");
+            } else {
+                // If no ticket has been generated yet, return an empty string
+                return "";
+            }
+        }
     }
 }

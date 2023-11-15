@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import lk.ijse.cinemax.dto.CustomerDto;
 import lk.ijse.cinemax.dto.SignUpDto;
@@ -37,6 +38,7 @@ public class CustomerFormController {
     public TextField txtCustomerSearch;
 
     public JFXComboBox<String> txtUserId;
+    public Rectangle recCustomerManagement;
 
     private CustomerModel cusModel = new CustomerModel();
 
@@ -192,6 +194,30 @@ public class CustomerFormController {
         setCellValueFctory();
         loadAllCustomer();
         loadAllUserIds();
+
+        generateCustomerid();
+    }
+
+    private void generateCustomerid(){
+        try {
+            String lastId = cusModel.getLastCustomerId();
+
+            String newId = generateNextId(lastId, "C");
+
+            txtCustomerId.setText(newId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String generateNextId(String lastId, String C) {
+        if (lastId == null || lastId.isEmpty()) {
+            return C + "001";
+        }
+
+        int numericPart = Integer.parseInt(lastId.substring(1)) + 1;
+        return String.format("%s%03d", C, numericPart);
     }
 
     private void loadAllUserIds() {

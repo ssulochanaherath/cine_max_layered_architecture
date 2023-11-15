@@ -90,7 +90,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d1ccc0" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
+        <Rectangle fx:id="recCustomerManagement" arcHeight="50.0" arcWidth="50.0" fill="#d1ccc0" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
         <Label layoutX="197.0" layoutY="103.0">
             <font>
                 <Font name="Laksaman Bold" size="32.0" />
@@ -102,14 +102,14 @@
          </font>
       </Label>
       <Label layoutX="765.0" layoutY="175.0" prefHeight="11.0" prefWidth="78.0" text="User ID :" />
-      <Label layoutX="200.0" layoutY="175.0" prefHeight="19.0" prefWidth="106.0" text="Customer ID :" />
-      <JFXTextField fx:id="txtCustomerId" layoutX="319.0" layoutY="170.0" prefHeight="24.0" prefWidth="170.0" />
-      <Label layoutX="200.0" layoutY="225.0" prefHeight="19.0" prefWidth="63.0" text=" Name :" />
-      <JFXTextField fx:id="txtCustomerName" layoutX="278.0" layoutY="220.0" prefHeight="24.0" prefWidth="210.0" />
-      <Label layoutX="200.0" layoutY="325.0" prefHeight="19.0" prefWidth="92.0" text="Telephone :" />
-      <JFXTextField fx:id="txtCustomerTelephone" layoutX="306.0" layoutY="320.0" prefHeight="24.0" prefWidth="186.0" />
-      <Label layoutX="200.0" layoutY="275.0" prefHeight="11.0" prefWidth="78.0" text="Address :" />
-      <JFXTextField fx:id="txtCustomerAddress" layoutX="292.0" layoutY="270.0" prefHeight="24.0" prefWidth="198.0" />
+      <Label layoutX="213.0" layoutY="175.0" prefHeight="19.0" prefWidth="106.0" text="Customer ID :" />
+      <JFXTextField fx:id="txtCustomerId" layoutX="332.0" layoutY="170.0" prefHeight="24.0" prefWidth="170.0" />
+      <Label layoutX="213.0" layoutY="225.0" prefHeight="19.0" prefWidth="63.0" text=" Name :" />
+      <JFXTextField fx:id="txtCustomerName" layoutX="291.0" layoutY="220.0" prefHeight="24.0" prefWidth="210.0" />
+      <Label layoutX="213.0" layoutY="325.0" prefHeight="19.0" prefWidth="92.0" text="Telephone :" />
+      <JFXTextField fx:id="txtCustomerTelephone" layoutX="319.0" layoutY="320.0" prefHeight="24.0" prefWidth="186.0" />
+      <Label layoutX="213.0" layoutY="275.0" prefHeight="11.0" prefWidth="78.0" text="Address :" />
+      <JFXTextField fx:id="txtCustomerAddress" layoutX="305.0" layoutY="270.0" prefHeight="24.0" prefWidth="198.0" />
       <JFXButton buttonType="RAISED" layoutX="622.0" layoutY="344.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #1abc9c;" text="Save" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />

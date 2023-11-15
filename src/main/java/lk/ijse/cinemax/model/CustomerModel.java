@@ -124,4 +124,21 @@ public class CustomerModel {
         }
         return dtoList;
     }
+
+    public String getLastCustomerId() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT customerId from customer ORDER BY customerId DESC LIMIT 1";
+
+        try (PreparedStatement pstm = connection.prepareStatement(sql);
+             ResultSet resultSet = pstm.executeQuery()) {
+
+            if (resultSet.next()) {
+                return resultSet.getString(1);
+            } else {
+                // If no customer has been generated yet, return an empty string
+                return "";
+            }
+        }
+    }
 }

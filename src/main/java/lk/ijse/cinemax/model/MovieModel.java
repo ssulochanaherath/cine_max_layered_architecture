@@ -93,4 +93,20 @@ public class MovieModel {
 
         return pstm.executeUpdate() > 0;
     }
+
+    public String generateMovieId() throws SQLException{
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT movieId FROM movie ORDER BY movieId DESC LIMIT 1";
+
+        try(PreparedStatement pstm = connection.prepareStatement(sql)){
+            ResultSet resultSet = pstm.executeQuery();
+
+            if(resultSet.next()){
+                return resultSet.getString(1);
+            }else{
+                return "";
+            }
+        }
+    }
 }

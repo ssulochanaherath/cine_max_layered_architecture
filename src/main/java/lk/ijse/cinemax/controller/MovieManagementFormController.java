@@ -1,7 +1,6 @@
 package lk.ijse.cinemax.controller;
 
 import com.jfoenix.controls.JFXTextField;
-import com.sun.source.tree.TryTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,8 +19,6 @@ import lk.ijse.cinemax.dto.MovieDto;
 import lk.ijse.cinemax.dto.tm.MovieTm;
 import lk.ijse.cinemax.model.MovieModel;
 
-import java.awt.*;
-import java.rmi.AlreadyBoundException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -189,6 +186,30 @@ public class MovieManagementFormController {
     public void initialize() {
         setCellValueFctory();
         loadAllMovie();
+
+        generateMovieId();
+    }
+
+    private void generateMovieId() {
+        try {
+            String lastMovieId = movieModel.generateMovieId();
+
+            String newMovieId = generateNewMovieId(lastMovieId, "M");
+
+            txtMovieId.setText(newMovieId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String generateNewMovieId(String lastMovieId, String M) {
+        if (lastMovieId == null || lastMovieId.isEmpty()) {
+            return M + "001";
+        }
+
+        int numericPart = Integer.parseInt(lastMovieId.substring(1)) + 1;
+        return String.format("%s%03d", M, numericPart);
     }
 
     private void loadAllMovie() {
