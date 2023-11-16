@@ -92,20 +92,6 @@ public class DashboardFormController {
         oldStage.close();
     }
 
-    public void btnItemOnAction(MouseEvent event) throws Exception{
-        Node source = (Node) event.getSource();
-        Stage oldStage = (Stage) source.getScene().getWindow();
-
-        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/item_form.fxml"));
-        Scene scene = new Scene(rootNode);
-        Stage newStage = new Stage();
-        newStage.setTitle("Item Form");
-        newStage.setScene(scene);
-        newStage.show();
-
-        oldStage.close();
-    }
-
     public void btnReportOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();

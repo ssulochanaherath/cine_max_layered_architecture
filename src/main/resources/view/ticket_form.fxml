@@ -40,7 +40,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fitHeight="35.0" fitWidth="50.0" layoutX="73.0" layoutY="210.0" onMouseClicked="#btnMoviesOnAction" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="35.0" fitWidth="50.0" layoutX="73.0" layoutY="225.0" onMouseClicked="#btnMoviesOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../icons/movies-new.png" />
             </image>
@@ -48,7 +48,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="295.0" onMouseClicked="#btnFoodOnAction" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="425.0" onMouseClicked="#btnFoodOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../icons/popcorn-new.png" />
             </image>
@@ -57,15 +57,15 @@
             </cursor>
         </ImageView>
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="359.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="380.0" onMouseClicked="#btnTicketOnAction" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="325.0" onMouseClicked="#btnTicketOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../icons/ticket-new.png" />
+                <Image url="@../icons/ticket-fill.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="465.0" onMouseClicked="#btnSupplierOnAction" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="525.0" onMouseClicked="#btnSupplierOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../icons/supplier-new.png" />
             </image>
@@ -73,15 +73,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="550.0" onMouseClicked="#btnItemOnAction" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../icons/item-new.png" />
-            </image>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="635.0" onMouseClicked="#btnReportOnAction" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="625.0" onMouseClicked="#btnReportOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../icons/report-new.png" />
             </image>
@@ -117,11 +109,11 @@
       </JFXButton>
       <TableView fx:id="tblTickets" layoutX="211.0" layoutY="380.0" prefHeight="307.0" prefWidth="822.0">
         <columns>
-          <TableColumn fx:id="colTicketId" prefWidth="144.8000030517578" text="Ticket ID" />
-          <TableColumn fx:id="colCustomerId" prefWidth="177.60000610351562" text="Customer ID" />
-            <TableColumn fx:id="colMovieId" prefWidth="172.0" text="Movie ID" />
-            <TableColumn fx:id="colSeatId" prefWidth="165.5999755859375" text="Seat No" />
-            <TableColumn fx:id="colTicketPrice" prefWidth="166.39984130859375" text="Price" />
+          <TableColumn fx:id="colTicketId" prefWidth="156.8000030517578" text="Ticket ID" />
+          <TableColumn fx:id="colCustomerId" prefWidth="133.60000610351562" text="Customer ID" />
+            <TableColumn fx:id="colMovieId" prefWidth="160.0" text="Movie ID" />
+            <TableColumn fx:id="colSeatId" prefWidth="193.5999755859375" text="Seat No" />
+            <TableColumn fx:id="colTicketPrice" prefWidth="177.59991455078125" text="Price" />
         </columns>
       </TableView>
     </children>

@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -15,10 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import lk.ijse.cinemax.dto.CustomerDto;
-import lk.ijse.cinemax.dto.MovieDto;
-import lk.ijse.cinemax.dto.SeatDto;
-import lk.ijse.cinemax.dto.TicketDto;
+import lk.ijse.cinemax.dto.*;
 import lk.ijse.cinemax.dto.tm.TicketTm;
 import lk.ijse.cinemax.model.CustomerModel;
 import lk.ijse.cinemax.model.TicketModel;
@@ -39,9 +37,11 @@ public class TicketFormController {
     public TableColumn colMovieId;
     public TableColumn colSeatId;
     public TableColumn colTicketPrice;
+    public TableColumn colScheduleTime;
+    public JFXComboBox<String> cmbShowtimeTime;
     private TicketModel ticketModel = new TicketModel();
 
-    public void btnLogOutOnAction(MouseEvent event) throws Exception{
+    public void btnLogOutOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -55,7 +55,7 @@ public class TicketFormController {
         oldStage.close();
     }
 
-    public void btnCustomerOnAction(MouseEvent event) throws Exception{
+    public void btnCustomerOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -69,7 +69,7 @@ public class TicketFormController {
         oldStage.close();
     }
 
-    public void btnDashboardOnAction(MouseEvent event) throws Exception{
+    public void btnDashboardOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -83,7 +83,7 @@ public class TicketFormController {
         oldStage.close();
     }
 
-    public void btnMoviesOnAction(MouseEvent event) throws Exception{
+    public void btnMoviesOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -97,7 +97,7 @@ public class TicketFormController {
         oldStage.close();
     }
 
-    public void btnTicketOnAction(MouseEvent event) throws Exception{
+    public void btnTicketOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -111,7 +111,7 @@ public class TicketFormController {
         oldStage.close();
     }
 
-    public void btnSupplierOnAction(MouseEvent event) throws Exception{
+    public void btnSupplierOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -125,7 +125,7 @@ public class TicketFormController {
         oldStage.close();
     }
 
-    public void btnItemOnAction(MouseEvent event) throws Exception{
+    public void btnItemOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -139,7 +139,7 @@ public class TicketFormController {
         oldStage.close();
     }
 
-    public void btnReportOnAction(MouseEvent event) throws Exception{
+    public void btnReportOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -153,7 +153,7 @@ public class TicketFormController {
         oldStage.close();
     }
 
-    public void btnFoodOnAction(MouseEvent event) throws Exception{
+    public void btnFoodOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
@@ -181,6 +181,7 @@ public class TicketFormController {
             e.printStackTrace();
         }
     }
+
 
     private void generateTicketId() {
         try {
@@ -215,7 +216,7 @@ public class TicketFormController {
         try {
             List<TicketDto> ticketList = model.loadAllTickets();
 
-            for (TicketDto ticketDto : ticketList){
+            for (TicketDto ticketDto : ticketList) {
                 ticketTms.add(
                         new TicketTm(
                                 ticketDto.getTicketId(),
@@ -228,6 +229,7 @@ public class TicketFormController {
             }
             tblTickets.setItems(ticketTms);
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
@@ -296,7 +298,7 @@ public class TicketFormController {
         String seatId = cmbSeatIds.getValue();
         String price = txtTicketPrice.getText();
 
-        var dto = new TicketDto(ticketId,cusId,movieId,seatId,price);
+        var dto = new TicketDto(ticketId, cusId, movieId, seatId, price);
 
         try {
             boolean isBooked = ticketModel.saveTicket(dto);
@@ -306,6 +308,7 @@ public class TicketFormController {
                 clearFields();
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
         initialize();

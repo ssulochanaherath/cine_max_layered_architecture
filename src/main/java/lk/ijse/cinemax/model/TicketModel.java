@@ -1,10 +1,7 @@
 package lk.ijse.cinemax.model;
 
 import lk.ijse.cinemax.db.DbConnection;
-import lk.ijse.cinemax.dto.CustomerDto;
-import lk.ijse.cinemax.dto.MovieDto;
-import lk.ijse.cinemax.dto.SeatDto;
-import lk.ijse.cinemax.dto.TicketDto;
+import lk.ijse.cinemax.dto.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -55,7 +52,7 @@ public class TicketModel {
         }
     }
 
-    public List<SeatDto> loadAllSeatNos() throws SQLException{
+    public List<SeatDto> loadAllSeatNos() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM seats";
         try (PreparedStatement pstm = connection.prepareStatement(sql);
@@ -76,7 +73,7 @@ public class TicketModel {
         }
     }
 
-    public boolean saveTicket(TicketDto dto) throws SQLException{
+    public boolean saveTicket(TicketDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "INSERT INTO tickets VALUES(?,?,?,?,?)";
@@ -93,7 +90,7 @@ public class TicketModel {
         return isBooked;
     }
 
-    public List<TicketDto> loadAllTickets() throws SQLException{
+    public List<TicketDto> loadAllTickets() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
         String sql = "SELECT * FROM tickets";
@@ -133,3 +130,5 @@ public class TicketModel {
         }
     }
 }
+
+
