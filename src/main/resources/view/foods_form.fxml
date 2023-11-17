@@ -82,7 +82,7 @@
                 <Font name="Laksaman Bold" size="32.0" />
             </font>
         </Label>
-        <Label layoutX="197.0" layoutY="109.0" text="Foods">
+        <Label layoutX="197.0" layoutY="109.0" text="Foods Items Manage">
             <font>
                 <Font name="Laksaman Bold" size="26.0" />
             </font>
