@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 public class FoodsFormController {
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -126,6 +128,20 @@ public class FoodsFormController {
         Stage oldStage = (Stage) source.getScene().getWindow();
 
         Parent rootNode = FXMLLoader.load(getClass().getResource("/view/foods_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Foods Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
+    }
+
+    public void btnFoodsManageOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/foods_manage_form.fxml"));
         Scene scene = new Scene(rootNode);
         Stage newStage = new Stage();
         newStage.setTitle("Foods Form");

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="724.0" prefWidth="1080.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.FoodsManageFormController">
+    <children>
+        <Label layoutX="20.0" onMouseClicked="#btnDashboardOnAction" text="CineMax">
+            <font>
+                <Font name="Laksaman" size="49.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="OPEN_HAND" />
+            </cursor>
+        </Label>
+        <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="1024.0" layoutY="38.0" onMouseClicked="#btnLogOutOnAction">
+            <image>
+                <Image url="@../icons/logout.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#130f40" height="603.0" layoutX="18.0" layoutY="103.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="146.0" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="74.0" layoutY="135.0" onMouseClicked="#btnCustomerOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/customer-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="50.0" layoutX="73.0" layoutY="225.0" onMouseClicked="#btnMoviesOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/movies-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="425.0" onMouseClicked="#btnFoodOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/popcorn-fill.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="359.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="325.0" onMouseClicked="#btnTicketOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/ticket-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="525.0" onMouseClicked="#btnSupplierOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/supplier-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="625.0" onMouseClicked="#btnReportOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/report-new.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+        <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#d1ccc0" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
+        <Label layoutX="197.0" layoutY="103.0">
+            <font>
+                <Font name="Laksaman Bold" size="32.0" />
+            </font>
+        </Label>
+        <Label layoutX="197.0" layoutY="109.0" text="Foods Management">
+            <font>
+                <Font name="Laksaman Bold" size="26.0" />
+            </font>
+        </Label>
+        <Label layoutX="252.0" layoutY="199.0" prefHeight="19.0" prefWidth="77.0" text="Food Code :" />
+        <JFXTextField fx:id="txtCode" layoutX="343.0" layoutY="200.0" onAction="#codeSearchOnAction" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="657.0" layoutY="199.0" prefHeight="19.0" prefWidth="92.0" text="Description :" />
+        <JFXTextField fx:id="txtDescription" layoutX="749.0" layoutY="197.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="657.0" layoutY="267.0" prefHeight="19.0" prefWidth="52.0" text="Qty :" />
+        <JFXTextField fx:id="txtQtyOnHand" layoutX="722.0" layoutY="257.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="252.0" layoutY="261.0" prefHeight="16.0" prefWidth="78.0" text="Unit Price :" />
+        <JFXTextField fx:id="txtUnitPrice" layoutX="343.0" layoutY="256.0" prefHeight="24.0" prefWidth="170.0" />
+        <JFXButton buttonType="RAISED" layoutX="622.0" layoutY="344.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #1abc9c;" text="Save" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="722.0" layoutY="344.0" onAction="#btnUpdateOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Update" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <JFXButton buttonType="RAISED" layoutX="922.0" layoutY="344.0" onAction="#btnClearOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #8e44ad;" text="Clear" textFill="WHITE">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </JFXButton>
+        <TableView fx:id="tblItem" layoutX="206.0" layoutY="416.0" prefHeight="266.0" prefWidth="826.0">
+            <columns>
+                <TableColumn fx:id="colCode" prefWidth="148.8000030517578" text="Food Code" />
+                <TableColumn fx:id="colDescription" prefWidth="271.199951171875" text="Description" />
+                <TableColumn fx:id="colUnitPrice" prefWidth="240.0" text="Unit Price" />
+                <TableColumn fx:id="colQtyOnHand" prefWidth="167.19989013671875" text="Qty On Hand" />
+            </columns>
+        </TableView>
+        <TextField fx:id="txtMovieSearch" layoutX="709.0" layoutY="34.0" prefHeight="35.0" prefWidth="210.0" promptText="Search Foods" />
+        <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="930.0" layoutY="31.0" onMouseClicked="#btnMovieSearchOnAction" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../icons/search.png" />
+            </image>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </ImageView>
+      <JFXButton buttonType="RAISED" layoutX="822.0" layoutY="344.0" onAction="#btnDeleteOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #e74c3c;" text="Delete" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+    </children>
+</AnchorPane>
