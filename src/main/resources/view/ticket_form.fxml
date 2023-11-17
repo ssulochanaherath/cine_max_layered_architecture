@@ -109,12 +109,15 @@
       </JFXButton>
       <TableView fx:id="tblTickets" layoutX="211.0" layoutY="380.0" prefHeight="307.0" prefWidth="822.0">
         <columns>
-          <TableColumn fx:id="colTicketId" prefWidth="156.8000030517578" text="Ticket ID" />
-          <TableColumn fx:id="colCustomerId" prefWidth="133.60000610351562" text="Customer ID" />
-            <TableColumn fx:id="colMovieId" prefWidth="160.0" text="Movie ID" />
-            <TableColumn fx:id="colSeatId" prefWidth="193.5999755859375" text="Seat No" />
-            <TableColumn fx:id="colTicketPrice" prefWidth="177.59991455078125" text="Price" />
+          <TableColumn fx:id="colTicketId" prefWidth="103.20002746582031" text="Ticket ID" />
+          <TableColumn fx:id="colCustomerId" prefWidth="120.00003051757812" text="Customer ID" />
+            <TableColumn fx:id="colMovieId" prefWidth="117.60003662109375" text="Movie ID" />
+            <TableColumn fx:id="colSeatId" prefWidth="110.4000244140625" text="Seat No" />
+            <TableColumn fx:id="colShowTimeIds" prefWidth="233.60003662109375" text="Showtime ID" />
+            <TableColumn fx:id="colTicketPrice" prefWidth="140.00003662109373" text="Price" />
         </columns>
       </TableView>
+      <Label layoutX="531.0" layoutY="245.0" text="ShowtimeID :" />
+      <JFXComboBox fx:id="cmbShowtimeId" layoutX="644.0" layoutY="241.0" onAction="#cmbLoadShowtimeIds" prefHeight="24.0" prefWidth="99.0" />
     </children>
 </AnchorPane>

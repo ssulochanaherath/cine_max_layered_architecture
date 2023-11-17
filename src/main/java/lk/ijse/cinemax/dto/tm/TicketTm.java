@@ -5,16 +5,18 @@ public class TicketTm {
     private String customerId;
     private String movieId;
     private String seatNo;
+    private String showtimeID;
     private String ticketPrice;
 
     public TicketTm() {
     }
 
-    public TicketTm(String ticketId, String customerId, String movieId, String seatNo, String price) {
+    public TicketTm(String ticketId, String customerId, String movieId, String seatNo, String showtimeID, String price) {
         this.ticketId = ticketId;
         this.customerId = customerId;
         this.movieId = movieId;
         this.seatNo = seatNo;
+        this.showtimeID = showtimeID;
         this.ticketPrice = price;
     }
 
@@ -50,6 +52,14 @@ public class TicketTm {
         this.seatNo = seatNo;
     }
 
+    public String getShowtimeID() {
+        return showtimeID;
+    }
+
+    public void setShowtimeID(String showtimeID) {
+        this.showtimeID = showtimeID;
+    }
+
     public String getTicketPrice() {
         return ticketPrice;
     }
@@ -65,6 +75,7 @@ public class TicketTm {
                 ", customerId='" + customerId + '\'' +
                 ", movieId='" + movieId + '\'' +
                 ", seatNo='" + seatNo + '\'' +
+                ", showtimeID='" + showtimeID + '\'' +
                 ", price='" + ticketPrice + '\'' +
                 '}';
     }

@@ -76,14 +76,15 @@ public class TicketModel {
     public boolean saveTicket(TicketDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO tickets VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO tickets VALUES(?,?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getTicketId());
         pstm.setString(2, dto.getCustomerId());
         pstm.setString(3, dto.getMovieId());
         pstm.setString(4, dto.getSeatNo());
-        pstm.setString(5, dto.getPrice());
+        pstm.setString(5, dto.getShowTimeID());
+        pstm.setString(6, dto.getPrice());
 
         boolean isBooked = pstm.executeUpdate() > 0;
 
@@ -106,7 +107,8 @@ public class TicketModel {
                             resultSet.getString(2),
                             resultSet.getString(3),
                             resultSet.getString(4),
-                            resultSet.getString(5)
+                            resultSet.getString(5),
+                            resultSet.getString(6)
                     )
             );
         }
@@ -128,6 +130,28 @@ public class TicketModel {
                 return "";
             }
         }
+    }
+
+    public List<ShowTimeDto> loadAllShowtimeIds() throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM showtime";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        ResultSet resultSet = pstm.executeQuery();
+
+        ArrayList<ShowTimeDto> showtimeDtoList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            showtimeDtoList.add(
+                    new ShowTimeDto(
+                            resultSet.getString(1),
+                            resultSet.getString(2),
+                            resultSet.getString(3)
+                    )
+            );
+        }
+        return showtimeDtoList;
+
     }
 }
 

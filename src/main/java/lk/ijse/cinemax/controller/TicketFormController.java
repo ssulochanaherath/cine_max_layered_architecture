@@ -37,8 +37,8 @@ public class TicketFormController {
     public TableColumn colMovieId;
     public TableColumn colSeatId;
     public TableColumn colTicketPrice;
-    public TableColumn colScheduleTime;
-    public JFXComboBox<String> cmbShowtimeTime;
+    public JFXComboBox<String> cmbShowtimeId;
+    public TableColumn colShowTimeIds;
     private TicketModel ticketModel = new TicketModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception {
@@ -175,6 +175,7 @@ public class TicketFormController {
             cmbLoadCustomerIds(null); // Load customer IDs into cmbCustomerIds
             cmbLoadMovieIds(null);    // Load movie IDs into cmbMovieId
             cmbLoadSeatNos(null);      // Load row IDs into cmbRowIds
+            cmbLoadShowtimeIds(null);
 
             generateTicketId();
         } catch (Exception e) {
@@ -223,6 +224,7 @@ public class TicketFormController {
                                 ticketDto.getCustomerId(),
                                 ticketDto.getMovieId(),
                                 ticketDto.getSeatNo(),
+                                ticketDto.getShowTimeID(),
                                 ticketDto.getPrice()
                         )
                 );
@@ -239,6 +241,7 @@ public class TicketFormController {
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         colMovieId.setCellValueFactory(new PropertyValueFactory<>("movieId"));
         colSeatId.setCellValueFactory(new PropertyValueFactory<>("seatNo"));
+        colShowTimeIds.setCellValueFactory(new PropertyValueFactory<>("showtimeID"));
         colTicketPrice.setCellValueFactory(new PropertyValueFactory<>("ticketPrice"));
     }
 
@@ -296,9 +299,10 @@ public class TicketFormController {
         String cusId = cmbCustomerIds.getValue();
         String movieId = cmbMovieId.getValue();
         String seatId = cmbSeatIds.getValue();
+        String showTimeId = cmbShowtimeId.getValue();
         String price = txtTicketPrice.getText();
 
-        var dto = new TicketDto(ticketId, cusId, movieId, seatId, price);
+        var dto = new TicketDto(ticketId, cusId, movieId, seatId, showTimeId, price);
 
         try {
             boolean isBooked = ticketModel.saveTicket(dto);
@@ -319,6 +323,23 @@ public class TicketFormController {
         cmbCustomerIds.setValue(null);
         cmbMovieId.setValue(null);
         cmbSeatIds.setValue(null);
+        cmbShowtimeId.setValue(null);
         txtTicketPrice.clear();
+    }
+
+    public void cmbLoadShowtimeIds(ActionEvent event) throws SQLException{
+        ObservableList<String> obList = FXCollections.observableArrayList();
+
+        try {
+            List<ShowTimeDto> idList = ticketModel.loadAllShowtimeIds();
+
+            for (ShowTimeDto dto : idList) {
+                obList.add(dto.getShowTimeId());
+            }
+
+            cmbShowtimeId.setItems(obList);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
