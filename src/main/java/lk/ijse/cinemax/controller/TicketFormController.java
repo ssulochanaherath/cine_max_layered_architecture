@@ -5,7 +5,6 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -18,13 +17,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.cinemax.dto.*;
 import lk.ijse.cinemax.dto.tm.TicketTm;
-import lk.ijse.cinemax.model.CustomerModel;
+import lk.ijse.cinemax.model.SeatModel;
 import lk.ijse.cinemax.model.TicketModel;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 public class TicketFormController {
     public JFXComboBox<String> cmbCustomerIds;
@@ -42,6 +42,8 @@ public class TicketFormController {
     public TableColumn colShowTimeIds;
     public JFXTextField txtMOvieId;
     private TicketModel ticketModel = new TicketModel();
+
+    private SeatModel seatModel = new SeatModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
@@ -295,7 +297,29 @@ public class TicketFormController {
         }
     }
 
-    private Connection connection;
+//    public void btnTicketBookingOnAction(ActionEvent event) {
+//        String ticketId = txtTicketId.getText();
+//        String customerId = cmbCustomerIds.getValue();
+//        String movieId = cmbMovieId.getValue();
+//        String seatNo = cmbSeatIds.getValue();
+//        String showtimeId = cmbShowtimeId.getValue();
+//        String ticketPrice = txtTicketPrice.getText();
+//
+//        var dto = new TicketDto(ticketId, customerId, movieId, seatNo, showtimeId, ticketPrice);
+//
+//        try {
+//            boolean isAdded = ticketModel.addTicket(dto);
+//
+//            if (isAdded) {
+//                new Alert(Alert.AlertType.INFORMATION, "Ticket Added").show();
+//                clearFields();
+//            }
+//        } catch (SQLException e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        }
+//        initialize();
+//    }
+
     public void btnTicketBookingOnAction(ActionEvent event) {
         String ticketId = txtTicketId.getText();
         String cusId = cmbCustomerIds.getValue();
@@ -306,17 +330,48 @@ public class TicketFormController {
 
         var dto = new TicketDto(ticketId, cusId, movieId, seatId, showTimeId, price);
 
-        try {
-            boolean isBooked = ticketModel.saveTicket(dto);
+        Connection connection = null;
 
-            if (isBooked) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Ticket Booked Successfully!").show();
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine_max", "root", "Ijse@1234");
+            connection.setAutoCommit(false);
+
+            // Perform ticket booking
+            boolean isBooked = ticketModel.saveTicket(connection, dto);
+
+            // Perform seat deletion
+            boolean isSeatDeleted = seatModel.deleteSeat(connection, seatId);
+
+            if (isBooked && isSeatDeleted) {
+                connection.commit();
+                new Alert(Alert.AlertType.CONFIRMATION, "Ticket Booked Successfully! Seat Deleted.").show();
                 clearFields();
+            } else {
+                connection.rollback();
+                new Alert(Alert.AlertType.WARNING, "Transaction failed. Ticket and seat changes rolled back.").show();
             }
         } catch (SQLException e) {
+            try {
+                if (connection != null) {
+                    connection.rollback();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.setAutoCommit(true);
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+
         initialize();
     }
 

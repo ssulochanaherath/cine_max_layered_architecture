@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TicketModel {
-
+    private SeatModel seatModel = new SeatModel();
     public List<CustomerDto> loadAllCustomerIds() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
         String sql = "SELECT * FROM customer";
@@ -73,24 +73,6 @@ public class TicketModel {
         }
     }
 
-    public boolean saveTicket(TicketDto dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "INSERT INTO tickets VALUES(?,?,?,?,?,?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1, dto.getTicketId());
-        pstm.setString(2, dto.getCustomerId());
-        pstm.setString(3, dto.getMovieId());
-        pstm.setString(4, dto.getSeatNo());
-        pstm.setString(5, dto.getShowTimeID());
-        pstm.setString(6, dto.getPrice());
-
-        boolean isBooked = pstm.executeUpdate() > 0;
-
-        return isBooked;
-    }
-
     public List<TicketDto> loadAllTickets() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
@@ -152,6 +134,26 @@ public class TicketModel {
         }
         return showtimeDtoList;
 
+    }
+
+    public boolean saveTicket(Connection connection, TicketDto ticketDto) throws SQLException {
+        // Prepare the SQL query
+
+        // Now, execute the SQL query within the provided connection
+        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO tickets (ticketId, customerId, movieId, seatId, showTimeID, price) VALUES (?, ?, ?, ?, ?, ?)")) {
+            // Set the parameters
+            statement.setString(1, ticketDto.getTicketId());
+            statement.setString(2, ticketDto.getCustomerId());
+            statement.setString(3, ticketDto.getMovieId());
+            statement.setString(4, ticketDto.getSeatNo());
+            statement.setString(5, ticketDto.getShowTimeID());
+            statement.setString(6, ticketDto.getPrice());
+
+            // Execute the query
+            statement.executeUpdate();
+
+            return true;
+        }
     }
 }
 

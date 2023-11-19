@@ -6,7 +6,7 @@ public class TicketTm {
     private String movieId;
     private String seatNo;
     private String showtimeID;
-    private String ticketPrice;
+    private String price;
 
     public TicketTm() {
     }
@@ -17,7 +17,7 @@ public class TicketTm {
         this.movieId = movieId;
         this.seatNo = seatNo;
         this.showtimeID = showtimeID;
-        this.ticketPrice = price;
+        this.price = price;
     }
 
     public String getTicketId() {
@@ -61,11 +61,11 @@ public class TicketTm {
     }
 
     public String getTicketPrice() {
-        return ticketPrice;
+        return price;
     }
 
     public void setTicketPrice(String ticketPrice) {
-        this.ticketPrice = ticketPrice;
+        this.price = ticketPrice;
     }
 
     @Override
@@ -76,7 +76,7 @@ public class TicketTm {
                 ", movieId='" + movieId + '\'' +
                 ", seatNo='" + seatNo + '\'' +
                 ", showtimeID='" + showtimeID + '\'' +
-                ", price='" + ticketPrice + '\'' +
+                ", price='" + price + '\'' +
                 '}';
     }
 }
