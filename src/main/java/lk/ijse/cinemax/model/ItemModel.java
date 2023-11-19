@@ -2,6 +2,7 @@ package lk.ijse.cinemax.model;
 
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.ItemDto;
+import lk.ijse.cinemax.dto.tm.CartTm;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -81,15 +82,15 @@ public class ItemModel {
         return pstm.executeUpdate() > 0;
     }
 
-//    public boolean updateItem(List<CartTm> cartTmList) throws SQLException {
-//        for(CartTm tm : cartTmList) {
-//            System.out.println("Item: " + tm);
-//            if(!updateQty(tm.getCode(), tm.getQty())) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
+    public boolean updateItem(List<CartTm> cartTmList) throws SQLException {
+        for(CartTm tm : cartTmList) {
+            System.out.println("Item: " + tm);
+            if(!updateQty(tm.getCode(), tm.getQty())) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public boolean updateQty(String code, int qty) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();

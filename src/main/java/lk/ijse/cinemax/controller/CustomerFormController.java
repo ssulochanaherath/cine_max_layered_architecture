@@ -224,7 +224,7 @@ public class CustomerFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDto> idLIst = cusModel.loadAllCusomerIds();
+            List<CustomerDto> idLIst = cusModel.loadAllCustomerIds();
 
             for (CustomerDto dto : idLIst) {
                 obList.add(dto.getUserId());

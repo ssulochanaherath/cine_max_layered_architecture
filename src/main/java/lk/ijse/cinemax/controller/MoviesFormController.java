@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.model.TicketModel;
 
 public class MoviesFormController {
     public ImageView missionIMpossible;
@@ -18,6 +19,7 @@ public class MoviesFormController {
     public ImageView shedlockHolmes;
     public ImageView hobbit;
     public TextField txtMovieName;
+    private TicketModel ticketModel = new TicketModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -145,19 +147,20 @@ public class MoviesFormController {
         oldStage.close();
     }
 
-    public void btnMissionImpossibleOnAction(MouseEvent event) throws Exception{
+    public void btnMissionImpossibleOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
 
         Parent rootNode = FXMLLoader.load(getClass().getResource("/view/mission_impossible_form.fxml"));
         Scene scene = new Scene(rootNode);
         Stage newStage = new Stage();
-        newStage.setTitle("Mission Impossible Form");
+        newStage.setTitle("Avengers Form");
         newStage.setScene(scene);
         newStage.show();
 
         oldStage.close();
     }
+
 
     public void btnAvengersOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();

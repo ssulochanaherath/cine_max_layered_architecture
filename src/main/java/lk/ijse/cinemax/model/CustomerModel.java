@@ -104,10 +104,10 @@ public class CustomerModel {
         return dto;
     }
 
-    public List<CustomerDto> loadAllCusomerIds() throws SQLException{
+    public List<CustomerDto> loadAllCustomerIds() throws SQLException{
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "SELECT * FROM user";
+        String sql = "SELECT * FROM customer";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         List<CustomerDto> dtoList = new ArrayList<>();
@@ -141,4 +141,26 @@ public class CustomerModel {
             }
         }
     }
+
+//    public List<CustomerDto> loadAllCustomerIds() throws SQLException {
+//        Connection connection = DbConnection.getInstance().getConnection();
+//        String sql = "SELECT * FROM customer";
+//        try (PreparedStatement pstm = connection.prepareStatement(sql);
+//             ResultSet resultSet = pstm.executeQuery()) {
+//
+//            List<CustomerDto> customerDtoList = new ArrayList<>();
+//
+//            while (resultSet.next()) {
+//                customerDtoList.add(new CustomerDto(
+//                        resultSet.getString(1),
+//                        resultSet.getString(2),
+//                        resultSet.getString(3),
+//                        resultSet.getString(4),
+//                        resultSet.getString(5)
+//                ));
+//            }
+//
+//            return customerDtoList;
+//        }
+//    }
 }

@@ -21,6 +21,7 @@ import lk.ijse.cinemax.dto.tm.TicketTm;
 import lk.ijse.cinemax.model.CustomerModel;
 import lk.ijse.cinemax.model.TicketModel;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Timer;
@@ -39,6 +40,7 @@ public class TicketFormController {
     public TableColumn colTicketPrice;
     public JFXComboBox<String> cmbShowtimeId;
     public TableColumn colShowTimeIds;
+    public JFXTextField txtMOvieId;
     private TicketModel ticketModel = new TicketModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception {
@@ -293,7 +295,7 @@ public class TicketFormController {
         }
     }
 
-
+    private Connection connection;
     public void btnTicketBookingOnAction(ActionEvent event) {
         String ticketId = txtTicketId.getText();
         String cusId = cmbCustomerIds.getValue();
