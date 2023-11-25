@@ -1,34 +1,48 @@
 package lk.ijse.cinemax.model;
 
 import lk.ijse.cinemax.db.DbConnection;
+import lk.ijse.cinemax.dto.SeatDto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SeatModel {
-    public boolean deleteSeat(Connection connection, String seatId) {
-        try (PreparedStatement deleteStatement = connection.prepareStatement("DELETE FROM seats WHERE seatId = ?")) {
-            // Set the parameter
-            deleteStatement.setString(1, seatId);
 
-            // Execute the delete query
-            int rowsAffected = deleteStatement.executeUpdate();
+    public boolean hideSeat(Connection connection, String seatId) throws SQLException {
+        String query = "UPDATE seats SET status = 'unavailable' WHERE seatId = ? AND status = 'available'";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, seatId);
 
-            // Check if the deletion was successful
-            if (rowsAffected > 0) {
-                // Optionally, you can perform additional actions or log information here
-                return true;
-            } else {
-                // Optionally, you can log a message or throw an exception
-                System.err.println("Seat with ID " + seatId + " not found for deletion.");
-                return false;
-            }
-        } catch (SQLException e) {
-            // Handle SQL exceptions
-            e.printStackTrace();
-            // Optionally, log a message or throw a custom exception
-            return false;
+            int rowsAffected = preparedStatement.executeUpdate();
+
+            return rowsAffected > 0;
         }
     }
+//    public List<SeatDto> loadAvailableSeats() throws SQLException{
+//        String query = "SELECT * FROM seats WHERE status = 'available'";
+//        List<SeatDto> availableSeats = new ArrayList<>();
+//
+//        try (Connection connection = DbConnection.getInstance().getConnection();
+//             PreparedStatement preparedStatement = connection.prepareStatement(query);
+//             ResultSet resultSet = preparedStatement.executeQuery()) {
+//
+//            while (resultSet.next()) {
+//                SeatDto seatDto = new SeatDto();
+//                seatDto.setSeatId(resultSet.getString("seatId"));
+//                seatDto.setStatus(resultSet.getString("status"));
+//                // Add other seat details as needed
+//                availableSeats.add(seatDto);
+//            }
+//        } catch (SQLException e) {
+//            // Log or print the exception details
+//            e.printStackTrace();
+//        }
+//
+//        return availableSeats;
+//    }
+
 }

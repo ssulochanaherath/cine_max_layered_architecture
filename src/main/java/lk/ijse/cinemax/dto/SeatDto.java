@@ -5,15 +5,17 @@ public class SeatDto {
     private String horizontal;
     private String vertical;
     private String seatNo;
+    private String status;
 
     public SeatDto() {
     }
 
-    public SeatDto(String seatId, String horizontal, String vertical, String seatNo) {
+    public SeatDto(String seatId, String horizontal, String vertical, String seatNo, String status) {
         this.seatId = seatId;
         this.horizontal = horizontal;
         this.vertical = vertical;
         this.seatNo = seatNo;
+        this.status = status;
     }
 
     public String getSeatId() {
@@ -48,6 +50,14 @@ public class SeatDto {
         this.seatNo = seatNo;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "SeatDto{" +
@@ -55,6 +65,7 @@ public class SeatDto {
                 ", horizontal='" + horizontal + '\'' +
                 ", vertical='" + vertical + '\'' +
                 ", seatNo='" + seatNo + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

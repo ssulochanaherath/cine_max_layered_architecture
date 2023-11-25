@@ -12,9 +12,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.*;
 import lk.ijse.cinemax.dto.tm.TicketTm;
 import lk.ijse.cinemax.model.SeatModel;
@@ -41,6 +43,7 @@ public class TicketFormController {
     public JFXComboBox<String> cmbShowtimeId;
     public TableColumn colShowTimeIds;
     public JFXTextField txtMOvieId;
+    public TextField txtTicketSearch;
     private TicketModel ticketModel = new TicketModel();
 
     private SeatModel seatModel = new SeatModel();
@@ -297,6 +300,8 @@ public class TicketFormController {
         }
     }
 
+
+
 //    public void btnTicketBookingOnAction(ActionEvent event) {
 //        String ticketId = txtTicketId.getText();
 //        String customerId = cmbCustomerIds.getValue();
@@ -320,6 +325,63 @@ public class TicketFormController {
 //        initialize();
 //    }
 
+//
+
+//    public void btnTicketBookingOnAction(ActionEvent event) {
+//        String ticketId = txtTicketId.getText();
+//        String cusId = cmbCustomerIds.getValue();
+//        String movieId = cmbMovieId.getValue();
+//        String seatId = cmbSeatIds.getValue();
+//        String showTimeId = cmbShowtimeId.getValue();
+//        String price = txtTicketPrice.getText();
+//
+//        var dto = new TicketDto(ticketId, cusId, movieId, seatId, showTimeId, price);
+//
+//        Connection connection = null;
+//
+//        try {
+//            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/cine_max", "root", "Ijse@1234");
+//            connection.setAutoCommit(false);
+//
+//            // Perform ticket booking
+//            boolean isBooked = ticketModel.saveTicket(connection, dto);
+//
+//            // Perform seat deletion
+//            boolean isSeatDeleted = seatModel.deleteSeat(connection, seatId);
+//
+//            if (isBooked && isSeatDeleted) {
+//                connection.commit();
+//                new Alert(Alert.AlertType.CONFIRMATION, "Ticket Booked Successfully! Seat Deleted.").show();
+//                clearFields();
+//            } else {
+//                connection.rollback();
+//                new Alert(Alert.AlertType.WARNING, "Transaction failed. Ticket and seat changes rolled back.").show();
+//            }
+//        } catch (SQLException e) {
+//            try {
+//                if (connection != null) {
+//                    connection.rollback();
+//                }
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+//
+//            e.printStackTrace();
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        } finally {
+//            try {
+//                if (connection != null) {
+//                    connection.setAutoCommit(true);
+//                    connection.close();
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        initialize();
+//    }
+
     public void btnTicketBookingOnAction(ActionEvent event) {
         String ticketId = txtTicketId.getText();
         String cusId = cmbCustomerIds.getValue();
@@ -339,10 +401,10 @@ public class TicketFormController {
             // Perform ticket booking
             boolean isBooked = ticketModel.saveTicket(connection, dto);
 
-            // Perform seat deletion
-            boolean isSeatDeleted = seatModel.deleteSeat(connection, seatId);
+            // Perform seat hide
+            boolean isHide = seatModel.hideSeat(connection, seatId);
 
-            if (isBooked && isSeatDeleted) {
+            if (isBooked && isHide) {
                 connection.commit();
                 new Alert(Alert.AlertType.CONFIRMATION, "Ticket Booked Successfully! Seat Deleted.").show();
                 clearFields();
@@ -375,6 +437,8 @@ public class TicketFormController {
         initialize();
     }
 
+
+
     private void clearFields() {
         txtTicketId.clear();
         cmbCustomerIds.setValue(null);
@@ -387,16 +451,16 @@ public class TicketFormController {
     public void cmbLoadShowtimeIds(ActionEvent event) throws SQLException{
         ObservableList<String> obList = FXCollections.observableArrayList();
 
-        try {
-            List<ShowTimeDto> idList = ticketModel.loadAllShowtimeIds();
+        List<ShowTimeDto> idList = ticketModel.loadAllShowtimeIds();
 
-            for (ShowTimeDto dto : idList) {
-                obList.add(dto.getShowTimeId());
-            }
-
-            cmbShowtimeId.setItems(obList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        for (ShowTimeDto dto : idList) {
+            obList.add(dto.getShowTimeId());
         }
+
+        cmbShowtimeId.setItems(obList);
+    }
+
+    public void btnTicketCancelOnAction(ActionEvent event) {
+        clearFields();
     }
 }

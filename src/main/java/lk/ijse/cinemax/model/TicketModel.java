@@ -54,7 +54,7 @@ public class TicketModel {
 
     public List<SeatDto> loadAllSeatNos() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM seats";
+        String sql = "SELECT * FROM seats WHERE status = 'available'";
         try (PreparedStatement pstm = connection.prepareStatement(sql);
              ResultSet resultSet = pstm.executeQuery()) {
 
@@ -65,13 +65,15 @@ public class TicketModel {
                         resultSet.getString(1),
                         resultSet.getString(2),
                         resultSet.getString(3),
-                        resultSet.getString(4)
+                        resultSet.getString(4),
+                        resultSet.getString(5)
                 ));
             }
 
             return seatsList;
         }
     }
+
 
     public List<TicketDto> loadAllTickets() throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
@@ -137,7 +139,6 @@ public class TicketModel {
     }
 
     public boolean saveTicket(Connection connection, TicketDto ticketDto) throws SQLException {
-        // Prepare the SQL query
 
         // Now, execute the SQL query within the provided connection
         try (PreparedStatement statement = connection.prepareStatement("INSERT INTO tickets (ticketId, customerId, movieId, seatId, showTimeID, price) VALUES (?, ?, ?, ?, ?, ?)")) {

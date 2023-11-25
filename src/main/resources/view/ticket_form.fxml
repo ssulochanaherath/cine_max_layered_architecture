@@ -102,7 +102,7 @@
       <JFXComboBox fx:id="cmbSeatIds" layoutX="292.0" layoutY="241.0" onAction="#cmbLoadSeatNos" prefHeight="24.0" prefWidth="99.0" />
       <Label layoutX="807.0" layoutY="245.0" text="Price :" />
       <JFXTextField fx:id="txtTicketPrice" layoutX="867.0" layoutY="241.0" />
-      <JFXButton layoutX="944.0" layoutY="312.0" onAction="#btnTicketBookingOnAction" prefHeight="35.0" prefWidth="81.0" style="-fx-background-color: #192a56;" text="Booking" textFill="WHITE">
+      <JFXButton layoutX="848.0" layoutY="312.0" onAction="#btnTicketBookingOnAction" prefHeight="35.0" prefWidth="81.0" style="-fx-background-color: #192a56;" text="Booking" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -119,5 +119,10 @@
       </TableView>
       <Label layoutX="531.0" layoutY="245.0" text="ShowtimeID :" />
       <JFXComboBox fx:id="cmbShowtimeId" layoutX="644.0" layoutY="241.0" onAction="#cmbLoadShowtimeIds" prefHeight="24.0" prefWidth="99.0" />
+      <JFXButton layoutX="956.0" layoutY="312.0" onAction="#btnTicketCancelOnAction" prefHeight="35.0" prefWidth="81.0" style="-fx-background-color: #e74c3c;" text="Clear" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
     </children>
 </AnchorPane>
