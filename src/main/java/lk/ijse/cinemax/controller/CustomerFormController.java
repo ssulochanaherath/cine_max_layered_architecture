@@ -42,6 +42,8 @@ public class CustomerFormController {
 
     private CustomerModel cusModel = new CustomerModel();
 
+    private SignUpModel signUpModel = new SignUpModel();
+
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
@@ -175,6 +177,13 @@ public class CustomerFormController {
         String customerAddress = txtCustomerAddress.getText();
         String customerTelephone = txtCustomerTelephone.getText();
 
+        String telephoneRegex = "^\\d{10}$"; // Assumes a 10-digit phone number; you can adjust the pattern as needed
+
+        if (!customerTelephone.matches(telephoneRegex)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Telephone Number! Please enter a 10-digit number.").show();
+            return; // Don't proceed with saving if the telephone number is invalid
+        }
+
         var dto = new CustomerDto(userId,customerId,customerName,customerAddress,customerTelephone);
 
         try {
@@ -224,9 +233,9 @@ public class CustomerFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDto> idLIst = cusModel.loadAllCustomerIds();
+            List<SignUpDto> idLIst = signUpModel.loadAllUserIds();
 
-            for (CustomerDto dto : idLIst) {
+            for (SignUpDto dto : idLIst) {
                 obList.add(dto.getUserId());
             }
             txtUserId.setItems(obList);

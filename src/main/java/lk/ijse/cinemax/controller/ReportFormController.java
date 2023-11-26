@@ -7,8 +7,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.db.DbConnection;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
+import java.io.InputStream;
+import java.sql.SQLException;
 
 public class ReportFormController {
+    private DbConnection DBConnection;
+
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
@@ -133,5 +143,16 @@ public class ReportFormController {
         newStage.show();
 
         oldStage.close();
+    }
+
+    public void btnTicketReportOnAction(MouseEvent mouseEvent) throws JRException, SQLException {
+         InputStream resourceAsStream = getClass().getResourceAsStream("/report/TicketListNew.jrxml");
+         JasperDesign load = JRXmlLoader.load(resourceAsStream);
+         JasperReport jasperReport = JasperCompileManager.compileReport(load);
+         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
+                 null,
+                 DbConnection.getInstance().getConnection()
+         );
+         JasperViewer.viewReport(jasperPrint, false);
     }
 }

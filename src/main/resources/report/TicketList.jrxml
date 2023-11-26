@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.20.6-5c96b6aa8a39ac1dc6b6bea4b81168e16dd39231  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TicketList" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08b0c872-f7f2-4256-a983-33d532d05620">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Cinemacx Adaptor"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM tickets;]]>
+	</queryString>
+	<field name="ticketId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="ticketId"/>
+		<property name="com.jaspersoft.studio.field.label" value="ticketId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tickets"/>
+	</field>
+	<field name="customerId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="customerId"/>
+		<property name="com.jaspersoft.studio.field.label" value="customerId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tickets"/>
+	</field>
+	<field name="movieId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="movieId"/>
+		<property name="com.jaspersoft.studio.field.label" value="movieId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tickets"/>
+	</field>
+	<field name="seatId" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="seatId"/>
+		<property name="com.jaspersoft.studio.field.label" value="seatId"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tickets"/>
+	</field>
+	<field name="showtimeID" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="showtimeID"/>
+		<property name="com.jaspersoft.studio.field.label" value="showtimeID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tickets"/>
+	</field>
+	<field name="price" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="price"/>
+		<property name="com.jaspersoft.studio.field.label" value="price"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tickets"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="30" width="237" height="30" uuid="0ed03c1a-6193-4dad-ac32-795c5ddb4f15"/>
+				<textElement>
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cine Max Tickets]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="0" width="100" height="30" uuid="cd505e5b-06ca-4c8e-9940-9cca7f5a165d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dbc958d0-eb9e-4e41-b7fb-ac9adca39f46"/>
+				</reportElement>
+				<text><![CDATA[ticketId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="0" width="100" height="30" uuid="4cbd5c4c-fb8a-47bc-af03-a4c14e105a4c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a4bbd74c-289b-45a9-8b06-46445289d974"/>
+				</reportElement>
+				<text><![CDATA[customerId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="0" width="100" height="30" uuid="60dd1943-53bc-4011-9f59-e10e43783441">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a7adb574-13d2-49f9-acd0-ce6ed674aebf"/>
+				</reportElement>
+				<text><![CDATA[movieId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="0" width="100" height="30" uuid="87eaea0f-1983-482f-bb53-4e71cda5894d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="391d3f15-a3c2-4332-adc4-9afbaafce74e"/>
+				</reportElement>
+				<text><![CDATA[seatId]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="389" y="0" width="100" height="30" uuid="06220c56-2dcc-4731-b6b5-7a61257340cf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1ee0b027-0203-461b-88a0-97ace204404a"/>
+				</reportElement>
+				<text><![CDATA[showtimeID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="488" y="0" width="100" height="30" uuid="8f542eed-4b4f-4bd8-8b7d-76cb1ef5ba92">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b1b1972b-9f47-403c-8f84-574874027c0c"/>
+				</reportElement>
+				<text><![CDATA[price]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="47" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="6289fd97-ea9a-4c74-b95e-de8e5f42d798">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="dbc958d0-eb9e-4e41-b7fb-ac9adca39f46"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{ticketId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="0" width="100" height="30" uuid="4f9565fc-f2c0-4aae-88d5-77c2e8b6e1a0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a4bbd74c-289b-45a9-8b06-46445289d974"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{customerId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="30" uuid="9e164d27-5ff5-4761-9a21-3eac4b700c28">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a7adb574-13d2-49f9-acd0-ce6ed674aebf"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{movieId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="100" height="30" uuid="7001a7d1-6d60-43e0-9e2c-dcedeabbd5a6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="391d3f15-a3c2-4332-adc4-9afbaafce74e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{seatId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="100" height="30" uuid="798ddfb1-d0bc-4312-b1ff-fda3ab1d9f5b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1ee0b027-0203-461b-88a0-97ace204404a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{showtimeID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="480" y="0" width="100" height="30" uuid="c0a18643-63fa-4892-a59c-9b7526215d90">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b1b1972b-9f47-403c-8f84-574874027c0c"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

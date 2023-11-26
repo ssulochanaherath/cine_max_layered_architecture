@@ -35,6 +35,13 @@ public class SignupFormController {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
+        String userIdRegex = "U\\d{3}";
+
+        if (!userId.matches(userIdRegex)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid User Id! Please enter a valid User Id.").show();
+            return;
+        }
+
         var dto = new SignUpDto(userId,fristName,lastName,userName,password);
 
         try {
