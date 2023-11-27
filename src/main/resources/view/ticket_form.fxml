@@ -124,5 +124,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Label layoutX="216.0" layoutY="304.0" text="Customer Email :" />
+      <JFXTextField fx:id="txtCustomerEmail" layoutX="339.0" layoutY="300.0" prefHeight="24.0" prefWidth="186.0" />
     </children>
 </AnchorPane>

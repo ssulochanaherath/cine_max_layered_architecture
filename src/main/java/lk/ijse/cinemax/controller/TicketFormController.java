@@ -22,11 +22,15 @@ import lk.ijse.cinemax.dto.tm.TicketTm;
 import lk.ijse.cinemax.model.SeatModel;
 import lk.ijse.cinemax.model.TicketModel;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class TicketFormController {
     public JFXComboBox<String> cmbCustomerIds;
@@ -42,8 +46,7 @@ public class TicketFormController {
     public TableColumn colTicketPrice;
     public JFXComboBox<String> cmbShowtimeId;
     public TableColumn colShowTimeIds;
-    public JFXTextField txtMOvieId;
-    public TextField txtTicketSearch;
+    public JFXTextField txtCustomerEmail;
     private TicketModel ticketModel = new TicketModel();
 
     private SeatModel seatModel = new SeatModel();
@@ -390,6 +393,8 @@ public class TicketFormController {
         String showTimeId = cmbShowtimeId.getValue();
         String price = txtTicketPrice.getText();
 
+        String email = txtCustomerEmail.getText();
+
         var dto = new TicketDto(ticketId, cusId, movieId, seatId, showTimeId, price);
 
         Connection connection = null;
@@ -406,6 +411,17 @@ public class TicketFormController {
 
             if (isBooked && isHide) {
                 connection.commit();
+
+                String emailContent = "Thank you for being our customer. Your ticket details are send with this email."
+                        + "\n\nTicket Details:"
+                        + "\n\nID: " + cusId
+                        + "\nMovie: " + movieId
+                        + "\nSeat: " + seatId
+                        + "\nShowtime: " + showTimeId
+                        + "\nPrice: " + price;
+
+                sendEmail(email, "Ticket Booked!", emailContent);
+
                 new Alert(Alert.AlertType.CONFIRMATION, "Ticket Booked Successfully! Seat Deleted.").show();
                 clearFields();
             } else {
@@ -437,6 +453,39 @@ public class TicketFormController {
         initialize();
     }
 
+    private void sendEmail(String to, String subject, String content) {
+        final String username = "hallwembley@gmail.com"; // Replace with your Gmail username
+        final String password = "nopvwkcbxpxhvjji"; // Replace with your Gmail password
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(content);
+
+            Transport.send(message);
+
+            System.out.println("Email sent successfully!");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 
     private void clearFields() {
@@ -446,6 +495,7 @@ public class TicketFormController {
         cmbSeatIds.setValue(null);
         cmbShowtimeId.setValue(null);
         txtTicketPrice.clear();
+        txtCustomerEmail.clear();
     }
 
     public void cmbLoadShowtimeIds(ActionEvent event) throws SQLException{
