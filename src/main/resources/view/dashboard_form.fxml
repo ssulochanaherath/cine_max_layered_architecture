@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -82,5 +83,7 @@
             <Font name="Laksaman Bold" size="32.0" />
          </font>
       </Label>
+      <Label layoutX="207.0" layoutY="289.0" prefHeight="28.0" prefWidth="109.0" text="Avaible Seats :" textFill="#fafafa" />
+      <TextField fx:id="txtSeatsCount" layoutX="315.0" layoutY="291.0" prefHeight="24.0" prefWidth="88.0" />
     </children>
 </AnchorPane>

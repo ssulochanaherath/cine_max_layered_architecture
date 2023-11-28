@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -29,12 +30,12 @@ import java.util.ResourceBundle;
 
 public class MoviesFormController implements Initializable {
     public TextField txtMovieName;
-    public ImageView imgAvengers;
-    public ImageView imgMissionImpossible;
-    public ImageView imgTopGun;
-    public ImageView imgSherlockHolmes;
-    public ImageView imgHobbit;
-    public ImageView imgPirates;
+    public ImageView imgOne;
+    public ImageView imgTwo;
+    public ImageView imgThree;
+    public ImageView imgFour;
+    public ImageView imgFive;
+    public ImageView imgSix;
     private TicketModel ticketModel = new TicketModel();
     private MovieModel movieModel = new MovieModel();
     private MovieDto movieDto = new MovieDto();
@@ -370,65 +371,211 @@ public class MoviesFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Load the default image when the interface is loaded
-        loadAvengersImage();
-        loadMissionImpossibleImage();
-        loadPiratesImage();
-        loadTopGunImage();
-        loadSherlockImage();
-        loadHobbitImage();
+
+        loadImageOne();
+        loadImageTwo();
+        loadImageThree();
+        loadImageFour();
+        loadImageFive();
+        loadImageSix();
     }
 
-    private void loadAvengersImage() {
-        // You can set a default image path or URL
-        String defaultImagePath = "/images/Avengers.jpg";
+    private void loadImageSix() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT image FROM movie WHERE movieId = 'M006'";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
 
-        // Load the image and set it to the ImageView
-        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
-        imgAvengers.setImage(defaultImage);
+                if (resultSet.next()) {
+                    byte[] imageBytes = resultSet.getBytes("image");
+                    if (imageBytes != null) {
+                        Image image = new Image(new ByteArrayInputStream(imageBytes));
+                        imgSix.setImage(image);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
+                        alert.show();
+                    }
+                }
+            } catch (SQLException e) {
+                if (e instanceof SQLNonTransientConnectionException) {
+                    // Handle connection closed exception
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                    alert.show();
+                } else {
+                    e.printStackTrace(); // Handle other SQLExceptions appropriately
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void loadMissionImpossibleImage() {
-        // You can set a default image path or URL
-        String defaultImagePath = "/images/Mission-Impossible.jpg";
+    private void loadImageFive() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT image FROM movie WHERE movieId = 'M005'";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
 
-        // Load the image and set it to the ImageView
-        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
-        imgMissionImpossible.setImage(defaultImage);
+                if (resultSet.next()) {
+                    byte[] imageBytes = resultSet.getBytes("image");
+                    if (imageBytes != null) {
+                        Image image = new Image(new ByteArrayInputStream(imageBytes));
+                        imgFive.setImage(image);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
+                        alert.show();
+                    }
+                }
+            } catch (SQLException e) {
+                if (e instanceof SQLNonTransientConnectionException) {
+                    // Handle connection closed exception
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                    alert.show();
+                } else {
+                    e.printStackTrace(); // Handle other SQLExceptions appropriately
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void loadPiratesImage() {
-        // You can set a default image path or URL
-        String defaultImagePath = "/images/Pirates-of-the-Carribean.jpg";
+    private void loadImageFour() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT image FROM movie WHERE movieId = 'M004'";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
 
-        // Load the image and set it to the ImageView
-        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
-        imgPirates.setImage(defaultImage);
+                if (resultSet.next()) {
+                    byte[] imageBytes = resultSet.getBytes("image");
+                    if (imageBytes != null) {
+                        Image image = new Image(new ByteArrayInputStream(imageBytes));
+                        imgFour.setImage(image);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
+                        alert.show();
+                    }
+                }
+            } catch (SQLException e) {
+                if (e instanceof SQLNonTransientConnectionException) {
+                    // Handle connection closed exception
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                    alert.show();
+                } else {
+                    e.printStackTrace(); // Handle other SQLExceptions appropriately
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void loadTopGunImage() {
-        // You can set a default image path or URL
-        String defaultImagePath = "/images/Top-Gun-Maverick.jpg";
+    private void loadImageThree() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT image FROM movie WHERE movieId = 'M003'";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
 
-        // Load the image and set it to the ImageView
-        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
-        imgTopGun.setImage(defaultImage);
+                if (resultSet.next()) {
+                    byte[] imageBytes = resultSet.getBytes("image");
+                    if (imageBytes != null) {
+                        Image image = new Image(new ByteArrayInputStream(imageBytes));
+                        imgThree.setImage(image);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
+                        alert.show();
+                    }
+                }
+            } catch (SQLException e) {
+                if (e instanceof SQLNonTransientConnectionException) {
+                    // Handle connection closed exception
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                    alert.show();
+                } else {
+                    e.printStackTrace(); // Handle other SQLExceptions appropriately
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void loadSherlockImage() {
-        // You can set a default image path or URL
-        String defaultImagePath = "/images/Sherloch-Holmes.jpg";
 
-        // Load the image and set it to the ImageView
-        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
-        imgSherlockHolmes.setImage(defaultImage);
+    private void loadImageOne() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT image FROM movie WHERE movieId = 'M001'";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
+
+                if (resultSet.next()) {
+                    byte[] imageBytes = resultSet.getBytes("image");
+                    if (imageBytes != null) {
+                        Image image = new Image(new ByteArrayInputStream(imageBytes));
+                        imgOne.setImage(image);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
+                        alert.show();
+                    }
+                }
+            } catch (SQLException e) {
+                if (e instanceof SQLNonTransientConnectionException) {
+                    // Handle connection closed exception
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                    alert.show();
+                } else {
+                    e.printStackTrace(); // Handle other SQLExceptions appropriately
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    private void loadHobbitImage() {
-        // You can set a default image path or URL
-        String defaultImagePath = "/images/The-Hobbit.jpg";
+    private void loadImageTwo() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT image FROM movie WHERE movieId = 'M002'";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
 
-        // Load the image and set it to the ImageView
-        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
-        imgHobbit.setImage(defaultImage);
+                if (resultSet.next()) {
+                    byte[] imageBytes = resultSet.getBytes("image");
+                    if (imageBytes != null) {
+                        Image image = new Image(new ByteArrayInputStream(imageBytes));
+                        imgTwo.setImage(image);
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
+                        alert.show();
+                    }
+                }
+            } catch (SQLException e) {
+                if (e instanceof SQLNonTransientConnectionException) {
+                    // Handle connection closed exception
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                    alert.show();
+                } else {
+                    e.printStackTrace(); // Handle other SQLExceptions appropriately
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
