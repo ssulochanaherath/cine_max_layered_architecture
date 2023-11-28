@@ -1,5 +1,6 @@
 package lk.ijse.cinemax.controller;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -13,10 +14,24 @@ import lk.ijse.cinemax.db.DbConnection;
 
 import java.net.URL;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class DashboardFormController implements Initializable {
     public TextField txtSeatsCount;
+    public JFXTextField txtDate;
+    public JFXTextField txtMovieCount;
+    public JFXTextField txtFood;
+    public JFXTextField txtQty;
+    public JFXTextField txtFood1;
+    public JFXTextField txtQty1;
+    public JFXTextField txtFood2;
+    public JFXTextField txtQty2;
+    public JFXTextField txtFood3;
+    public JFXTextField txtQty3;
+    public JFXTextField txtFood4;
+    public JFXTextField txtQty4;
+    public JFXTextField txtSuppliers;
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -134,6 +149,107 @@ public class DashboardFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         availableSeats();
+        setDate();
+        availableMovies();
+        availableSuppliers();
+        showItemInfo("qty_on_hand", txtQty, "F001"); // for quantity
+        showItemInfo("description", txtFood, "F001"); // for description
+        showItemInfo("qty_on_hand", txtQty1, "F002"); // for quantity
+        showItemInfo("description", txtFood1, "F002"); // for description
+        showItemInfo("qty_on_hand", txtQty2, "F003"); // for quantity
+        showItemInfo("description", txtFood2, "F003"); // for description
+        showItemInfo("qty_on_hand", txtQty3, "F004"); // for quantity
+        showItemInfo("description", txtFood3, "F004"); // for description
+        showItemInfo("qty_on_hand", txtQty4, "F005"); // for quantity
+        showItemInfo("description", txtFood4, "F005"); // for description
+    }
+
+    private void availableSuppliers() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT COUNT(*) FROM supplier";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
+
+                if (resultSet.next()) {
+                    int availableSeatsCount = resultSet.getInt(1);
+                    txtSuppliers.setText(String.valueOf(availableSeatsCount));
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "No available seats found.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            if (e instanceof SQLNonTransientConnectionException) {
+                // Handle connection closed exception
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                alert.show();
+            } else {
+                e.printStackTrace(); // Handle other SQLExceptions appropriately
+                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                alert.show();
+            }
+        }
+    }
+
+    private void showItemInfo(String column, TextField targetTextField, String itemCode) {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT " + column + " FROM item WHERE code = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setString(1, itemCode);
+
+                try (ResultSet resultSet = pstm.executeQuery()) {
+                    if (resultSet.next()) {
+                        String value = resultSet.getString(column);
+                        targetTextField.setText(String.valueOf(value));
+                    } else {
+                        System.out.println("No data found for item with code: " + itemCode);
+                        // Display a message without showing an error alert
+                        targetTextField.setText("N/A");
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            if (e instanceof SQLNonTransientConnectionException) {
+                // Handle connection closed exception
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                alert.show();
+            } else {
+                e.printStackTrace(); // Handle other SQLExceptions appropriately
+                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                alert.show();
+            }
+        }
+    }
+
+    private void availableMovies() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT COUNT(*) FROM movie";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+            ResultSet resultSet = pstm.executeQuery()) {
+
+                if (resultSet.next()) {
+                    int availableMoviesCount = resultSet.getInt(1);
+                    txtMovieCount.setText(String.valueOf(availableMoviesCount));
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "No available movies found.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            if (e instanceof SQLNonTransientConnectionException) {
+                // Handle connection closed exception
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                alert.show();
+            } else {
+                e.printStackTrace(); // Handle other SQLExceptions appropriately
+                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                alert.show();
+            }
+        }
     }
 
     public void availableSeats() {
@@ -162,6 +278,10 @@ public class DashboardFormController implements Initializable {
                 alert.show();
             }
         }
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
     }
 
 }

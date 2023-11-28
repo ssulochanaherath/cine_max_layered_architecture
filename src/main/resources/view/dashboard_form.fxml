@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,9 +19,9 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </Label>
-      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="1024.0" layoutY="38.0" onMouseClicked="#btnLogOutOnAction">
+      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="1008.0" layoutY="29.0" onMouseClicked="#btnLogOutOnAction">
          <image>
-            <Image url="@../icons/logout.png" />
+            <Image url="@../icons/log-out.png" />
          </image>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -77,13 +77,110 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#34495e" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#eff0eb" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
       <Label layoutX="197.0" layoutY="103.0">
          <font>
             <Font name="Laksaman Bold" size="32.0" />
          </font>
       </Label>
-      <Label layoutX="207.0" layoutY="289.0" prefHeight="28.0" prefWidth="109.0" text="Avaible Seats :" textFill="#fafafa" />
-      <TextField fx:id="txtSeatsCount" layoutX="315.0" layoutY="291.0" prefHeight="24.0" prefWidth="88.0" />
+      <JFXTextField fx:id="txtDate" layoutX="852.0" layoutY="35.0" prefHeight="42.0" prefWidth="122.0" unFocusColor="#fff6f6">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextField>
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#2ecc71" height="167.0" layoutX="197.0" layoutY="118.0" stroke="WHITE" strokeType="INSIDE" width="201.0" />
+      <Label layoutX="226.0" layoutY="142.0" prefHeight="55.0" prefWidth="157.0" text="Available Seats" textFill="WHITE">
+         <font>
+            <Font name="Laksaman Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtSeatsCount" focusColor="WHITE" layoutX="262.0" layoutY="189.0" prefHeight="72.0" prefWidth="61.0" unFocusColor="#2ecc71">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </JFXTextField>
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#00a8ff" height="167.0" layoutX="417.0" layoutY="118.0" stroke="WHITE" strokeType="INSIDE" width="218.0" />
+      <JFXTextField fx:id="txtMovieCount" focusColor="WHITE" layoutX="509.0" layoutY="189.0" prefHeight="72.0" prefWidth="61.0" unFocusColor="#2ecc71">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </JFXTextField>
+      <ImageView fitHeight="319.0" fitWidth="618.0" layoutX="501.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/header.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="452.0" layoutY="142.0" prefHeight="55.0" prefWidth="176.0" text="Available Movies" textFill="WHITE">
+         <font>
+            <Font name="Laksaman Bold" size="18.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#12cbc4f7" height="390.0" layoutX="202.0" layoutY="309.0" stroke="WHITE" strokeType="INSIDE" width="244.0" />
+      <Label layoutX="292.0" layoutY="325.0" prefHeight="55.0" prefWidth="62.0" text="Items">
+         <font>
+            <Font name="Laksaman Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtFood" layoutX="225.0" layoutY="390.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtQty" layoutX="345.0" layoutY="390.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtFood1" layoutX="225.0" layoutY="440.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtQty1" layoutX="345.0" layoutY="440.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtFood2" layoutX="225.0" layoutY="490.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtQty2" layoutX="345.0" layoutY="490.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtFood3" layoutX="225.0" layoutY="540.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtQty3" layoutX="345.0" layoutY="540.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtFood4" layoutX="225.0" layoutY="590.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXTextField fx:id="txtQty4" layoutX="345.0" layoutY="590.0" prefHeight="24.0" prefWidth="83.0" unFocusColor="#12cbc4">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#9b59b6" height="167.0" layoutX="814.0" layoutY="118.0" stroke="WHITE" strokeType="INSIDE" width="218.0" />
+      <JFXTextField fx:id="txtSuppliers" focusColor="WHITE" layoutX="913.0" layoutY="189.0" prefHeight="72.0" prefWidth="61.0" unFocusColor="#9b59b6">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </JFXTextField>
+      <Label layoutX="881.0" layoutY="142.0" prefHeight="55.0" prefWidth="83.0" text="Suppliers" textFill="WHITE">
+         <font>
+            <Font name="Laksaman Bold" size="18.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
