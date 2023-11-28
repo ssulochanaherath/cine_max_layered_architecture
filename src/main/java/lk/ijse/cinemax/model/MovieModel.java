@@ -3,24 +3,35 @@ package lk.ijse.cinemax.model;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.MovieDto;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MovieModel {
-    public boolean saveMovie(MovieDto dto) throws SQLException {
+
+    public boolean saveMovie(MovieDto dto) throws SQLException, IOException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO movie VALUES(?,?,?,?)";
+        String sql = "INSERT INTO movie VALUES(?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getMovieId());
         pstm.setString(2, dto.getMovieName());
         pstm.setString(3, dto.getMovieGenre());
         pstm.setString(4, dto.getYear());
+
+        if (dto.getImagePath() != null) {
+            byte[] imageData = Files.readAllBytes(Paths.get(dto.getImagePath()));
+            pstm.setBytes(5, imageData);
+        } else {
+            // If no image is provided, set the column to null
+            pstm.setNull(5, Types.LONGVARBINARY);
+        }
 
         boolean isSaved = pstm.executeUpdate() > 0;
 
@@ -41,7 +52,8 @@ public class MovieModel {
                     resultSet.getString(1),
                     resultSet.getString(2),
                     resultSet.getString(3),
-                    resultSet.getString(4)
+                    resultSet.getString(4),
+                    resultSet.getString(5)
             ));
         }
         return dtoList;
@@ -50,13 +62,14 @@ public class MovieModel {
     public boolean updateMovie(MovieDto dto) throws SQLException{
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE movie SET movieName = ? , movieGenre = ? , movieYear = ? WHERE movieId = ?";
+        String sql = "UPDATE movie SET movieName = ? , movieGenre = ? , movieYear = ?, imagePath = ? WHERE movieId = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getMovieName());
         pstm.setString(2, dto.getMovieGenre());
         pstm.setString(3, dto.getYear());
-        pstm.setString(4, dto.getMovieId());
+        pstm.setString(4, dto.getImagePath());
+        pstm.setString(5, dto.getMovieId());
 
         return pstm.executeUpdate() > 0;
     }
@@ -77,8 +90,9 @@ public class MovieModel {
             String name = resultSet.getString(2);
             String genre = resultSet.getString(3);
             String year = resultSet.getString(4);
+            String imagePath = resultSet.getString(5);
 
-            dto = new MovieDto(id, name, genre, year);
+            dto = new MovieDto(id, name, genre, year, imagePath);
         }
         return dto;
     }

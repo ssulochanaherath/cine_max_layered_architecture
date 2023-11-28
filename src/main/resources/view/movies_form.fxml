@@ -87,14 +87,6 @@
                 <Font name="Laksaman Bold" size="26.0" />
             </font>
         </Label>
-      <ImageView fx:id="missionIMpossible" fitHeight="209.0" fitWidth="155.0" layoutX="274.0" layoutY="170.0" onMouseClicked="#btnMissionImpossibleOnAction" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Mission-Impossible.jpg" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
       <Label layoutX="573.0" layoutY="107.0" prefHeight="58.0" prefWidth="96.0" text="Movies" textFill="WHITE">
          <font>
             <Font name="Laksaman Bold" size="28.0" />
@@ -102,106 +94,6 @@
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
-      </Label>
-      <Label layoutX="277.0" layoutY="374.0" prefHeight="34.0" prefWidth="140.0" text="Mission Impossible" textFill="WHITE">
-         <font>
-            <Font name="Laksaman Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="323.0" layoutY="400.0" text="2023" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="avengers" fitHeight="209.0" fitWidth="155.0" layoutX="551.0" layoutY="170.0" onMouseClicked="#btnAvengersOnAction" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Avengers.jpg" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <Label layoutX="589.0" layoutY="375.0" text="Avengers" textFill="WHITE">
-         <font>
-            <Font name="Laksaman Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="600.0" layoutY="400.0" text="2019" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="piratesOfTheCaribbean" fitHeight="209.0" fitWidth="155.0" layoutX="828.0" layoutY="170.0" onMouseClicked="#btnPiratesOfTheCarribeanOnAction" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Pirates-of-the-Carribean.jpg" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <Label layoutX="817.0" layoutY="375.0" text="Pirates of the Caribean" textFill="WHITE">
-         <font>
-            <Font name="Laksaman Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="877.0" layoutY="400.0" text="2017" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="topGun" fitHeight="209.0" fitWidth="155.0" layoutX="276.0" layoutY="445.0" onMouseClicked="#btnTopGunOnAction" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Top-Gun-Maverick.jpg" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <Label layoutX="271.0" layoutY="653.0" text="Top Gun : Maverick" textFill="WHITE">
-         <font>
-            <Font name="Laksaman Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="325.0" layoutY="679.0" text="2022" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="shedlockHolmes" fitHeight="209.0" fitWidth="155.0" layoutX="551.0" layoutY="445.0" onMouseClicked="#btnSherlockHolmesOnAction" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/Sherloch-Holmes.jpg" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <Label layoutX="558.0" layoutY="653.0" text="Sherlock Holmes" textFill="WHITE">
-         <font>
-            <Font name="Laksaman Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="600.0" layoutY="679.0" text="2009" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="hobbit" fitHeight="209.0" fitWidth="155.0" layoutX="830.0" layoutY="445.0" onMouseClicked="#btnHobbitOnAction" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/The-Hobbit.jpg" />
-         </image>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </ImageView>
-      <Label layoutX="854.0" layoutY="653.0" text="The Hobbit" textFill="WHITE">
-         <font>
-            <Font name="Laksaman Bold" size="15.0" />
-         </font>
-      </Label>
-      <Label layoutX="879.0" layoutY="679.0" text="2013" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
       </Label>
       <TextField fx:id="txtMovieName" layoutX="600.0" layoutY="35.0" prefHeight="34.0" prefWidth="222.0" promptText="Search Movies" />
       <ImageView fitHeight="42.0" fitWidth="49.0" layoutX="831.0" layoutY="31.0" onMouseClicked="#btnSearchOnAction" pickOnBounds="true" preserveRatio="true">
@@ -220,5 +112,11 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <ImageView fx:id="imgAvengers" fitHeight="208.0" fitWidth="158.0" layoutX="260.0" layoutY="187.0" onMouseClicked="#btnAvengersOnAction" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgMissionImpossible" fitHeight="208.0" fitWidth="158.0" layoutX="540.0" layoutY="187.0" onMouseClicked="#btnMissionImpossibleOnAction" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgPirates" fitHeight="208.0" fitWidth="158.0" layoutX="820.0" layoutY="187.0" onMouseClicked="#btnPiratesOfTheCarribeanOnAction" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgTopGun" fitHeight="208.0" fitWidth="158.0" layoutX="263.0" layoutY="439.0" onMouseClicked="#btnTopGunOnAction" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgSherlockHolmes" fitHeight="208.0" fitWidth="158.0" layoutX="543.0" layoutY="439.0" onMouseClicked="#btnSherlockHolmesOnAction" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgHobbit" fitHeight="208.0" fitWidth="158.0" layoutX="823.0" layoutY="439.0" onMouseClicked="#btnHobbitOnAction" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>

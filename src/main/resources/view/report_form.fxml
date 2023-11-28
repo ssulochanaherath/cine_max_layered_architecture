@@ -87,11 +87,6 @@
                 <Font name="Laksaman Bold" size="26.0" />
             </font>
         </Label>
-        <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="1017.0" layoutY="119.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../icons/report-new.png" />
-            </image>
-        </ImageView>
       <ImageView fitHeight="348.0" fitWidth="285.0" layoutX="292.0" layoutY="244.0" onMouseClicked="#btnTicketReportOnAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/Tickets.jpg" />
@@ -101,6 +96,19 @@
          </cursor>
       </ImageView>
       <Label layoutX="381.0" layoutY="534.0" text="Tickets">
+         <font>
+            <Font name="Laksaman Bold" size="26.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="285.0" fitWidth="285.0" layoutX="663.0" layoutY="243.0" onMouseClicked="#btnFoodReportOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/pop.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="OPEN_HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="734.0" layoutY="534.0" text="Food Order">
          <font>
             <Font name="Laksaman Bold" size="26.0" />
          </font>

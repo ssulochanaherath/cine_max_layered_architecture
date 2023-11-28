@@ -2,6 +2,7 @@ package lk.ijse.cinemax.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,17 +10,34 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.db.DbConnection;
+import lk.ijse.cinemax.dto.MovieDto;
+import lk.ijse.cinemax.model.MovieModel;
 import lk.ijse.cinemax.model.TicketModel;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class MoviesFormController {
-    public ImageView missionIMpossible;
-    public ImageView avengers;
-    public ImageView piratesOfTheCaribbean;
-    public ImageView topGun;
-    public ImageView shedlockHolmes;
-    public ImageView hobbit;
+import java.io.*;
+import java.net.URL;
+import java.sql.*;
+
+import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
+public class MoviesFormController implements Initializable {
     public TextField txtMovieName;
+    public ImageView imgAvengers;
+    public ImageView imgMissionImpossible;
+    public ImageView imgTopGun;
+    public ImageView imgSherlockHolmes;
+    public ImageView imgHobbit;
+    public ImageView imgPirates;
     private TicketModel ticketModel = new TicketModel();
+    private MovieModel movieModel = new MovieModel();
+    private MovieDto movieDto = new MovieDto();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -347,5 +365,70 @@ public class MoviesFormController {
         newStage.show();
 
         oldStage.close();
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Load the default image when the interface is loaded
+        loadAvengersImage();
+        loadMissionImpossibleImage();
+        loadPiratesImage();
+        loadTopGunImage();
+        loadSherlockImage();
+        loadHobbitImage();
+    }
+
+    private void loadAvengersImage() {
+        // You can set a default image path or URL
+        String defaultImagePath = "/images/Avengers.jpg";
+
+        // Load the image and set it to the ImageView
+        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
+        imgAvengers.setImage(defaultImage);
+    }
+
+    private void loadMissionImpossibleImage() {
+        // You can set a default image path or URL
+        String defaultImagePath = "/images/Mission-Impossible.jpg";
+
+        // Load the image and set it to the ImageView
+        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
+        imgMissionImpossible.setImage(defaultImage);
+    }
+
+    private void loadPiratesImage() {
+        // You can set a default image path or URL
+        String defaultImagePath = "/images/Pirates-of-the-Carribean.jpg";
+
+        // Load the image and set it to the ImageView
+        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
+        imgPirates.setImage(defaultImage);
+    }
+
+    private void loadTopGunImage() {
+        // You can set a default image path or URL
+        String defaultImagePath = "/images/Top-Gun-Maverick.jpg";
+
+        // Load the image and set it to the ImageView
+        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
+        imgTopGun.setImage(defaultImage);
+    }
+
+    private void loadSherlockImage() {
+        // You can set a default image path or URL
+        String defaultImagePath = "/images/Sherloch-Holmes.jpg";
+
+        // Load the image and set it to the ImageView
+        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
+        imgSherlockHolmes.setImage(defaultImage);
+    }
+
+    private void loadHobbitImage() {
+        // You can set a default image path or URL
+        String defaultImagePath = "/images/The-Hobbit.jpg";
+
+        // Load the image and set it to the ImageView
+        Image defaultImage = new Image(getClass().getResourceAsStream(defaultImagePath));
+        imgHobbit.setImage(defaultImage);
     }
 }

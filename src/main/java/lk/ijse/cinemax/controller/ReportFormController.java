@@ -155,4 +155,15 @@ public class ReportFormController {
          );
          JasperViewer.viewReport(jasperPrint, false);
     }
+
+    public void btnFoodReportOnAction(MouseEvent mouseEvent) throws JRException, SQLException{
+        InputStream resourceAsStream = getClass().getResourceAsStream("/report/FoodList.jrxml");
+        JasperDesign load = JRXmlLoader.load(resourceAsStream);
+        JasperReport jasperReport = JasperCompileManager.compileReport(load);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,
+                null,
+                DbConnection.getInstance().getConnection()
+        );
+        JasperViewer.viewReport(jasperPrint, false);
+    }
 }

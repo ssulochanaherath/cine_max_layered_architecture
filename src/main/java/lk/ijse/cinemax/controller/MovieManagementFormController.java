@@ -13,12 +13,19 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lk.ijse.cinemax.dto.MovieDto;
 import lk.ijse.cinemax.dto.tm.MovieTm;
 import lk.ijse.cinemax.model.MovieModel;
 
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -33,6 +40,8 @@ public class MovieManagementFormController {
     public TableColumn colMovieGenre;
     public TableColumn colYear;
     public TextField txtMovieSearch;
+    public TableColumn colImage;
+    public ImageView imgMovie;
 
     private MovieModel movieModel = new MovieModel();
 
@@ -162,13 +171,17 @@ public class MovieManagementFormController {
         oldStage.close();
     }
 
+    private File selectedImageFile;
+
     public void btnSaveOnAction(ActionEvent event) {
         String movieId = txtMovieId.getText();
         String movieName = txtMovieName.getText();
         String movieGenre = txtMovieGenre.getText();
         String year = txtYear.getText();
 
-        var dto = new MovieDto(movieId, movieName, movieGenre, year);
+        var dto = new MovieDto(movieId, movieName, movieGenre, year, null);
+
+        dto.setImagePath(selectedImageFile != null ? selectedImageFile.getAbsolutePath() : null);
 
         try {
             boolean isSaved = movieModel.saveMovie(dto);
@@ -176,12 +189,16 @@ public class MovieManagementFormController {
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Saved Movie!").show();
                 clearFields();
+                initialize(); // Move initialize() outside if statement
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        initialize();
+
     }
+
 
     public void initialize() {
         setCellValueFctory();
@@ -226,7 +243,8 @@ public class MovieManagementFormController {
                                 dto.getMovieId(),
                                 dto.getMovieName(),
                                 dto.getMovieGenre(),
-                                dto.getYear()
+                                dto.getYear(),
+                                dto.getImagePath()
                         )
                 );
             }
@@ -241,6 +259,7 @@ public class MovieManagementFormController {
         colMovieName.setCellValueFactory(new PropertyValueFactory<>("movieName"));
         colMovieGenre.setCellValueFactory(new PropertyValueFactory<>("movieGenre"));
         colYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+        colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
     }
 
     private void clearFields() {
@@ -249,6 +268,7 @@ public class MovieManagementFormController {
         txtMovieGenre.clear();
         txtYear.clear();
         txtMovieSearch.clear();
+        selectedImageFile = null;
     }
 
     public void btnUpdateOnAction(ActionEvent event) {
@@ -257,7 +277,9 @@ public class MovieManagementFormController {
         String movieGenre = txtMovieGenre.getText();
         String year = txtYear.getText();
 
-        var dto = new MovieDto(movieId, movieName, movieGenre, year);
+        var dto = new MovieDto(movieId, movieName, movieGenre, year, null);
+
+        dto.setImagePath(selectedImageFile != null ? selectedImageFile.getAbsolutePath() : null);
 
         try {
             boolean isUpdated = movieModel.updateMovie(dto);
@@ -310,5 +332,23 @@ public class MovieManagementFormController {
 
     public void btnClearOnAction(ActionEvent event) {
         clearFields();
+    }
+
+    public void btnChooseImageOnAction(ActionEvent event) throws SQLException{
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif")
+        );
+
+        // Show open file dialog
+        selectedImageFile = fileChooser.showOpenDialog(((Node) event.getSource()).getScene().getWindow());
+
+        if (selectedImageFile != null) {
+            // You can display the selected image or perform any other action
+            // For example, you can set the image path to a TextField or display it in an ImageView
+            // For simplicity, let's just print the file path for now
+            System.out.println("Selected Image File: " + selectedImageFile.getAbsolutePath());
+        }
     }
 }

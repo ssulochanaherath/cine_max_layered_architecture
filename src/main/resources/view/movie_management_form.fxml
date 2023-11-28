@@ -122,10 +122,11 @@
         </JFXButton>
         <TableView fx:id="tblMovies" layoutX="206.0" layoutY="416.0" prefHeight="266.0" prefWidth="826.0">
             <columns>
-                <TableColumn fx:id="colMovieId" prefWidth="238.40000915527344" text="Movie ID" />
-                <TableColumn fx:id="colMovieName" prefWidth="166.39996337890625" text="Name" />
-                <TableColumn fx:id="colMovieGenre" prefWidth="172.79998779296875" text="Genre" />
-                <TableColumn fx:id="colYear" prefWidth="249.60009765625" text="Year" />
+                <TableColumn fx:id="colMovieId" prefWidth="133.6000213623047" text="Movie ID" />
+                <TableColumn fx:id="colMovieName" prefWidth="186.4000244140625" text="Name" />
+                <TableColumn fx:id="colMovieGenre" prefWidth="149.60003662109375" text="Genre" />
+                <TableColumn fx:id="colYear" prefWidth="160.79986572265625" text="Year" />
+            <TableColumn fx:id="colImage" prefWidth="192.79996337890623" text="Image" />
             </columns>
         </TableView>
         <TextField fx:id="txtMovieSearch" layoutX="709.0" layoutY="34.0" prefHeight="35.0" prefWidth="210.0" promptText="Search Movies" />
@@ -137,5 +138,12 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
+      <Label layoutX="252.0" layoutY="325.0" prefHeight="19.0" prefWidth="63.0" text="Image :" />
+      <JFXButton buttonType="RAISED" layoutX="324.0" layoutY="317.0" onAction="#btnChooseImageOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Choose" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <ImageView fx:id="imgMovie" fitHeight="120.0" fitWidth="98.0" layoutX="413.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </AnchorPane>

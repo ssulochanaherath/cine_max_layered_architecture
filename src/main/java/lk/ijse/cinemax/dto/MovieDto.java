@@ -5,15 +5,17 @@ public class MovieDto {
     private String movieName;
     private String movieGenre;
     private String year;
+    private String imagePath;
 
     public MovieDto() {
     }
 
-    public MovieDto(String movieId, String movieName, String movieGenre, String year) {
+    public MovieDto(String movieId, String movieName, String movieGenre, String year, String imagePath) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.movieGenre = movieGenre;
         this.year = year;
+        this.imagePath = imagePath;
     }
 
     public String getMovieId() {
@@ -48,6 +50,14 @@ public class MovieDto {
         this.year = year;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Override
     public String toString() {
         return "MovieDto{" +
@@ -55,6 +65,7 @@ public class MovieDto {
                 ", movieName='" + movieName + '\'' +
                 ", movieGenre='" + movieGenre + '\'' +
                 ", year='" + year + '\'' +
+                ", imagePath='" + imagePath + '\'' +
                 '}';
     }
 }
