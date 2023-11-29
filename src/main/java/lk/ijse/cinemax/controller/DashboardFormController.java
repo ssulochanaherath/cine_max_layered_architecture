@@ -1,13 +1,12 @@
 package lk.ijse.cinemax.controller;
 
-import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.cinemax.db.DbConnection;
@@ -15,23 +14,28 @@ import lk.ijse.cinemax.db.DbConnection;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class DashboardFormController implements Initializable {
-    public TextField txtSeatsCount;
-    public JFXTextField txtDate;
-    public JFXTextField txtMovieCount;
-    public JFXTextField txtFood;
-    public JFXTextField txtQty;
-    public JFXTextField txtFood1;
-    public JFXTextField txtQty1;
-    public JFXTextField txtFood2;
-    public JFXTextField txtQty2;
-    public JFXTextField txtFood3;
-    public JFXTextField txtQty3;
-    public JFXTextField txtFood4;
-    public JFXTextField txtQty4;
-    public JFXTextField txtSuppliers;
+    public Label txtDate;
+    public Label txtSeatsCount;
+    public Label txtMovieCount;
+    public Label txtSuppliers;
+    public Label txtFood;
+    public Label txtQty;
+    public Label txtFood1;
+    public Label txtQty1;
+    public Label txtFood2;
+    public Label txtQty2;
+    public Label txtFood3;
+    public Label txtQty3;
+    public Label txtFood4;
+    public Label txtQty4;
+    public Label txtTime;
+    public Label txtUserName;
+
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -148,10 +152,13 @@ public class DashboardFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        showUserName();
         availableSeats();
         setDate();
+        setTime();
         availableMovies();
         availableSuppliers();
+
         showItemInfo("qty_on_hand", txtQty, "F001"); // for quantity
         showItemInfo("description", txtFood, "F001"); // for description
         showItemInfo("qty_on_hand", txtQty1, "F002"); // for quantity
@@ -162,6 +169,34 @@ public class DashboardFormController implements Initializable {
         showItemInfo("description", txtFood3, "F004"); // for description
         showItemInfo("qty_on_hand", txtQty4, "F005"); // for quantity
         showItemInfo("description", txtFood4, "F005"); // for description
+    }
+
+    private void showUserName() {
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT fristName FROM user WHERE userId = 'U001'";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
+
+                if (resultSet.next()) {
+                    String fristName = resultSet.getString(1);
+                    txtUserName.setText(String.valueOf(fristName));
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "No available seats found.");
+                    alert.show();
+                }
+            }
+        } catch (SQLException e) {
+            if (e instanceof SQLNonTransientConnectionException) {
+                // Handle connection closed exception
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+                alert.show();
+            } else {
+                e.printStackTrace(); // Handle other SQLExceptions appropriately
+                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                alert.show();
+            }
+        }
     }
 
     private void availableSuppliers() {
@@ -192,7 +227,7 @@ public class DashboardFormController implements Initializable {
         }
     }
 
-    private void showItemInfo(String column, TextField targetTextField, String itemCode) {
+    private void showItemInfo(String column, Label targetTextField, String itemCode) {
         try {
             Connection connection = DbConnection.getInstance().getConnection();
             String sql = "SELECT " + column + " FROM item WHERE code = ?";
@@ -284,4 +319,9 @@ public class DashboardFormController implements Initializable {
         txtDate.setText(String.valueOf(LocalDate.now()));
     }
 
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
+    }
+    
 }

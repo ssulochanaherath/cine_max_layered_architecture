@@ -6,9 +6,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class SeatsFormController {
+
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();

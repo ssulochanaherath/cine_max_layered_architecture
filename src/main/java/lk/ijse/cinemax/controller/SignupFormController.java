@@ -28,6 +28,32 @@ public class SignupFormController {
 
     private SignUpModel signUpModel = new SignUpModel();
 
+    public void initialize() {
+        generateUserId();
+    }
+
+    private void generateUserId() {
+        try {
+            String lastId = signUpModel.getLastUserId();
+
+            String newId = generateNextId(lastId, "U");
+
+            txtUserId.setText(newId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String generateNextId(String lastId, String u) {
+        if (lastId == null || lastId.isEmpty()) {
+            return u + "001";
+        }
+
+        int numericPart = Integer.parseInt(lastId.substring(1)) + 1;
+        return String.format("%s%03d", u, numericPart);
+    }
+
     public void btnCreateAccountOnAction(ActionEvent event) throws SQLException {
         String userId = txtUserId.getText();
         String fristName = txtFristName.getText();
