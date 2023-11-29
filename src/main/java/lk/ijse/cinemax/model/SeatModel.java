@@ -22,6 +22,7 @@ public class SeatModel {
             return rowsAffected > 0;
         }
     }
+
 //    public List<SeatDto> loadAvailableSeats() throws SQLException{
 //        String query = "SELECT * FROM seats WHERE status = 'available'";
 //        List<SeatDto> availableSeats = new ArrayList<>();

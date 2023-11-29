@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +27,9 @@ import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class MoviesFormController implements Initializable {
@@ -36,6 +40,8 @@ public class MoviesFormController implements Initializable {
     public ImageView imgFour;
     public ImageView imgFive;
     public ImageView imgSix;
+    public Label txtDate;
+    public Label txtTime;
     private TicketModel ticketModel = new TicketModel();
     private MovieModel movieModel = new MovieModel();
     private MovieDto movieDto = new MovieDto();
@@ -378,6 +384,9 @@ public class MoviesFormController implements Initializable {
         loadImageFour();
         loadImageFive();
         loadImageSix();
+
+        setDate();
+        setTime();
     }
 
     private void loadImageSix() {
@@ -577,5 +586,14 @@ public class MoviesFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 }

@@ -11,17 +11,9 @@
 
 <AnchorPane prefHeight="724.0" prefWidth="1080.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.SeatsFormController">
     <children>
-        <Label layoutX="20.0" onMouseClicked="#btnDashboardOnAction" text="CineMax">
-            <font>
-                <Font name="Laksaman" size="49.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
-            </cursor>
-        </Label>
-        <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="1024.0" layoutY="38.0" onMouseClicked="#btnLogOutOnAction">
+        <ImageView fitHeight="42.0" fitWidth="35.0" layoutX="1024.0" layoutY="38.0" onMouseClicked="#btnLogOutOnAction">
             <image>
-                <Image url="@../icons/logout.png" />
+                <Image url="@../icons/log-out.png" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -77,7 +69,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#d1ccc0" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
+        <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#efeded" height="603.0" layoutX="181.0" layoutY="103.0" stroke="WHITE" strokeType="INSIDE" width="882.0" />
         <Label layoutX="197.0" layoutY="109.0" text="Seats Booking">
             <font>
                 <Font name="Laksaman Bold" size="26.0" />
@@ -89,335 +81,363 @@
             <Font name="Laksaman Bold" size="25.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="237.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="237.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="253.0" layoutY="333.0" prefHeight="28.0" prefWidth="21.0" text="1A" textFill="WHITE">
+      <Label layoutX="244.0" layoutY="333.0" prefHeight="28.0" prefWidth="41.0" text="S001" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="237.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="237.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="253.0" layoutY="492.0" prefHeight="28.0" prefWidth="21.0" text="3A" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="236.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="236.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="252.0" layoutY="414.0" prefHeight="28.0" prefWidth="21.0" text="2A" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="237.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="237.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="253.0" layoutY="571.0" prefHeight="28.0" prefWidth="21.0" text="4A" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="323.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="323.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="339.0" layoutY="333.0" prefHeight="28.0" prefWidth="21.0" text="1B" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="323.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="323.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="339.0" layoutY="492.0" prefHeight="28.0" prefWidth="21.0" text="3B" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="322.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="322.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="338.0" layoutY="414.0" prefHeight="28.0" prefWidth="21.0" text="2B" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="323.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="323.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="339.0" layoutY="571.0" prefHeight="28.0" prefWidth="21.0" text="4B" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="408.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="408.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="424.0" layoutY="333.0" prefHeight="28.0" prefWidth="21.0" text="1C" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="408.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="408.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="424.0" layoutY="492.0" prefHeight="28.0" prefWidth="21.0" text="3C" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="407.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="407.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="423.0" layoutY="414.0" prefHeight="28.0" prefWidth="21.0" text="2C" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="408.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="408.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="424.0" layoutY="571.0" prefHeight="28.0" prefWidth="21.0" text="4C" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="494.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="494.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="510.0" layoutY="333.0" prefHeight="28.0" prefWidth="21.0" text="1D" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="492.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="492.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="510.0" layoutY="492.0" prefHeight="28.0" prefWidth="21.0" text="3D" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="493.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="493.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="509.0" layoutY="414.0" prefHeight="28.0" prefWidth="21.0" text="2D" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="494.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="494.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="510.0" layoutY="571.0" prefHeight="28.0" prefWidth="21.0" text="4D" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="700.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="700.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="716.0" layoutY="333.0" prefHeight="28.0" prefWidth="21.0" text="1E" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="700.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="700.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="716.0" layoutY="492.0" prefHeight="28.0" prefWidth="21.0" text="3E" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="699.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="699.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="715.0" layoutY="414.0" prefHeight="28.0" prefWidth="21.0" text="2E" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="700.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="700.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="716.0" layoutY="571.0" prefHeight="28.0" prefWidth="21.0" text="4E" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="786.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="786.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="802.0" layoutY="333.0" prefHeight="28.0" prefWidth="21.0" text="1F" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="786.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="786.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="802.0" layoutY="492.0" prefHeight="28.0" prefWidth="21.0" text="3F" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="785.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="785.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="801.0" layoutY="414.0" prefHeight="28.0" prefWidth="21.0" text="2F" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="786.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="786.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="802.0" layoutY="571.0" prefHeight="28.0" prefWidth="21.0" text="4F" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="871.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="871.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="887.0" layoutY="333.0" prefHeight="28.0" prefWidth="21.0" text="1G" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="871.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="871.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="887.0" layoutY="492.0" prefHeight="28.0" prefWidth="21.0" text="3G" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="870.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="870.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="886.0" layoutY="414.0" prefHeight="28.0" prefWidth="21.0" text="2G" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="871.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="871.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="887.0" layoutY="571.0" prefHeight="28.0" prefWidth="21.0" text="4G" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="957.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="957.0" layoutY="319.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="973.0" layoutY="333.0" prefHeight="28.0" prefWidth="21.0" text="1H" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="957.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="957.0" layoutY="478.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="973.0" layoutY="492.0" prefHeight="28.0" prefWidth="21.0" text="3H" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="956.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="956.0" layoutY="400.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="972.0" layoutY="414.0" prefHeight="28.0" prefWidth="21.0" text="2H" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#ea2027" height="55.0" layoutX="957.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
+      <Rectangle arcHeight="25.0" arcWidth="25.0" fill="#67729d" height="55.0" layoutX="957.0" layoutY="557.0" stroke="#0000007f" strokeType="INSIDE" width="55.0">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Rectangle>
-      <Label layoutX="973.0" layoutY="571.0" prefHeight="28.0" prefWidth="21.0" text="4H" textFill="WHITE">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <JFXButton buttonType="RAISED" layoutX="966.0" layoutY="658.0" onAction="#btnNextUIOnAction" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #006266;" text="Next" textFill="#fff9f9">
+      <JFXButton buttonType="RAISED" layoutX="966.0" layoutY="658.0" onAction="#btnNextUIOnAction" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #5F6F52;" text="Next" textFill="#fff9f9">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="197.0" layoutY="658.0" onAction="#btnBackUIOnAction" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #006266;" text="Back" textFill="#fff9f9">
+      <JFXButton buttonType="RAISED" layoutX="197.0" layoutY="658.0" onAction="#btnBackUIOnAction" prefHeight="35.0" prefWidth="65.0" style="-fx-background-color: #5F6F52;" text="Back" textFill="#fff9f9">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <Label layoutX="964.0" layoutY="333.0" prefHeight="28.0" prefWidth="41.0" text="S008" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="877.0" layoutY="333.0" prefHeight="28.0" prefWidth="41.0" text="S007" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="792.0" layoutY="333.0" prefHeight="28.0" prefWidth="41.0" text="S006" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="707.0" layoutY="333.0" prefHeight="28.0" prefWidth="41.0" text="S005" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="500.0" layoutY="333.0" prefHeight="28.0" prefWidth="41.0" text="S004" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="413.0" layoutY="333.0" prefHeight="28.0" prefWidth="41.0" text="S003" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="328.0" layoutY="333.0" prefHeight="28.0" prefWidth="41.0" text="S002" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="414.0" prefHeight="28.0" prefWidth="41.0" text="S009" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="963.0" layoutY="414.0" prefHeight="28.0" prefWidth="41.0" text="S016" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="876.0" layoutY="414.0" prefHeight="28.0" prefWidth="41.0" text="S015" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="791.0" layoutY="414.0" prefHeight="28.0" prefWidth="41.0" text="S014" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="706.0" layoutY="414.0" prefHeight="28.0" prefWidth="41.0" text="S013" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="499.0" layoutY="414.0" prefHeight="28.0" prefWidth="41.0" text="S012" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="412.0" layoutY="414.0" prefHeight="28.0" prefWidth="41.0" text="S011" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="327.0" layoutY="414.0" prefHeight="28.0" prefWidth="41.0" text="S010" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="492.0" prefHeight="28.0" prefWidth="41.0" text="S017" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="963.0" layoutY="492.0" prefHeight="28.0" prefWidth="41.0" text="S024" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="876.0" layoutY="492.0" prefHeight="28.0" prefWidth="41.0" text="S023" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="791.0" layoutY="492.0" prefHeight="28.0" prefWidth="41.0" text="S022" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="706.0" layoutY="492.0" prefHeight="28.0" prefWidth="41.0" text="S021" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="499.0" layoutY="492.0" prefHeight="28.0" prefWidth="41.0" text="S020" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="412.0" layoutY="492.0" prefHeight="28.0" prefWidth="41.0" text="S019" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="327.0" layoutY="492.0" prefHeight="28.0" prefWidth="41.0" text="S018" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="243.0" layoutY="571.0" prefHeight="28.0" prefWidth="41.0" text="S025" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="963.0" layoutY="571.0" prefHeight="28.0" prefWidth="41.0" text="S032" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="876.0" layoutY="571.0" prefHeight="28.0" prefWidth="41.0" text="S031" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="791.0" layoutY="571.0" prefHeight="28.0" prefWidth="41.0" text="S030" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="706.0" layoutY="571.0" prefHeight="28.0" prefWidth="41.0" text="S029" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="499.0" layoutY="571.0" prefHeight="28.0" prefWidth="41.0" text="S028" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="412.0" layoutY="571.0" prefHeight="28.0" prefWidth="41.0" text="S027" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="327.0" layoutY="571.0" prefHeight="28.0" prefWidth="41.0" text="S026" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="80.0" fitWidth="107.0" layoutX="18.0" layoutY="12.0" onMouseClicked="#btnDashboardOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/newlogo.jpeg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="109.0" layoutY="4.0" prefHeight="64.0" prefWidth="83.0" text="CINE">
+         <font>
+            <Font name="Laksaman Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="119.0" layoutY="36.0" prefHeight="64.0" prefWidth="62.0" text="MAX">
+         <font>
+            <Font name="Laksaman Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtDate" layoutX="901.0" layoutY="24.0" prefHeight="30.0" prefWidth="105.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtTime" layoutX="928.0" layoutY="49.0" prefHeight="30.0" prefWidth="83.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

@@ -22,6 +22,9 @@ import lk.ijse.cinemax.model.ItemModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class FoodsManageFormController {
@@ -36,6 +39,8 @@ public class FoodsManageFormController {
     public JFXTextField txtDescription;
     public JFXTextField txtQtyOnHand;
     public JFXTextField txtUnitPrice;
+    public Label txtDate;
+    public Label txtTime;
     private AnchorPane root;
     private ItemModel itemModel = new ItemModel();
 
@@ -155,8 +160,19 @@ public class FoodsManageFormController {
         setCellValueFactory();
         loadAllItems();
         tableListener();
+        setDate();
+        setTime();
 
         generateFoodId();
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 
     private void generateFoodId() {

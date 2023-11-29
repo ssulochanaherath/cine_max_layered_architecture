@@ -28,6 +28,8 @@ import lk.ijse.cinemax.model.PlaceOrderModel;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,13 +43,15 @@ public class FoodsFormController {
     public TableColumn colUnitPrice;
     public TableColumn colTotal;
     public JFXTextField txtOrderId;
-    public JFXTextField txtDate;
+    //public JFXTextField txtDate;
     public JFXTextField txtDescription;
     public JFXTextField txtUnitPrice;
     public JFXTextField txtQtyOnHand;
     public JFXTextField txtCustomerName;
     public JFXTextField txtNetTotal;
     public TextField txtSearchOrder;
+    public Label txtTime;
+    public Label txtDate;
     private Label lblCustomerName;
     private Label lblDescription;
     private Label lblOrderDate;
@@ -207,12 +211,18 @@ public class FoodsFormController {
         setCellValueFactory();
         generateOrderId();
         setDate();
+        setTime();
         loadCustomerIds();
         loadItemCodes();
     }
 
     public void setDate(){
         txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 
     private void loadItemCodes() {

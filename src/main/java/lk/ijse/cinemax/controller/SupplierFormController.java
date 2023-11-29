@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -20,6 +17,9 @@ import lk.ijse.cinemax.dto.tm.SupplierTm;
 import lk.ijse.cinemax.model.SupplierModel;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SupplierFormController {
@@ -33,6 +33,8 @@ public class SupplierFormController {
     public JFXTextField txtSupplierName;
     public JFXTextField txtSupplierTele;
     public JFXTextField txtSupplierAddress;
+    public Label txtDate;
+    public Label txtTime;
     private SupplierModel supplierModel = new SupplierModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
@@ -164,8 +166,19 @@ public class SupplierFormController {
     public void initialize() {
         setCellValueFactory();
         loadAllSupplier();
+        setDate();
+        setTime();
 
         generateSupplierId();
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 
     private void loadAllSupplier() {

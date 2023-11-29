@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,6 +24,9 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MovieManagementFormController {
@@ -42,6 +42,8 @@ public class MovieManagementFormController {
     public TextField txtMovieSearch;
     public TableColumn colImage;
     public ImageView imgMovie;
+    public Label txtDate;
+    public Label txtTime;
 
     private MovieModel movieModel = new MovieModel();
 
@@ -203,8 +205,19 @@ public class MovieManagementFormController {
     public void initialize() {
         setCellValueFctory();
         loadAllMovie();
+        setDate();
+        setTime();
 
         generateMovieId();
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 
     private void generateMovieId() {

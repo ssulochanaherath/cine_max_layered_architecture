@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -28,6 +25,9 @@ import javax.mail.internet.MimeMessage;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -47,6 +47,8 @@ public class TicketFormController {
     public JFXComboBox<String> cmbShowtimeId;
     public TableColumn colShowTimeIds;
     public JFXTextField txtCustomerEmail;
+    public Label txtDate;
+    public Label txtTime;
     private TicketModel ticketModel = new TicketModel();
 
     private SeatModel seatModel = new SeatModel();
@@ -188,9 +190,20 @@ public class TicketFormController {
             cmbLoadShowtimeIds(null);
 
             generateTicketId();
+            setDate();
+            setTime();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 
 
@@ -512,5 +525,19 @@ public class TicketFormController {
 
     public void btnTicketCancelOnAction(ActionEvent event) {
         clearFields();
+    }
+
+    public void btnSeatsBookingOnAction(ActionEvent event) throws Exception{
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/seats_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Seats Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
     }
 }

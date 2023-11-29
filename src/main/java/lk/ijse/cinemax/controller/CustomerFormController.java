@@ -21,6 +21,9 @@ import lk.ijse.cinemax.model.CustomerModel;
 import lk.ijse.cinemax.model.SignUpModel;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class CustomerFormController {
@@ -39,6 +42,8 @@ public class CustomerFormController {
 
     public JFXComboBox<String> txtUserId;
     public Rectangle recCustomerManagement;
+    public Label txtDate;
+    public Label txtTime;
 
     private CustomerModel cusModel = new CustomerModel();
 
@@ -205,6 +210,8 @@ public class CustomerFormController {
         loadAllUserIds();
 
         generateCustomerid();
+        setDate();
+        setTime();
     }
 
     private void generateCustomerid(){
@@ -347,5 +354,14 @@ public class CustomerFormController {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
         }
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 }

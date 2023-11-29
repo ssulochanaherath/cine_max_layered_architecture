@@ -1,16 +1,34 @@
 package lk.ijse.cinemax.controller;
 
+import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.dto.SeatDto;
+import lk.ijse.cinemax.model.SeatModel;
+import lk.ijse.cinemax.model.TicketModel;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class SeatsFormController {
 
+    public JFXComboBox cmbSeatId;
+    public Label txtDate;
+    public Label txtTime;
+    private SeatModel seatModel = new SeatModel();
+    private TicketModel ticketModel = new TicketModel();
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();
@@ -162,5 +180,19 @@ public class SeatsFormController {
         newStage.show();
 
         oldStage.close();
+    }
+
+    public void initialize(){
+        setDate();
+        setTime();
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 }

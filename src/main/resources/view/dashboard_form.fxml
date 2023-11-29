@@ -123,7 +123,7 @@
       </Label>
       <Label fx:id="txtDate" layoutX="881.0" layoutY="29.0" prefHeight="30.0" prefWidth="105.0">
          <font>
-            <Font size="18.0" />
+            <Font size="16.0" />
          </font>
       </Label>
       <Label fx:id="txtSeatsCount" layoutX="277.0" layoutY="193.0" prefHeight="64.0" prefWidth="54.0">
@@ -193,7 +193,7 @@
       </Label>
       <Label fx:id="txtTime" layoutX="908.0" layoutY="54.0" prefHeight="30.0" prefWidth="83.0">
          <font>
-            <Font size="15.0" />
+            <Font size="14.0" />
          </font>
       </Label>
       <Label layoutX="280.0" layoutY="29.0" prefHeight="35.0" prefWidth="128.0" text="WELCOME, " textFill="#4834d4">

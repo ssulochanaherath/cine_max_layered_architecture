@@ -12,22 +12,6 @@
 
 <AnchorPane prefHeight="724.0" prefWidth="1080.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.cinemax.controller.SherlockHolmesFormController">
     <children>
-        <Label layoutX="20.0" onMouseClicked="#btnDashboardOnAction" text="CineMax">
-            <font>
-                <Font name="Laksaman" size="49.0" />
-            </font>
-            <cursor>
-                <Cursor fx:constant="OPEN_HAND" />
-            </cursor>
-        </Label>
-        <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="1024.0" layoutY="38.0" onMouseClicked="#btnLogOutOnAction">
-            <image>
-                <Image url="@../icons/logout.png" />
-            </image>
-            <cursor>
-                <Cursor fx:constant="HAND" />
-            </cursor>
-        </ImageView>
         <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#130f40" height="603.0" layoutX="18.0" layoutY="103.0" stroke="WHITE" strokeLineCap="ROUND" strokeType="INSIDE" width="146.0" />
         <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="73.0" layoutY="125.0" onMouseClicked="#btnCustomerOnAction" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -123,5 +107,41 @@
                 <Image url="@../images/ratings.jpeg" />
             </image>
         </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="1010.0" layoutY="31.0" onMouseClicked="#btnLogOutOnAction">
+         <image>
+            <Image url="@../icons/log-out.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <ImageView fitHeight="80.0" fitWidth="107.0" layoutX="24.0" layoutY="17.0" onMouseClicked="#btnDashboardOnAction" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../icons/newlogo.jpeg" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <Label layoutX="115.0" layoutY="7.0" prefHeight="64.0" prefWidth="83.0" text="CINE">
+         <font>
+            <Font name="Laksaman Bold" size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="125.0" layoutY="39.0" prefHeight="64.0" prefWidth="62.0" text="MAX">
+         <font>
+            <Font name="Laksaman Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtDate" layoutX="883.0" layoutY="31.0" prefHeight="30.0" prefWidth="105.0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtTime" layoutX="910.0" layoutY="56.0" prefHeight="30.0" prefWidth="83.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

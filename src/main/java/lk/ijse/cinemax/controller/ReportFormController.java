@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.cinemax.db.DbConnection;
@@ -15,8 +16,13 @@ import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class ReportFormController {
+    public Label txtDate;
+    public Label txtTime;
     private DbConnection DBConnection;
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
@@ -165,5 +171,19 @@ public class ReportFormController {
                 DbConnection.getInstance().getConnection()
         );
         JasperViewer.viewReport(jasperPrint, false);
+    }
+
+    public void initialize() {
+        setDate();
+        setTime();
+    }
+
+    public void setDate(){
+        txtDate.setText(String.valueOf(LocalDate.now()));
+    }
+
+    public void setTime() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        txtTime.setText(LocalTime.now().format(formatter));
     }
 }
