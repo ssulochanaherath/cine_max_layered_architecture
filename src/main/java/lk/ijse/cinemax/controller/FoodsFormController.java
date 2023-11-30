@@ -26,12 +26,17 @@ import lk.ijse.cinemax.model.OrderModel;
 import lk.ijse.cinemax.model.PlaceOrderModel;
 
 
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 public class FoodsFormController {
     public JFXTextField txtQty;
@@ -52,6 +57,7 @@ public class FoodsFormController {
     public TextField txtSearchOrder;
     public Label txtTime;
     public Label txtDate;
+    public JFXTextField txtCustomerEmail;
     private Label lblCustomerName;
     private Label lblDescription;
     private Label lblOrderDate;
@@ -335,14 +341,64 @@ public class FoodsFormController {
             cartTmList.add(cartTm);
         }
 
-        System.out.println("Place order form controller: " + cartTmList);
+        //System.out.println("Place order form controller: " + cartTmList);
         var placeOrderDto = new PlaceOrderDto(orderId, date, customerId, cartTmList);
         try {
             boolean isSuccess = placeOrderModel.placeOrder(placeOrderDto);
             if (isSuccess) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Success!").show();
+
+                sendOrderConfirmationEmail(customerId, placeOrderDto);
             }
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void sendOrderConfirmationEmail(String customerId, PlaceOrderDto placeOrderDto) {
+        // Replace placeholders with your actual email configurations
+        String username = "hallwembley@gmail.com";
+        String password = "nopvwkcbxpxhvjji";
+
+        Properties properties = new Properties();
+        properties.put("mail.smtp.auth", "true");
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.host", "smtp.gmail.com");
+        properties.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(properties, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(String.valueOf(txtCustomerEmail.getText())));
+            message.setSubject("Order Confirmation");
+
+            // Customize the email body based on your requirements
+            String emailBody = "Thank you for placing your order with us.\n\n";
+            emailBody += "Order ID: " + placeOrderDto.getOrderId() + "\n";
+            emailBody += "Date: " + placeOrderDto.getDate() + "\n";
+            emailBody += "\n\nDetails of your order:\n";
+
+            for (CartTm cartTm : placeOrderDto.getCartTmList()) {
+                emailBody += "Item: " + cartTm.getCode() + "\n";
+                emailBody += "Description: " + cartTm.getDescription() + "\n";
+                emailBody += "Quantity: " + cartTm.getQty() + "\n";
+                emailBody += "Unit Price: " + cartTm.getUnitPrice() + "\n";
+                emailBody += "Total: " + cartTm.getTot() + "\n\n";
+            }
+
+            message.setText(emailBody);
+
+            Transport.send(message);
+
+            System.out.println("Email sent successfully!");
+        } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
     }
@@ -371,6 +427,7 @@ public class FoodsFormController {
         try {
             CustomerDto customerDto = customerModel.searchCustomer(id);
             txtCustomerName.setText(customerDto.getCustomerName());
+            txtCustomerEmail.setText(customerDto.getCustomerEmail());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
