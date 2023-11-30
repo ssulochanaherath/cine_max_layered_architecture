@@ -272,17 +272,48 @@ public class TicketFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDto> customerList = ticketModel.loadAllCustomerIds();
+            List<CustomerDto> customerList = ticketModel.loadAllCustomerIds(); // Assume there is a method to load all customer details
 
             for (CustomerDto dto : customerList) {
                 obList.add(dto.getUserId());
             }
             cmbCustomerIds.setItems(obList);
+
+            // Add a listener to cmbCustomerIds to automatically load the customer email when a customer is selected
+            cmbCustomerIds.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedCustomerId) -> {
+                if (selectedCustomerId != null) {
+                    try {
+                        String customerEmail = ticketModel.getCustomerEmail(selectedCustomerId); // Assume there is a method to get customer email by ID
+                        txtCustomerEmail.setText(customerEmail);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
+
+
+//    public void cmbLoadCustomerIds(ActionEvent event) {
+//        ObservableList<String> obList = FXCollections.observableArrayList();
+//
+//        try {
+//            List<CustomerDto> customerList = ticketModel.loadAllCustomerIds();
+//
+//            for (CustomerDto dto : customerList) {
+//                obList.add(dto.getUserId());
+//            }
+//            cmbCustomerIds.setItems(obList);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     public void cmbLoadMovieIds(ActionEvent event) {
         ObservableList<String> obmList = FXCollections.observableArrayList();

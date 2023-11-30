@@ -116,11 +116,12 @@
       </JFXButton>
       <TableView fx:id="tblCustomer" layoutX="206.0" layoutY="416.0" prefHeight="266.0" prefWidth="826.0">
         <columns>
-          <TableColumn fx:id="colUserId" prefWidth="155.1999969482422" text="Customer ID" />
-          <TableColumn fx:id="colCustomerId" prefWidth="157.60003662109375" text="Name" />
-            <TableColumn fx:id="colCustomerName" prefWidth="188.0" text="Address" />
-            <TableColumn fx:id="colCustomerAddress" prefWidth="182.39996337890625" text="Telephone" />
-            <TableColumn fx:id="colCustomerTele" prefWidth="148.79986572265625" text="User ID" />
+          <TableColumn fx:id="colUserId" prefWidth="111.19999694824219" text="Customer ID" />
+          <TableColumn fx:id="colCustomerId" prefWidth="120.79998779296875" text="Name" />
+            <TableColumn fx:id="colCustomerName" prefWidth="104.0" text="Address" />
+            <TableColumn fx:id="colCustomerAddress" prefWidth="124.00006103515625" text="Telephone" />
+            <TableColumn fx:id="colCustomerTele" prefWidth="103.199951171875" text="User ID" />
+            <TableColumn fx:id="colCustomerEmail" prefWidth="261.6000122070312" text="Email" />
         </columns>
       </TableView>
       <TextField fx:id="txtCustomerSearch" layoutX="709.0" layoutY="34.0" prefHeight="35.0" prefWidth="210.0" promptText="Search Customers" />
@@ -161,5 +162,7 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label layoutX="660.0" layoutY="227.0" prefHeight="19.0" prefWidth="63.0" text="Email :" />
+      <JFXTextField fx:id="txtCustomerEmail" layoutX="738.0" layoutY="222.0" prefHeight="24.0" prefWidth="264.0" />
     </children>
 </AnchorPane>

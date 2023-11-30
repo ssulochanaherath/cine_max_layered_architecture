@@ -3,8 +3,6 @@ package lk.ijse.cinemax.model;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.MovieDto;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -13,6 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MovieModel {
+
+    public static byte[] getImageData(String movieName) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT image FROM movie WHERE movieName = ?";
+        PreparedStatement pstm = connection.prepareStatement(sql);
+        pstm.setString(1, movieName);
+
+        ResultSet resultSet = pstm.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getBytes(1);
+        }
+
+        return null;
+    }
 
     public boolean saveMovie(MovieDto dto) throws SQLException, IOException {
         Connection connection = DbConnection.getInstance().getConnection();
@@ -123,4 +137,5 @@ public class MovieModel {
             }
         }
     }
+
 }

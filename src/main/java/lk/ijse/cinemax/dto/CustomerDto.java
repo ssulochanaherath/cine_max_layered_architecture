@@ -6,16 +6,18 @@ public class CustomerDto {
     private String customerName;
     private String customerAddress;
     private String customerTelephone;
+    private String customerEmail;
 
     public CustomerDto() {
     }
 
-    public CustomerDto(String userId, String customerId, String customerName, String customerAddress, String customerTelephone) {
+    public CustomerDto(String userId, String customerId, String customerName, String customerAddress, String customerTelephone, String customerEmail) {
         this.userId = userId;
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerTelephone = customerTelephone;
+        this.customerEmail = customerEmail;
     }
 
     public String getUserId() {
@@ -58,6 +60,14 @@ public class CustomerDto {
         this.customerTelephone = customerTelephone;
     }
 
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
     @Override
     public String toString() {
         return "CustomerDto{" +
@@ -66,6 +76,7 @@ public class CustomerDto {
                 ", customerName='" + customerName + '\'' +
                 ", customerAddress='" + customerAddress + '\'' +
                 ", customerTelephone='" + customerTelephone + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
                 '}';
     }
 }

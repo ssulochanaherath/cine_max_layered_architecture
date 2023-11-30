@@ -6,16 +6,18 @@ public class CustomerTm {
     private String customerName;
     private String customerAddress;
     private String customerTelephone;
+    private String customerEmail;
 
     public CustomerTm() {
     }
 
-    public CustomerTm(String userId, String customerId, String customerName, String customerAddress, String customerTelephone) {
+    public CustomerTm(String userId, String customerId, String customerName, String customerAddress, String customerTelephone, String customerEmail) {
         this.userId = userId;
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
         this.customerTelephone = customerTelephone;
+        this.customerEmail = customerEmail;
     }
 
     public String getUserId() {
@@ -58,6 +60,14 @@ public class CustomerTm {
         this.customerTelephone = customerTelephone;
     }
 
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
     @Override
     public String toString() {
         return "CustomerTm{" +
@@ -66,6 +76,7 @@ public class CustomerTm {
                 ", customerName='" + customerName + '\'' +
                 ", customerAddress='" + customerAddress + '\'' +
                 ", customerTelephone='" + customerTelephone + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
                 '}';
     }
 }

@@ -23,7 +23,8 @@ public class TicketModel {
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
-                        resultSet.getString(5)
+                        resultSet.getString(5),
+                        resultSet.getString(6)
                 ));
             }
 
@@ -155,6 +156,24 @@ public class TicketModel {
             statement.executeUpdate();
 
             return true;
+        }
+    }
+
+    public String getCustomerEmail(String selectedCustomerId) throws SQLException {
+        Connection connection = DbConnection.getInstance().getConnection();
+        String query = "SELECT email FROM customer WHERE customerId = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, selectedCustomerId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getString("email");
+                } else {
+                    // If no customer with the specified ID is found, return an empty string
+                    return "";
+                }
+            }
         }
     }
 }

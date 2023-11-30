@@ -14,7 +14,7 @@ public class CustomerModel {
     public boolean saveCustomer(CustomerDto dto) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO customer VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO customer VALUES(?,?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getCustomerId());
@@ -22,6 +22,7 @@ public class CustomerModel {
         pstm.setString(3, dto.getCustomerAddress());
         pstm.setString(4, dto.getCustomerTelephone());
         pstm.setString(5, dto.getUserId());
+        pstm.setString(6, dto.getCustomerEmail());
 
         boolean isSaved = pstm.executeUpdate() > 0;
 
@@ -44,7 +45,8 @@ public class CustomerModel {
                             resultSet.getString(2),
                             resultSet.getString(3),
                             resultSet.getString(4),
-                            resultSet.getString(5)
+                            resultSet.getString(5),
+                            resultSet.getString(6)
                     )
             );
         }
@@ -55,7 +57,7 @@ public class CustomerModel {
     public boolean updateCustomer(CustomerDto dto) throws SQLException{
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE customer SET name = ?, address = ?, tele = ?, userId = ? WHERE customerId = ?";
+        String sql = "UPDATE customer SET name = ?, address = ?, tele = ?, userId = ?, customerEmail = ? WHERE customerId = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getCustomerName());
@@ -63,6 +65,7 @@ public class CustomerModel {
         pstm.setString(3, dto.getCustomerTelephone());
         pstm.setString(4, dto.getUserId());
         pstm.setString(5, dto.getCustomerId());
+        pstm.setString(6, dto.getCustomerEmail());
 
         boolean isUpdated = pstm.executeUpdate() > 0;
 
@@ -98,8 +101,9 @@ public class CustomerModel {
             String tele = resultSet.getString(3);
             String userId = resultSet.getString(4);
             String customerId = resultSet.getString(5);
+            String email = resultSet.getString(6);
 
-            dto = new CustomerDto(customerId, name, address, tele, userId);
+            dto = new CustomerDto(customerId, name, address, tele, userId, email);
         }
         return dto;
     }
@@ -119,7 +123,8 @@ public class CustomerModel {
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
-                    resultSet.getString(5)
+                    resultSet.getString(5),
+                    resultSet.getString(6)
             ));
         }
         return dtoList;

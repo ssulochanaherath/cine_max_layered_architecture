@@ -44,6 +44,8 @@ public class CustomerFormController {
     public Rectangle recCustomerManagement;
     public Label txtDate;
     public Label txtTime;
+    public JFXTextField txtCustomerEmail;
+    public TableColumn colCustomerEmail;
 
     private CustomerModel cusModel = new CustomerModel();
 
@@ -181,6 +183,7 @@ public class CustomerFormController {
         String customerName = txtCustomerName.getText();
         String customerAddress = txtCustomerAddress.getText();
         String customerTelephone = txtCustomerTelephone.getText();
+        String customerEmail = txtCustomerEmail.getText();
 
         String telephoneRegex = "^\\d{10}$"; // Assumes a 10-digit phone number; you can adjust the pattern as needed
 
@@ -189,7 +192,7 @@ public class CustomerFormController {
             return; // Don't proceed with saving if the telephone number is invalid
         }
 
-        var dto = new CustomerDto(userId,customerId,customerName,customerAddress,customerTelephone);
+        var dto = new CustomerDto(userId,customerId,customerName,customerAddress,customerTelephone,customerEmail);
 
         try {
             boolean isSaved = cusModel.saveCustomer(dto);
@@ -266,7 +269,8 @@ public class CustomerFormController {
                                 dto.getCustomerId(),
                                 dto.getCustomerName(),
                                 dto.getCustomerAddress(),
-                                dto.getCustomerTelephone()
+                                dto.getCustomerTelephone(),
+                                dto.getCustomerEmail()
                         )
                 );
             }
@@ -282,6 +286,7 @@ public class CustomerFormController {
         colCustomerName.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         colCustomerAddress.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
         colCustomerTele.setCellValueFactory(new PropertyValueFactory<>("customerTelephone"));
+        colCustomerEmail.setCellValueFactory(new PropertyValueFactory<>("customerEmail"));
     }
 
     private void clearFields() {
@@ -291,6 +296,7 @@ public class CustomerFormController {
         txtCustomerAddress.clear();
         txtCustomerTelephone.clear();
         txtCustomerSearch.clear();
+        txtCustomerEmail.clear();
     }
 
     public void btnUpdateOnAction(ActionEvent event) {
@@ -299,8 +305,9 @@ public class CustomerFormController {
         String customerName = txtCustomerName.getText();
         String customerAddress = txtCustomerAddress.getText();
         String customerTelephone = txtCustomerTelephone.getText();
+        String customerEmail = txtCustomerEmail.getText();
 
-        var dto = new CustomerDto(userId,customerId,customerName,customerAddress,customerTelephone);
+        var dto = new CustomerDto(userId,customerId,customerName,customerAddress,customerTelephone,customerEmail);
 
         try {
             boolean isUpdated = cusModel.updateCustomer(dto);
@@ -347,6 +354,7 @@ public class CustomerFormController {
                 txtCustomerName.setText(customerDto.getCustomerName());
                 txtCustomerAddress.setText(customerDto.getCustomerAddress());
                 txtCustomerTelephone.setText(customerDto.getCustomerTelephone());
+                txtCustomerEmail.setText(customerDto.getCustomerEmail());
             } else {
                 new Alert(Alert.AlertType.WARNING, "Customer not Found!").show();
             }

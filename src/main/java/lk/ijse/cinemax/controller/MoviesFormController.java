@@ -12,20 +12,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.MovieDto;
 import lk.ijse.cinemax.model.MovieModel;
 import lk.ijse.cinemax.model.TicketModel;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
-import java.io.*;
 import java.net.URL;
 import java.sql.*;
 
-import java.awt.*;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -378,215 +373,108 @@ public class MoviesFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Load the default image when the interface is loaded
 
-        loadImageOne();
-        loadImageTwo();
-        loadImageThree();
-        loadImageFour();
-        loadImageFive();
-        loadImageSix();
+        loadImageAvengers();
+        loadImageMission();
+        loadImagePirates();
+        loadImageTopGun();
+        loadImageSherlock();
+        loadImageHobbit();
 
         setDate();
         setTime();
     }
 
-    private void loadImageSix() {
+    private void loadImageHobbit() {
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT image FROM movie WHERE movieId = 'M006'";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
+            byte[] imageBytes = MovieModel.getImageData("Hobbit");
 
-                if (resultSet.next()) {
-                    byte[] imageBytes = resultSet.getBytes("image");
-                    if (imageBytes != null) {
-                        Image image = new Image(new ByteArrayInputStream(imageBytes));
-                        imgSix.setImage(image);
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
-                        alert.show();
-                    }
-                }
-            } catch (SQLException e) {
-                if (e instanceof SQLNonTransientConnectionException) {
-                    // Handle connection closed exception
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                    alert.show();
-                } else {
-                    e.printStackTrace(); // Handle other SQLExceptions appropriately
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
-                    alert.show();
-                }
+            if (imageBytes != null) {
+                Image image = new Image(new ByteArrayInputStream(imageBytes));
+                imgSix.setImage(image);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            handleSQLException(e);
         }
     }
 
-    private void loadImageFive() {
+    private void loadImageSherlock() {
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT image FROM movie WHERE movieId = 'M005'";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
+            byte[] imageBytes = MovieModel.getImageData("Sherlock");
 
-                if (resultSet.next()) {
-                    byte[] imageBytes = resultSet.getBytes("image");
-                    if (imageBytes != null) {
-                        Image image = new Image(new ByteArrayInputStream(imageBytes));
-                        imgFive.setImage(image);
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
-                        alert.show();
-                    }
-                }
-            } catch (SQLException e) {
-                if (e instanceof SQLNonTransientConnectionException) {
-                    // Handle connection closed exception
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                    alert.show();
-                } else {
-                    e.printStackTrace(); // Handle other SQLExceptions appropriately
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
-                    alert.show();
-                }
+            if (imageBytes != null) {
+                Image image = new Image(new ByteArrayInputStream(imageBytes));
+                imgFive.setImage(image);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            handleSQLException(e);
         }
     }
 
-    private void loadImageFour() {
+    private void loadImageTopGun() {
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT image FROM movie WHERE movieId = 'M004'";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
+            byte[] imageBytes = MovieModel.getImageData("Top Gun");
 
-                if (resultSet.next()) {
-                    byte[] imageBytes = resultSet.getBytes("image");
-                    if (imageBytes != null) {
-                        Image image = new Image(new ByteArrayInputStream(imageBytes));
-                        imgFour.setImage(image);
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
-                        alert.show();
-                    }
-                }
-            } catch (SQLException e) {
-                if (e instanceof SQLNonTransientConnectionException) {
-                    // Handle connection closed exception
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                    alert.show();
-                } else {
-                    e.printStackTrace(); // Handle other SQLExceptions appropriately
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
-                    alert.show();
-                }
+            if (imageBytes != null) {
+                Image image = new Image(new ByteArrayInputStream(imageBytes));
+                imgFour.setImage(image);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            handleSQLException(e);
         }
     }
 
-    private void loadImageThree() {
+    private void loadImagePirates() {
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT image FROM movie WHERE movieId = 'M003'";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
+            byte[] imageBytes = MovieModel.getImageData("Pirates");
 
-                if (resultSet.next()) {
-                    byte[] imageBytes = resultSet.getBytes("image");
-                    if (imageBytes != null) {
-                        Image image = new Image(new ByteArrayInputStream(imageBytes));
-                        imgThree.setImage(image);
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
-                        alert.show();
-                    }
-                }
-            } catch (SQLException e) {
-                if (e instanceof SQLNonTransientConnectionException) {
-                    // Handle connection closed exception
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                    alert.show();
-                } else {
-                    e.printStackTrace(); // Handle other SQLExceptions appropriately
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
-                    alert.show();
-                }
+            if (imageBytes != null) {
+                Image image = new Image(new ByteArrayInputStream(imageBytes));
+                imgThree.setImage(image);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            handleSQLException(e);
+        }
+    }
+
+    private void loadImageMission() {
+        try {
+            byte[] imageBytes = MovieModel.getImageData("Mission Impossible");
+
+            if (imageBytes != null) {
+                Image image = new Image(new ByteArrayInputStream(imageBytes));
+                imgTwo.setImage(image);
+            }
+        } catch (SQLException e) {
+            handleSQLException(e);
+        }
+    }
+
+    private void loadImageAvengers() {
+        try {
+            byte[] imageBytes = MovieModel.getImageData("Avengers");
+
+            if (imageBytes != null) {
+                Image image = new Image(new ByteArrayInputStream(imageBytes));
+                imgOne.setImage(image);
+            }
+        } catch (SQLException e) {
+            handleSQLException(e);
         }
     }
 
 
-    private void loadImageOne() {
-        try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT image FROM movie WHERE movieId = 'M001'";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
-
-                if (resultSet.next()) {
-                    byte[] imageBytes = resultSet.getBytes("image");
-                    if (imageBytes != null) {
-                        Image image = new Image(new ByteArrayInputStream(imageBytes));
-                        imgOne.setImage(image);
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
-                        alert.show();
-                    }
-                }
-            } catch (SQLException e) {
-                if (e instanceof SQLNonTransientConnectionException) {
-                    // Handle connection closed exception
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                    alert.show();
-                } else {
-                    e.printStackTrace(); // Handle other SQLExceptions appropriately
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
-                    alert.show();
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+    private void handleSQLException(SQLException e) {
+        if (e instanceof SQLNonTransientConnectionException) {
+            // Handle connection closed exception
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
+            alert.show();
+        } else {
+            e.printStackTrace(); // Handle other SQLExceptions appropriately
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+            alert.show();
         }
     }
 
-    private void loadImageTwo() {
-        try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT image FROM movie WHERE movieId = 'M002'";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
-
-                if (resultSet.next()) {
-                    byte[] imageBytes = resultSet.getBytes("image");
-                    if (imageBytes != null) {
-                        Image image = new Image(new ByteArrayInputStream(imageBytes));
-                        imgTwo.setImage(image);
-                    } else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR, "No image found for movie.");
-                        alert.show();
-                    }
-                }
-            } catch (SQLException e) {
-                if (e instanceof SQLNonTransientConnectionException) {
-                    // Handle connection closed exception
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                    alert.show();
-                } else {
-                    e.printStackTrace(); // Handle other SQLExceptions appropriately
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
-                    alert.show();
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void setDate(){
         txtDate.setText(String.valueOf(LocalDate.now()));
