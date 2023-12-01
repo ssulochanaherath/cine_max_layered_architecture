@@ -131,4 +131,25 @@ public class ItemModel {
         return pstm.executeUpdate() > 0;
 
     }
+
+    public String getItemInfo(String column, String itemCode) {
+        String value = null;
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT " + column + " FROM item WHERE code = ?";
+
+            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+                pstm.setString(1, itemCode);
+
+                try (ResultSet resultSet = pstm.executeQuery()) {
+                    if (resultSet.next()) {
+                        value = resultSet.getString(column);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle other SQLExceptions appropriately
+        }
+        return value;
+    }
 }

@@ -23,6 +23,24 @@ public class SeatModel {
         }
     }
 
+    public int getAvailableSeatsCount() {
+        int count = 0;
+        try {
+            Connection connection = DbConnection.getInstance().getConnection();
+            String sql = "SELECT COUNT(*) FROM seats WHERE status = 'available'";
+            try (PreparedStatement pstm = connection.prepareStatement(sql);
+                 ResultSet resultSet = pstm.executeQuery()) {
+
+                if (resultSet.next()) {
+                    count = resultSet.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle other SQLExceptions appropriately
+        }
+        return count;
+    }
+
 //    public List<SeatDto> loadAvailableSeats() throws SQLException{
 //        String query = "SELECT * FROM seats WHERE status = 'available'";
 //        List<SeatDto> availableSeats = new ArrayList<>();

@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.cinemax.db.DbConnection;
+import lk.ijse.cinemax.model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -153,7 +154,6 @@ public class DashboardFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        showUserName();
         availableSeats();
         setDate();
         setTime();
@@ -172,147 +172,80 @@ public class DashboardFormController implements Initializable {
         showItemInfo("description", txtFood4, "F005"); // for description
     }
 
-    private void showUserName() {
-        try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT fristName FROM user WHERE userId = 'U001'";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
-
-                if (resultSet.next()) {
-                    String fristName = resultSet.getString(1);
-                    txtUserName.setText(String.valueOf(fristName));
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "No available seats found.");
-                    alert.show();
-                }
-            }
-        } catch (SQLException e) {
-            if (e instanceof SQLNonTransientConnectionException) {
-                // Handle connection closed exception
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                alert.show();
-            } else {
-                e.printStackTrace(); // Handle other SQLExceptions appropriately
-                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
-                alert.show();
-            }
-        }
-    }
-
     private void availableSuppliers() {
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT COUNT(*) FROM supplier";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
+            SupplierModel supplierModel = new SupplierModel();
+            int availableSuppliersCount = supplierModel.getAvailableSuppliersCount();
 
-                if (resultSet.next()) {
-                    int availableSeatsCount = resultSet.getInt(1);
-                    txtSuppliers.setText(String.valueOf(availableSeatsCount));
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "No available seats found.");
-                    alert.show();
-                }
-            }
-        } catch (SQLException e) {
-            if (e instanceof SQLNonTransientConnectionException) {
-                // Handle connection closed exception
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                alert.show();
+            if (availableSuppliersCount > 0) {
+                txtSuppliers.setText(String.valueOf(availableSuppliersCount));
             } else {
-                e.printStackTrace(); // Handle other SQLExceptions appropriately
-                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No available suppliers found.");
                 alert.show();
             }
+        } catch (Exception e) {
+            // Handle exceptions appropriately
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected error occurred.");
+            alert.show();
         }
     }
 
     private void showItemInfo(String column, Label targetTextField, String itemCode) {
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT " + column + " FROM item WHERE code = ?";
+            ItemModel itemModel = new ItemModel();
+            String value = itemModel.getItemInfo(column, itemCode);
 
-            try (PreparedStatement pstm = connection.prepareStatement(sql)) {
-                pstm.setString(1, itemCode);
-
-                try (ResultSet resultSet = pstm.executeQuery()) {
-                    if (resultSet.next()) {
-                        String value = resultSet.getString(column);
-                        targetTextField.setText(String.valueOf(value));
-                    } else {
-                        System.out.println("No data found for item with code: " + itemCode);
-                        // Display a message without showing an error alert
-                        targetTextField.setText("N/A");
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            if (e instanceof SQLNonTransientConnectionException) {
-                // Handle connection closed exception
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                alert.show();
+            if (value != null) {
+                targetTextField.setText(value);
             } else {
-                e.printStackTrace(); // Handle other SQLExceptions appropriately
-                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
-                alert.show();
+                System.out.println("No data found for item with code: " + itemCode);
+                // Display a message without showing an error alert
+                targetTextField.setText("N/A");
             }
+        } catch (Exception e) {
+            // Handle exceptions appropriately
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected error occurred.");
+            alert.show();
         }
     }
 
     private void availableMovies() {
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT COUNT(*) FROM movie";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-            ResultSet resultSet = pstm.executeQuery()) {
+            MovieModel movieModel = new MovieModel();
+            int availableMoviesCount = movieModel.getAvailableMoviesCount();
 
-                if (resultSet.next()) {
-                    int availableMoviesCount = resultSet.getInt(1);
-                    txtMovieCount.setText(String.valueOf(availableMoviesCount));
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "No available movies found.");
-                    alert.show();
-                }
-            }
-        } catch (SQLException e) {
-            if (e instanceof SQLNonTransientConnectionException) {
-                // Handle connection closed exception
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                alert.show();
+            if (availableMoviesCount > 0) {
+                txtMovieCount.setText(String.valueOf(availableMoviesCount));
             } else {
-                e.printStackTrace(); // Handle other SQLExceptions appropriately
-                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "No available movies found.");
                 alert.show();
             }
+        } catch (Exception e) {
+            // Handle exceptions appropriately
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected error occurred.");
+            alert.show();
         }
     }
 
     public void availableSeats() {
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT COUNT(*) FROM seats WHERE status = 'available'";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
+            SeatModel seatModel = new SeatModel();
+            int availableSeatsCount = seatModel.getAvailableSeatsCount();
 
-                if (resultSet.next()) {
-                    int availableSeatsCount = resultSet.getInt(1);
-                    txtSeatsCount.setText(String.valueOf(availableSeatsCount));
-                } else {
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "No available seats found.");
-                    alert.show();
-                }
-            }
-        } catch (SQLException e) {
-            if (e instanceof SQLNonTransientConnectionException) {
-                // Handle connection closed exception
-                Alert alert = new Alert(Alert.AlertType.ERROR, "Error accessing database: Connection closed.");
-                alert.show();
+            if (availableSeatsCount > 0) {
+                txtSeatsCount.setText(String.valueOf(availableSeatsCount));
             } else {
-                e.printStackTrace(); // Handle other SQLExceptions appropriately
-                Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected database error occurred.");
+                Alert alert = new Alert(Alert.AlertType.ERROR, "No available seats found.");
                 alert.show();
             }
+        } catch (Exception e) {
+            // Handle exceptions appropriately
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "An unexpected error occurred.");
+            alert.show();
         }
     }
 

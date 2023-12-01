@@ -199,14 +199,9 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="280.0" layoutY="29.0" prefHeight="35.0" prefWidth="128.0" text="WELCOME, " textFill="#4834d4">
+      <Label layoutX="506.0" layoutY="26.0" prefHeight="35.0" prefWidth="122.0" text="WELCOME " textFill="#4834d4">
          <font>
             <Font size="22.0" />
-         </font>
-      </Label>
-      <Label fx:id="txtUserName" layoutX="408.0" layoutY="29.0" prefHeight="35.0" prefWidth="128.0">
-         <font>
-            <Font size="20.0" />
          </font>
       </Label>
     </children>
