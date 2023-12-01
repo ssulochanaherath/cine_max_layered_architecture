@@ -96,12 +96,30 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <ImageView fx:id="imgOne" fitHeight="208.0" fitWidth="158.0" layoutX="260.0" layoutY="187.0" onMouseClicked="#btnAvengersOnAction" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgTwo" fitHeight="208.0" fitWidth="158.0" layoutX="540.0" layoutY="187.0" onMouseClicked="#btnMissionImpossibleOnAction" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgThree" fitHeight="208.0" fitWidth="158.0" layoutX="820.0" layoutY="187.0" onMouseClicked="#btnPiratesOfTheCarribeanOnAction" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgFour" fitHeight="208.0" fitWidth="158.0" layoutX="263.0" layoutY="439.0" onMouseClicked="#btnTopGunOnAction" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgFive" fitHeight="208.0" fitWidth="158.0" layoutX="543.0" layoutY="439.0" onMouseClicked="#btnSherlockHolmesOnAction" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="imgSix" fitHeight="208.0" fitWidth="158.0" layoutX="823.0" layoutY="439.0" onMouseClicked="#btnHobbitOnAction" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgOne" fitHeight="208.0" fitWidth="158.0" layoutX="260.0" layoutY="187.0" onMouseClicked="#btnAvengersOnAction" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgTwo" fitHeight="208.0" fitWidth="158.0" layoutX="540.0" layoutY="187.0" onMouseClicked="#btnMissionImpossibleOnAction" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgThree" fitHeight="208.0" fitWidth="158.0" layoutX="820.0" layoutY="187.0" onMouseClicked="#btnPiratesOfTheCarribeanOnAction" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgFour" fitHeight="208.0" fitWidth="158.0" layoutX="263.0" layoutY="439.0" onMouseClicked="#btnTopGunOnAction" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgFive" fitHeight="208.0" fitWidth="158.0" layoutX="543.0" layoutY="439.0" onMouseClicked="#btnSherlockHolmesOnAction" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
+      <ImageView fx:id="imgSix" fitHeight="208.0" fitWidth="158.0" layoutX="823.0" layoutY="439.0" onMouseClicked="#btnHobbitOnAction" pickOnBounds="true" preserveRatio="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></ImageView>
       <ImageView fitHeight="48.0" fitWidth="47.0" layoutX="1010.0" layoutY="28.0" onMouseClicked="#btnLogOutOnAction">
          <image>
             <Image url="@../icons/log-out.png" />

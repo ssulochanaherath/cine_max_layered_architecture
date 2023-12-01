@@ -1,14 +1,22 @@
 package lk.ijse.cinemax.controller;
 
+import com.jfoenix.controls.JFXTextArea;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.dto.MovieDto;
+import lk.ijse.cinemax.model.MovieModel;
 
+import java.io.ByteArrayInputStream;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +24,13 @@ import java.time.format.DateTimeFormatter;
 public class MissionImpossibleFormController {
     public Label txtDate;
     public Label txtTime;
+    public ImageView movieImage;
+    public Label txtMovieName;
+    public Label txtYear;
+    public Label txtGenre;
+    public JFXTextArea txtDescription;
+    public Label txtId;
+    private MovieModel movieModel = new MovieModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -175,6 +190,40 @@ public class MissionImpossibleFormController {
     public void initialize() {
         setDate();
         setTime();
+        loadMovieData("Mission Impossible");
+    }
+
+    public void loadMovieData(String movieName) {
+        try {
+            MovieDto movieDto = movieModel.getMovieName(movieName);
+
+            if (movieDto != null) {
+                // Set movie details to the labels
+                txtId.setText(movieDto.getMovieId());
+                txtMovieName.setText(movieDto.getMovieName());
+                txtGenre.setText(movieDto.getMovieGenre());
+                txtYear.setText(movieDto.getYear());
+                txtDescription.setText(movieDto.getDescription());
+
+                // Set the movie image
+                byte[] imageData = MovieModel.getImageData(movieName);
+                if (imageData != null) {
+                    Image image = new Image(new ByteArrayInputStream(imageData));
+                    movieImage.setImage(image);
+                }
+            } else {
+                // Handle the case where the movie is not found
+                // You can show an alert or set default values, depending on your requirements.
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Movie Not Found");
+                alert.setHeaderText(null);
+                alert.setContentText("Movie not found in the database.");
+                alert.showAndWait();
+            }
+        } catch (SQLException e) {
+            // Handle SQL exception
+            e.printStackTrace(); // You might want to handle this more gracefully in a production environment
+        }
     }
 
     public void setDate(){

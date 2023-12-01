@@ -1,5 +1,6 @@
 package lk.ijse.cinemax.controller;
 
+import com.jfoenix.controls.JFXTextArea;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -31,6 +32,8 @@ public class AvengersFormController implements Initializable{
     public Label txtMovieName;
     public Label txtYear;
     public Label txtGenre;
+    public JFXTextArea txtDescription;
+    public Label txtId;
     private MovieModel movieModel = new MovieModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
@@ -209,9 +212,11 @@ public class AvengersFormController implements Initializable{
 
             if (movieDto != null) {
                 // Set movie details to the labels
+                txtId.setText(movieDto.getMovieId());
                 txtMovieName.setText(movieDto.getMovieName());
                 txtGenre.setText(movieDto.getMovieGenre());
                 txtYear.setText(movieDto.getYear());
+                txtDescription.setText(movieDto.getDescription());
 
                 // Set the movie image
                 byte[] imageData = MovieModel.getImageData(movieName);
@@ -233,11 +238,6 @@ public class AvengersFormController implements Initializable{
             e.printStackTrace(); // You might want to handle this more gracefully in a production environment
         }
     }
-
-
-
-
-
 
 
     public void setDate(){

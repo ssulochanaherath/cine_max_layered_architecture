@@ -11,6 +11,7 @@ public class MovieTm {
     private String movieName;
     private String movieGenre;
     private String year;
+    private String description;
 
     private final ObjectProperty<Image> image = new SimpleObjectProperty<>();
 
@@ -21,11 +22,12 @@ public class MovieTm {
     public MovieTm() {
     }
 
-    public MovieTm(String movieId, String movieName, String movieGenre, String year, String image) {
+    public MovieTm(String movieId, String movieName, String movieGenre, String year, String image, String description) {
         this.movieId = movieId;
         this.movieName = movieName;
         this.movieGenre = movieGenre;
         this.year = year;
+        this.description = description;
     }
 
     public String getMovieId() {
@@ -60,7 +62,13 @@ public class MovieTm {
         this.year = year;
     }
 
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     @Override
     public String toString() {
@@ -70,6 +78,7 @@ public class MovieTm {
                 ", movieGenre='" + movieGenre + '\'' +
                 ", year='" + year + '\'' +
                 ", imagePath='" + image + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

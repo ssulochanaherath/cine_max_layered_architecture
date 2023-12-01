@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import lk.ijse.cinemax.db.DbConnection;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
@@ -323,5 +324,18 @@ public class DashboardFormController implements Initializable {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         txtTime.setText(LocalTime.now().format(formatter));
     }
-    
+
+    public void btnMovieNavigateOnAction(MouseEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage oldStage = (Stage) source.getScene().getWindow();
+
+        Parent rootNode = FXMLLoader.load(getClass().getResource("/view/movies_form.fxml"));
+        Scene scene = new Scene(rootNode);
+        Stage newStage = new Stage();
+        newStage.setTitle("Movies Form");
+        newStage.setScene(scene);
+        newStage.show();
+
+        oldStage.close();
+    }
 }

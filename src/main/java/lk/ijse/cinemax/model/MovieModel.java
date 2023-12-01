@@ -31,13 +31,15 @@ public class MovieModel {
     public boolean saveMovie(MovieDto dto) throws SQLException, IOException {
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "INSERT INTO movie VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO movie VALUES(?,?,?,?,?,?)";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getMovieId());
         pstm.setString(2, dto.getMovieName());
         pstm.setString(3, dto.getMovieGenre());
         pstm.setString(4, dto.getYear());
+        pstm.setString(5, dto.getImagePath());
+        pstm.setString(6, dto.getDescription());
 
         if (dto.getImagePath() != null) {
             byte[] imageData = Files.readAllBytes(Paths.get(dto.getImagePath()));
@@ -67,7 +69,8 @@ public class MovieModel {
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
-                    resultSet.getString(5)
+                    resultSet.getString(5),
+                    resultSet.getString(6)
             ));
         }
         return dtoList;
@@ -76,7 +79,7 @@ public class MovieModel {
     public boolean updateMovie(MovieDto dto) throws SQLException{
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE movie SET movieName = ? , movieGenre = ? , movieYear = ?, imagePath = ? WHERE movieId = ?";
+        String sql = "UPDATE movie SET movieName = ? , movieGenre = ? , movieYear = ?, imagePath = ?, description = ? WHERE movieId = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getMovieName());
@@ -84,6 +87,7 @@ public class MovieModel {
         pstm.setString(3, dto.getYear());
         pstm.setString(4, dto.getImagePath());
         pstm.setString(5, dto.getMovieId());
+        pstm.setString(6, dto.getDescription());
 
         return pstm.executeUpdate() > 0;
     }
@@ -105,8 +109,9 @@ public class MovieModel {
             String genre = resultSet.getString(3);
             String year = resultSet.getString(4);
             String imagePath = resultSet.getString(5);
+            String description = resultSet.getString(6);
 
-            dto = new MovieDto(id, name, genre, year, imagePath);
+            dto = new MovieDto(id, name, genre, year, imagePath, description);
         }
         return dto;
     }
@@ -152,7 +157,8 @@ public class MovieModel {
                         resultSet.getString(2),
                         resultSet.getString(3),
                         resultSet.getString(4),
-                        resultSet.getString(5)
+                        resultSet.getString(5),
+                        resultSet.getString(6)
                 );
             } else {
                 return null;

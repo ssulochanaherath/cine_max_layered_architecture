@@ -71,25 +71,22 @@
                 <Font name="Laksaman Bold" size="26.0" />
             </font>
         </Label>
-        <ImageView fitHeight="245.0" fitWidth="167.0" layoutX="206.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/Sherloch-Holmes.jpg" />
-            </image>
+        <ImageView fx:id="movieImage" fitHeight="245.0" fitWidth="167.0" layoutX="206.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Label layoutX="389.0" layoutY="125.0" prefHeight="64.0" prefWidth="286.0" text="Mission Impossible" textFill="WHITE">
+        <Label fx:id="txtMovieName" layoutX="389.0" layoutY="125.0" prefHeight="64.0" prefWidth="286.0" textFill="WHITE">
             <font>
                 <Font name="Laksaman Bold" size="30.0" />
             </font>
         </Label>
-        <Label layoutX="389.0" layoutY="184.0" text="2009" textFill="WHITE">
+        <Label fx:id="txtYear" layoutX="389.0" layoutY="184.0" prefHeight="19.0" prefWidth="74.0" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <Label layoutX="389.0" layoutY="194.0" prefHeight="43.0" prefWidth="465.0" text="Action / Adventure / Crime / Mystery / Thriller" textFill="WHITE">
+        <Label fx:id="txtGenre" layoutX="389.0" layoutY="194.0" prefHeight="43.0" prefWidth="465.0" textFill="WHITE">
             <font>
                 <Font name="Laksaman Bold" size="20.0" />
             </font>
@@ -99,7 +96,7 @@
                 <Font name="Laksaman Bold" size="20.0" />
             </font>
         </Label>
-        <JFXTextArea layoutX="207.0" layoutY="446.0" prefHeight="55.0" prefWidth="844.0" style="-fx-background-color: #bdc3c7;" text="                          Eccentric consulting detective Sherlock Holmes and Doctor John Watson battle to bring down a new nemesis and unravel a deadly plot that could destroy England." />
+        <JFXTextArea fx:id="txtDescription" layoutX="207.0" layoutY="446.0" prefHeight="55.0" prefWidth="844.0" style="-fx-background-color: #bdc3c7;" />
         <JFXButton buttonType="RAISED" layoutX="989.0" layoutY="658.0" onAction="#btnNextOnAction" style="-fx-background-color: #9b59b6;" text="Next" textFill="WHITE" />
         <JFXButton buttonType="RAISED" layoutX="206.0" layoutY="658.0" onAction="#btnBackOnAction" style="-fx-background-color: #2ecc71;" text="Back" textFill="WHITE" />
         <ImageView fitHeight="149.0" fitWidth="238.0" layoutX="384.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
@@ -141,6 +138,11 @@
       <Label fx:id="txtTime" layoutX="910.0" layoutY="56.0" prefHeight="30.0" prefWidth="83.0">
          <font>
             <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtId" layoutX="938.0" layoutY="139.0" prefHeight="30.0" prefWidth="83.0" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
          </font>
       </Label>
     </children>

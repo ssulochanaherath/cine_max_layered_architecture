@@ -399,7 +399,7 @@ public class MoviesFormController implements Initializable {
 
     private void loadImageSherlock() {
         try {
-            byte[] imageBytes = MovieModel.getImageData("Sherlock");
+            byte[] imageBytes = MovieModel.getImageData("Sherlock Holmes");
 
             if (imageBytes != null) {
                 Image image = new Image(new ByteArrayInputStream(imageBytes));

@@ -107,7 +107,7 @@
                 <Font name="Laksaman Bold" size="20.0" />
             </font>
         </Label>
-        <JFXTextArea layoutX="207.0" layoutY="446.0" prefHeight="64.0" prefWidth="844.0" style="-fx-background-color: #bdc3c7;" text="After the devastating events of Avengers: Infinity War, the universe is in ruins due to the efforts of the Mad Titan, Thanos. With the help of remaining allies, the Avengers must assemble once more in order to undo Thanos' actions and restore order to the universe once and for all, no matter what consequences may be in store." />
+        <JFXTextArea fx:id="txtDescription" layoutX="207.0" layoutY="446.0" prefHeight="64.0" prefWidth="844.0" style="-fx-background-color: #bdc3c7;" />
         <JFXButton buttonType="RAISED" layoutX="989.0" layoutY="658.0" onAction="#btnNextOnAction" style="-fx-background-color: #9b59b6;" text="Next" textFill="WHITE" />
         <JFXButton buttonType="RAISED" layoutX="206.0" layoutY="658.0" onAction="#btnBackOnAction" style="-fx-background-color: #2ecc71;" text="Back" textFill="WHITE" />
         <ImageView fitHeight="149.0" fitWidth="238.0" layoutX="384.0" layoutY="289.0" pickOnBounds="true" preserveRatio="true">
@@ -141,6 +141,11 @@
       <Label fx:id="txtTime" layoutX="904.0" layoutY="53.0" prefHeight="30.0" prefWidth="83.0">
          <font>
             <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="txtId" layoutX="928.0" layoutY="129.0" prefHeight="30.0" prefWidth="83.0" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
          </font>
       </Label>
     </children>

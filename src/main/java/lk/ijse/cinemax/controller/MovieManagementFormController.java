@@ -44,6 +44,8 @@ public class MovieManagementFormController {
     public ImageView imgMovie;
     public Label txtDate;
     public Label txtTime;
+    public JFXTextField txtDescription;
+    public TableColumn colDescription;
 
     private MovieModel movieModel = new MovieModel();
 
@@ -180,6 +182,7 @@ public class MovieManagementFormController {
         String movieName = txtMovieName.getText();
         String movieGenre = txtMovieGenre.getText();
         String year = txtYear.getText();
+        String description = txtDescription.getText();
 
         // Define the regex pattern for allowed movie names
         String allowedMovieNamesRegex = "(Avengers|Mission Impossible|Top Gun|Sherlock Holmes|Pirates|Hobbit)";
@@ -190,7 +193,7 @@ public class MovieManagementFormController {
             return; // Exit the method if validation fails
         }
 
-        var dto = new MovieDto(movieId, movieName, movieGenre, year, null);
+        var dto = new MovieDto(movieId, movieName, movieGenre, year, null, description);
 
         dto.setImagePath(selectedImageFile != null ? selectedImageFile.getAbsolutePath() : null);
 
@@ -266,7 +269,8 @@ public class MovieManagementFormController {
                                 dto.getMovieName(),
                                 dto.getMovieGenre(),
                                 dto.getYear(),
-                                dto.getImagePath()
+                                dto.getImagePath(),
+                                dto.getDescription()
                         )
                 );
             }
@@ -277,12 +281,26 @@ public class MovieManagementFormController {
     }
 
     private void setCellValueFctory() {
-        colMovieId.setCellValueFactory(new PropertyValueFactory<>("movieId"));
-        colMovieName.setCellValueFactory(new PropertyValueFactory<>("movieName"));
-        colMovieGenre.setCellValueFactory(new PropertyValueFactory<>("movieGenre"));
-        colYear.setCellValueFactory(new PropertyValueFactory<>("year"));
-        colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        if (colMovieId != null) {
+            colMovieId.setCellValueFactory(new PropertyValueFactory<>("movieId"));
+        }
+        if (colMovieName != null) {
+            colMovieName.setCellValueFactory(new PropertyValueFactory<>("movieName"));
+        }
+        if (colMovieGenre != null) {
+            colMovieGenre.setCellValueFactory(new PropertyValueFactory<>("movieGenre"));
+        }
+        if (colYear != null) {
+            colYear.setCellValueFactory(new PropertyValueFactory<>("year"));
+        }
+        if (colImage != null) {
+            colImage.setCellValueFactory(new PropertyValueFactory<>("image"));
+        }
+        if (colDescription != null) {
+            colDescription.setCellValueFactory(new PropertyValueFactory<>("description"));
+        }
     }
+
 
     private void clearFields() {
         txtMovieId.clear();
@@ -291,6 +309,7 @@ public class MovieManagementFormController {
         txtYear.clear();
         txtMovieSearch.clear();
         selectedImageFile = null;
+        txtDescription.clear();
     }
 
     public void btnUpdateOnAction(ActionEvent event) {
@@ -298,8 +317,9 @@ public class MovieManagementFormController {
         String movieName = txtMovieName.getText();
         String movieGenre = txtMovieGenre.getText();
         String year = txtYear.getText();
+        String description = txtDescription.getText();
 
-        var dto = new MovieDto(movieId, movieName, movieGenre, year, null);
+        var dto = new MovieDto(movieId, movieName, movieGenre, year, null, description);
 
         dto.setImagePath(selectedImageFile != null ? selectedImageFile.getAbsolutePath() : null);
 

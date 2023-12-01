@@ -81,10 +81,13 @@
          </font>
       </Label>
       <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#00a8ff" height="167.0" layoutX="417.0" layoutY="118.0" stroke="WHITE" strokeType="INSIDE" width="218.0" />
-      <ImageView fitHeight="319.0" fitWidth="618.0" layoutX="501.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="319.0" fitWidth="618.0" layoutX="501.0" layoutY="369.0" onMouseClicked="#btnMovieNavigateOnAction" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/header.jpg" />
          </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </ImageView>
       <Label layoutX="452.0" layoutY="142.0" prefHeight="55.0" prefWidth="176.0" text="Available Movies" textFill="WHITE">
          <font>

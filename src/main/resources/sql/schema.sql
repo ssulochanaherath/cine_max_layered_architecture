@@ -21,7 +21,8 @@ create  table movie (
                         movieName varchar(20) not null,
                         movieGenre varchar(20) not null,
                         movieYear varchar(20) not null,
-                        image longblob
+                        image longblob,
+                        description varchar(200)
 );
 
 create table showtime (

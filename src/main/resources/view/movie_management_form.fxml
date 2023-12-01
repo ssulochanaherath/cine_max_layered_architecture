@@ -76,14 +76,14 @@
                 <Font name="Laksaman Bold" size="26.0" />
             </font>
         </Label>
-        <Label layoutX="252.0" layoutY="199.0" prefHeight="19.0" prefWidth="77.0" text="Movie ID :" />
-        <JFXTextField fx:id="txtMovieId" layoutX="343.0" layoutY="200.0" prefHeight="24.0" prefWidth="170.0" />
-        <Label layoutX="700.0" layoutY="199.0" prefHeight="19.0" prefWidth="63.0" text=" Name :" />
-        <JFXTextField fx:id="txtMovieName" layoutX="778.0" layoutY="197.0" prefHeight="24.0" prefWidth="170.0" />
-        <Label layoutX="706.0" layoutY="261.0" prefHeight="19.0" prefWidth="52.0" text="Year :" />
-        <JFXTextField fx:id="txtYear" layoutX="781.0" layoutY="256.0" prefHeight="24.0" prefWidth="170.0" />
-        <Label layoutX="252.0" layoutY="261.0" prefHeight="16.0" prefWidth="52.0" text="Genre :" />
-        <JFXTextField fx:id="txtMovieGenre" layoutX="343.0" layoutY="256.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="252.0" layoutY="167.0" prefHeight="19.0" prefWidth="77.0" text="Movie ID :" />
+        <JFXTextField fx:id="txtMovieId" layoutX="343.0" layoutY="168.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="700.0" layoutY="167.0" prefHeight="19.0" prefWidth="63.0" text=" Name :" />
+        <JFXTextField fx:id="txtMovieName" layoutX="778.0" layoutY="165.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="706.0" layoutY="229.0" prefHeight="19.0" prefWidth="52.0" text="Year :" />
+        <JFXTextField fx:id="txtYear" layoutX="781.0" layoutY="224.0" prefHeight="24.0" prefWidth="170.0" />
+        <Label layoutX="252.0" layoutY="229.0" prefHeight="16.0" prefWidth="52.0" text="Genre :" />
+        <JFXTextField fx:id="txtMovieGenre" layoutX="343.0" layoutY="224.0" prefHeight="24.0" prefWidth="170.0" />
         <JFXButton buttonType="RAISED" layoutX="622.0" layoutY="344.0" onAction="#btnSaveOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #1abc9c;" text="Save" textFill="WHITE">
             <cursor>
                 <Cursor fx:constant="HAND" />
@@ -110,7 +110,7 @@
                 <TableColumn fx:id="colMovieName" prefWidth="186.4000244140625" text="Name" />
                 <TableColumn fx:id="colMovieGenre" prefWidth="149.60003662109375" text="Genre" />
                 <TableColumn fx:id="colYear" prefWidth="160.79986572265625" text="Year" />
-            <TableColumn fx:id="colImage" prefWidth="192.79996337890623" text="Image" />
+            <TableColumn fx:id="colDescription" prefWidth="192.79996337890623" text="Description" />
             </columns>
         </TableView>
         <TextField fx:id="txtMovieSearch" layoutX="709.0" layoutY="34.0" prefHeight="35.0" prefWidth="210.0" promptText="Search Movies" />
@@ -122,8 +122,8 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-      <Label layoutX="252.0" layoutY="325.0" prefHeight="19.0" prefWidth="63.0" text="Image :" />
-      <JFXButton buttonType="RAISED" layoutX="324.0" layoutY="317.0" onAction="#btnChooseImageOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Choose" textFill="WHITE">
+      <Label layoutX="252.0" layoutY="293.0" prefHeight="19.0" prefWidth="63.0" text="Image :" />
+      <JFXButton buttonType="RAISED" layoutX="324.0" layoutY="285.0" onAction="#btnChooseImageOnAction" prefHeight="35.0" prefWidth="70.0" style="-fx-background-color: #34495e;" text="Choose" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -165,5 +165,7 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label layoutX="680.0" layoutY="295.0" prefHeight="16.0" prefWidth="83.0" text="Description :" />
+      <JFXTextField fx:id="txtDescription" layoutX="787.0" layoutY="291.0" prefHeight="24.0" prefWidth="170.0" />
     </children>
 </AnchorPane>
