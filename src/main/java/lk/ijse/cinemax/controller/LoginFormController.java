@@ -57,7 +57,7 @@ public class LoginFormController {
 
             } else {
                 clearFields();
-                new Alert(Alert.AlertType.INFORMATION, "Invalid username or password").show();
+                new Alert(Alert.AlertType.ERROR, "Invalid username or password").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();

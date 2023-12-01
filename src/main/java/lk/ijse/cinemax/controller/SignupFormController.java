@@ -62,9 +62,38 @@ public class SignupFormController {
         String password = txtPassword.getText();
 
         String userIdRegex = "U\\d{3}";
+        String firstNameRegex = "[A-Z][a-z]*";
+        String lastNameRegex = "[A-Z][a-z]*";
+        String userNameRegex = "[a-z]+"; // Only simple letters
+        String passwordRegex = "\\d+"; // Only numbers
 
         if (!userId.matches(userIdRegex)) {
             new Alert(Alert.AlertType.ERROR, "Invalid User Id! Please enter a valid User Id.").show();
+            return;
+        }
+
+        if (!fristName.matches(firstNameRegex)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid First Name! Please use Capital Letter for the First Letter.").show();
+            return;
+        }
+
+        if (!lastName.matches(lastNameRegex)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Last Name! Please use Capital Letter for the First Letter.").show();
+            return;
+        }
+
+        if (!userName.matches(userNameRegex)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid User Name! Please enter a valid User Name with simple letters.").show();
+            return;
+        }
+
+        if (!password.matches(passwordRegex)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Password! Please enter a valid Password with only numbers.").show();
+            return;
+        }
+
+        if (fristName.isEmpty() || lastName.isEmpty() || userName.isEmpty() || password.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR, "Please fill in all the fields.").show();
             return;
         }
 

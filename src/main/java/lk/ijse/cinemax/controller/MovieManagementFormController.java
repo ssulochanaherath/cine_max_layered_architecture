@@ -181,6 +181,15 @@ public class MovieManagementFormController {
         String movieGenre = txtMovieGenre.getText();
         String year = txtYear.getText();
 
+        // Define the regex pattern for allowed movie names
+        String allowedMovieNamesRegex = "(Avengers|Mission Impossible|Top Gun|Sherlock Holmes|Pirates|Hobbit)";
+
+        // Check if the entered movieName matches the allowed pattern
+        if (!movieName.matches(allowedMovieNamesRegex)) {
+            new Alert(Alert.AlertType.ERROR, "Invalid Movie Name! Please enter a valid Movie Name.").show();
+            return; // Exit the method if validation fails
+        }
+
         var dto = new MovieDto(movieId, movieName, movieGenre, year, null);
 
         dto.setImagePath(selectedImageFile != null ? selectedImageFile.getAbsolutePath() : null);

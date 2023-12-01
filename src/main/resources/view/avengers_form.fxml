@@ -79,25 +79,25 @@
                 <Font name="Laksaman Bold" size="26.0" />
             </font>
         </Label>
-        <ImageView fitHeight="245.0" fitWidth="167.0" layoutX="206.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="movieImage" fitHeight="245.0" fitWidth="167.0" layoutX="206.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../images/Avengers.jpg" />
+                <Image url="@../images" />
             </image>
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Label layoutX="389.0" layoutY="125.0" prefHeight="64.0" prefWidth="286.0" text="Avengers" textFill="WHITE">
+        <Label fx:id="txtMovieName" layoutX="389.0" layoutY="125.0" prefHeight="64.0" prefWidth="286.0" textFill="WHITE">
             <font>
                 <Font name="Laksaman Bold" size="30.0" />
             </font>
         </Label>
-        <Label layoutX="389.0" layoutY="184.0" text="2019" textFill="WHITE">
+        <Label fx:id="txtYear" layoutX="389.0" layoutY="184.0" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <Label layoutX="389.0" layoutY="194.0" prefHeight="43.0" prefWidth="356.0" text="Action / Adventure / Drama / Sci-Fi" textFill="WHITE">
+        <Label fx:id="txtGenre" layoutX="389.0" layoutY="194.0" prefHeight="43.0" prefWidth="356.0" textFill="WHITE">
             <font>
                 <Font name="Laksaman Bold" size="20.0" />
             </font>

@@ -138,4 +138,25 @@ public class MovieModel {
         }
     }
 
+    public MovieDto getMovieName(String movieName) throws SQLException{
+        Connection connection = DbConnection.getInstance().getConnection();
+
+        String sql = "SELECT * FROM movie WHERE movieName = ?";
+        try(PreparedStatement pstm = connection.prepareStatement(sql)){
+            pstm.setString(1, movieName);
+            ResultSet resultSet = pstm.executeQuery();
+
+            if(resultSet.next()){
+                return new MovieDto(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5)
+                );
+            } else {
+                return null;
+            }
+        }
+    }
 }
