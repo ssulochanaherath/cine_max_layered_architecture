@@ -57,7 +57,7 @@ public class CustomerModel {
     public boolean updateCustomer(CustomerDto dto) throws SQLException{
         Connection connection = DbConnection.getInstance().getConnection();
 
-        String sql = "UPDATE customer SET name = ?, address = ?, tele = ?, userId = ?, customerEmail = ? WHERE customerId = ?";
+        String sql = "UPDATE customer SET name = ?, address = ?, tele = ?, userId = ?, email = ? WHERE customerId = ?";
         PreparedStatement pstm = connection.prepareStatement(sql);
 
         pstm.setString(1, dto.getCustomerName());
