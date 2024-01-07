@@ -34,6 +34,8 @@ public class PlaceOrderDAOImpl {
                 }
             }
             connection.rollback();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         } finally {
             connection.setAutoCommit(true);
         }

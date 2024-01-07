@@ -11,18 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface CrudDAO<T> extends SuperDAO {
-    boolean save(T dto) throws SQLException;
+    boolean save(T dto) throws SQLException, ClassNotFoundException;
 
-    ArrayList<T> getAll() throws SQLException;
+    //ArrayList<T> getAll() throws SQLException, ClassNotFoundException;
 
-    boolean update(T dto) throws SQLException;
+    boolean update(T dto) throws SQLException, ClassNotFoundException;
 
-    boolean delete(String id) throws SQLException;
+    boolean delete(String id) throws SQLException, ClassNotFoundException;
 
-    T search(String id) throws SQLException;
+    T search(String id) throws SQLException, ClassNotFoundException;
 
-    ArrayList<T> loadAllIds() throws SQLException;
+    ArrayList<T> loadAll() throws SQLException, ClassNotFoundException;
 
-    String getLastId() throws SQLException;
+    //String getLastId() throws SQLException, ClassNotFoundException;
 
 }

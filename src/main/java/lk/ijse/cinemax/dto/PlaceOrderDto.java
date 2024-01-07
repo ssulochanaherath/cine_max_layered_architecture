@@ -46,7 +46,7 @@ public class PlaceOrderDto {
         this.customerId = customerId;
     }
 
-    public List<CartTm> getCartTmList() {
+    public ArrayList<CartTm> getCartTmList() {
         return cartTmList;
     }
 
