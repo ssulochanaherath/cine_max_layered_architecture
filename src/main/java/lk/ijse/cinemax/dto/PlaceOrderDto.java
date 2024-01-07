@@ -47,7 +47,7 @@ public class PlaceOrderDto {
     }
 
     public ArrayList<CartTm> getCartTmList() {
-        return cartTmList;
+        return (ArrayList<CartTm>) cartTmList;
     }
 
     public void setCartTmList(List<CartTm> cartTmList) {
