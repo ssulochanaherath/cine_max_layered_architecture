@@ -1,14 +1,9 @@
 package lk.ijse.cinemax.dao;
 
-import lk.ijse.cinemax.db.DbConnection;
-import lk.ijse.cinemax.dto.CustomerDto;
+import lk.ijse.cinemax.entity.Movie;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public interface CrudDAO<T> extends SuperDAO {
     boolean save(T dto) throws SQLException, ClassNotFoundException;
@@ -19,7 +14,7 @@ public interface CrudDAO<T> extends SuperDAO {
 
     boolean delete(String id) throws SQLException, ClassNotFoundException;
 
-    T search(String id) throws SQLException, ClassNotFoundException;
+    Movie search(String id) throws SQLException, ClassNotFoundException;
 
     ArrayList<T> loadAll() throws SQLException, ClassNotFoundException;
 

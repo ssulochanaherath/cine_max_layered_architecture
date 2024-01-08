@@ -1,28 +1,33 @@
 package lk.ijse.cinemax.dao.custom.impl;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud;
+import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.OrderDAO;
 import lk.ijse.cinemax.db.DbConnection;
+import lk.ijse.cinemax.entity.Movie;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class OrderDAOImpl {
-    public String getLastOrderId() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+public class OrderDAOImpl implements OrderDAO {
+    public String getLastOrderId() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1");
 
-        String sql = "SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1";
-        try (PreparedStatement pstm = connection.prepareStatement(sql);
-             ResultSet resultSet = pstm.executeQuery()) {
-
-            if (resultSet.next()) {
-                return resultSet.getString(1);
-            } else {
-                // If no customer has been generated yet, return an empty string
-                return "";
-            }
+        if (rst.next()) {
+            return rst.getString(1);
+        } else {
+            // If no customer has been generated yet, return an empty string
+            return "";
         }
     }
 
-    private String splitOrderId(String currentOrderId) {
+    @Override
+    public boolean save(String orderId, String customerId, LocalDate date) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    public String splitOrderId(String currentOrderId) {
         if(currentOrderId != null) {
             String[] split = currentOrderId.split("O0");
 
@@ -34,16 +39,33 @@ public class OrderDAOImpl {
         }
     }
 
-    public boolean saveOrder(String orderId, String customerId, LocalDate date) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "INSERT INTO orders VALUES(?, ?, ?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, orderId);
-        pstm.setString(2, customerId);
-        pstm.setDate(3, Date.valueOf(date));
-
-        return pstm.executeUpdate() > 0;
+    @Override
+    public boolean save(MysqlxCrud.Order dto) throws SQLException, ClassNotFoundException {
+        return false;
     }
 
+    @Override
+    public boolean update(MysqlxCrud.Order dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public Movie search(String id) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<MysqlxCrud.Order> loadAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    public boolean saveOrder(String orderId, String customerId, LocalDate date) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO orders VALUES(?, ?, ?)",
+                orderId, customerId, date);
+    }
 }

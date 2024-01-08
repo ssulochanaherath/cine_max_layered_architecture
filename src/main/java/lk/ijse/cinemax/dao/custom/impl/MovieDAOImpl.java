@@ -1,16 +1,15 @@
 package lk.ijse.cinemax.dao.custom.impl;
 
+import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.MovieDAO;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.MovieDto;
+import lk.ijse.cinemax.entity.Movie;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MovieDAOImpl {
+public class MovieDAOImpl implements MovieDAO {
 
     public static byte[] getImageData(String movieName) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
@@ -28,159 +27,91 @@ public class MovieDAOImpl {
         return null;
     }
 
-    public boolean saveMovie(MovieDto dto) throws SQLException, IOException {
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "INSERT INTO movie VALUES(?,?,?,?,?,?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1, dto.getMovieId());
-        pstm.setString(2, dto.getMovieName());
-        pstm.setString(3, dto.getMovieGenre());
-        pstm.setString(4, dto.getYear());
-        pstm.setString(5, dto.getImagePath());
-        pstm.setString(6, dto.getDescription());
-
-        if (dto.getImagePath() != null) {
-            byte[] imageData = Files.readAllBytes(Paths.get(dto.getImagePath()));
-            pstm.setBytes(5, imageData);
-        } else {
-            // If no image is provided, set the column to null
-            pstm.setNull(5, Types.LONGVARBINARY);
-        }
-
-        boolean isSaved = pstm.executeUpdate() > 0;
-
-        return isSaved;
+    public boolean save(Movie dto) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO movie VALUES(?,?,?,?,?,?)",
+                dto.getMovieId(),dto.getMovieName(),dto.getMovieGenre(),dto.getYear(),dto.getImagePath(),dto.getDescription());
     }
 
-    public List<MovieDto> loadAllMovies() throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
+    public ArrayList<Movie> loadAll() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM movie");
+        ArrayList<Movie> allMovie = new ArrayList<>();
 
-        String sql = "SELECT * FROM movie";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
-
-        ArrayList<MovieDto> dtoList = new ArrayList<>();
-
-        while(resultSet.next()){
-            dtoList.add(new MovieDto(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5),
-                    resultSet.getString(6)
+        while (rst.next()){
+            allMovie.add(new Movie(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6)
             ));
         }
-        return dtoList;
+        return allMovie;
     }
 
-    public boolean updateMovie(MovieDto dto) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "UPDATE movie SET movieName = ? , movieGenre = ? , movieYear = ?, imagePath = ?, description = ? WHERE movieId = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1, dto.getMovieName());
-        pstm.setString(2, dto.getMovieGenre());
-        pstm.setString(3, dto.getYear());
-        pstm.setString(4, dto.getImagePath());
-        pstm.setString(5, dto.getMovieId());
-        pstm.setString(6, dto.getDescription());
-
-        return pstm.executeUpdate() > 0;
+    public boolean update(Movie dto) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("UPDATE movie SET movieName = ? , movieGenre = ? , movieYear = ?, imagePath = ?, description = ? WHERE movieId = ?",
+                dto.getMovieName(),dto.getMovieGenre(),dto.getYear(),dto.getImagePath(),dto.getDescription(),dto.getMovieId());
     }
 
-    public MovieDto searchMovie(String searchMovie) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "SELECT * FROM movie WHERE movieId = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, searchMovie);
-
-        ResultSet resultSet = pstm.executeQuery();
-
-        MovieDto dto = null;
-
-        if (resultSet.next()) {
-            String id = resultSet.getString(1);
-            String name = resultSet.getString(2);
-            String genre = resultSet.getString(3);
-            String year = resultSet.getString(4);
-            String imagePath = resultSet.getString(5);
-            String description = resultSet.getString(6);
-
-            dto = new MovieDto(id, name, genre, year, imagePath, description);
-        }
-        return dto;
+    public Movie search(String searchMovie) throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM movie WHERE movieId = ?", searchMovie);
+        rst.next();
+        return new Movie(searchMovie, rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getString(6));
     }
 
-    public boolean deleteMovie(String movieId) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "DELETE FROM movie WHERE movieid = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1, movieId);
-
-        return pstm.executeUpdate() > 0;
+    public boolean delete(String movieId) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("DELETE FROM movie WHERE movieId = ?", movieId);
     }
 
-    public String generateMovieId() throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
+    public String generateMovieId() throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("SELECT movieId FROM movie ORDER BY movieId DESC LIMIT 1");
+    }
 
-        String sql = "SELECT movieId FROM movie ORDER BY movieId DESC LIMIT 1";
+    public MovieDto getMovieName(String movieName) throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM movie WHERE movieName = ?", movieName);
+        rst.next();
 
-        try(PreparedStatement pstm = connection.prepareStatement(sql)){
-            ResultSet resultSet = pstm.executeQuery();
-
-            if(resultSet.next()){
-                return resultSet.getString(1);
-            }else{
-                return "";
-            }
+        if (rst.next()){
+            return new MovieDto(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6)
+            );
+        } else {
+            return null;
         }
     }
 
-    public MovieDto getMovieName(String movieName) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "SELECT * FROM movie WHERE movieName = ?";
-        try(PreparedStatement pstm = connection.prepareStatement(sql)){
-            pstm.setString(1, movieName);
-            ResultSet resultSet = pstm.executeQuery();
-
-            if(resultSet.next()){
-                return new MovieDto(
-                        resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6)
-                );
-            } else {
-                return null;
-            }
-        }
-    }
-
-    public int getAvailableMoviesCount() {
+    public int getAvailableMoviesCount() throws SQLException, ClassNotFoundException {
         int count = 0;
+        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM movie WHERE imagePath IS NOT NULL");
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT COUNT(*) FROM movie";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
-
-                if (resultSet.next()) {
-                    count = resultSet.getInt(1);
-                }
+            if (rst.next()) {
+                count =  rst.getInt(1);
             }
         } catch (SQLException e) {
-            e.printStackTrace(); // Handle other SQLExceptions appropriately
+            e.printStackTrace();
         }
         return count;
-    }
+        }
+
+//        int count = 0;
+//        try {
+//            Connection connection = DbConnection.getInstance().getConnection();
+//            String sql = "SELECT COUNT(*) FROM movie";
+//            try (PreparedStatement pstm = connection.prepareStatement(sql);
+//                 ResultSet resultSet = pstm.executeQuery()) {
+//
+//                if (resultSet.next()) {
+//                    count = resultSet.getInt(1);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Handle other SQLExceptions appropriately
+//        }
+//        return count;
 }

@@ -1,15 +1,21 @@
 package lk.ijse.cinemax.dao.custom.impl;
 
+import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.OrderDetailDAO;
+import lk.ijse.cinemax.dao.custom.PlaceOrderDAO;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.tm.CartTm;
+import lk.ijse.cinemax.entity.Movie;
+import lk.ijse.cinemax.entity.PlaceOrder;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetailDAOImpl {
-    public boolean saveOrderDetails(String orderId, List<CartTm> cartTmList) throws SQLException {
+public class OrderDetailDAOImpl implements PlaceOrderDAO {
+    public boolean saveOrderDetails(String orderId, List<CartTm> cartTmList) throws SQLException, ClassNotFoundException {
         for(CartTm tm : cartTmList) {
             if(!saveOrderDetails(orderId, tm)) {
                 return false;
@@ -18,17 +24,33 @@ public class OrderDetailDAOImpl {
         return true;
     }
 
-    private boolean saveOrderDetails(String orderId, CartTm tm) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    private boolean saveOrderDetails(String orderId, CartTm tm) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO order_detail VALUES(?, ?, ?, ?)",
+                orderId, tm.getCode(), tm.getQty(), tm.getUnitPrice());
+    }
 
-        String sql = "INSERT INTO order_detail VALUES(?, ?, ?, ?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
+    @Override
+    public boolean save(PlaceOrder dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 
-        pstm.setString(1, orderId);
-        pstm.setString(2, tm.getCode());
-        pstm.setInt(3, tm.getQty());
-        pstm.setDouble(4, tm.getUnitPrice());
+    @Override
+    public boolean update(PlaceOrder dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 
-        return pstm.executeUpdate() > 0;
+    @Override
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public Movie search(String id) throws SQLException, ClassNotFoundException {
+        return null;
+    }
+
+    @Override
+    public ArrayList<PlaceOrder> loadAll() throws SQLException, ClassNotFoundException {
+        return null;
     }
 }

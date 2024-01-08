@@ -2,17 +2,13 @@ package lk.ijse.cinemax.dao.custom.impl;
 
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.ItemDAO;
-import lk.ijse.cinemax.db.DbConnection;
-import lk.ijse.cinemax.dto.ItemDto;
 import lk.ijse.cinemax.dto.tm.CartTm;
 import lk.ijse.cinemax.entity.Item;
+import lk.ijse.cinemax.entity.Movie;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ItemDAOImpl implements ItemDAO {
     public boolean save(Item dto) throws SQLException, ClassNotFoundException {
@@ -38,7 +34,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
 
-    public Item search(String code) throws SQLException, ClassNotFoundException {
+    public Movie search(String code) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM item WHERE code = ?", code);
         rst.next();
         return new Item(

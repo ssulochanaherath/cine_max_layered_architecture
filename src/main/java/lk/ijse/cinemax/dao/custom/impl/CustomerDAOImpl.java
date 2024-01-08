@@ -2,18 +2,14 @@ package lk.ijse.cinemax.dao.custom.impl;
 
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.CustomerDAO;
-import lk.ijse.cinemax.db.DbConnection;
-import lk.ijse.cinemax.dto.CustomerDto;
 import lk.ijse.cinemax.entity.Customer;
+import lk.ijse.cinemax.entity.Movie;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class CustomerDAOImpl implements CustomerDAO{
+public class CustomerDAOImpl implements CustomerDAO {
     public boolean save(Customer dto) throws SQLException, ClassNotFoundException {
         boolean isSaved = SQLUtil.execute("INSERT INTO customer VALUES(?,?,?,?,?,?)",
                 dto.getCustomerId(),dto.getCustomerName(),dto.getCustomerAddress(),dto.getCustomerTelephone(),dto.getUserId(),dto.getCustomerEmail());
@@ -49,7 +45,7 @@ public class CustomerDAOImpl implements CustomerDAO{
         return SQLUtil.execute("DELETE FROM customer WHERE customerId = ?", customerId);
     }
 
-    public Customer search(String seachId) throws SQLException, ClassNotFoundException {
+    public Movie search(String seachId) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM customer WHERE customerId = ?", seachId);
         rst.next();
         return new Customer(seachId, rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getString(6));
@@ -71,6 +67,7 @@ public class CustomerDAOImpl implements CustomerDAO{
         }
         return allCustomer;
     }
+
 
     public String getLastId() throws SQLException, ClassNotFoundException {
 
