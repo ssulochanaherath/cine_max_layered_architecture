@@ -1,7 +1,10 @@
 package lk.ijse.cinemax.dao.custom.impl;
 
+import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.SupplierDAO;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.SupplierDto;
+import lk.ijse.cinemax.entity.Supplier;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,121 +13,78 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SupplierDAOImpl {
-    public String generateSupplierId() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+public class SupplierDAOImpl implements SupplierDAO {
+    public String generateSupplierId() throws SQLException, ClassNotFoundException {
+        ResultSet rst =  SQLUtil.execute("SELECT supplierId FROM supplier ORDER BY supplierId DESC LIMIT 1");
 
-        String sql = "SELECT supplierId FROM supplier ORDER BY supplierId DESC LIMIT 1";
-
-        try(PreparedStatement pstm = connection.prepareStatement(sql)) {
-            ResultSet resultSet = pstm.executeQuery();
-
-            if (resultSet.next()) {
-                return  resultSet.getString(1);
-            } else {
-                return "";
-            }
+        if (rst.next()){
+            String id = rst.getString(1);
+            int newId = Integer.parseInt(id.replace("S", "")) + 1;
+            return String.format("S%03d", newId);
+        } else {
+            return "S001";
         }
     }
 
-    public List<SupplierDto> loadAllSupplier() throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
+    public ArrayList<Supplier> loadAll() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM supplier");
+        ArrayList<Supplier> suppliers = new ArrayList<>();
 
-        String sql = "SELECT * FROM supplier";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
-
-        ArrayList<SupplierDto> dtoList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            dtoList.add(new SupplierDto(
-                    resultSet.getString(1),
-                    resultSet.getString(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4)
+        while (rst.next()){
+            suppliers.add(new Supplier(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4)
             ));
         }
-        return dtoList;
+        return suppliers;
     }
 
-    public SupplierDto searchSupplier(String searchMovie) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "SELECT * FROM supplier WHERE supplierId = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, searchMovie);
-
-        ResultSet resultSet = pstm.executeQuery();
-
-        SupplierDto dto = null;
-
-        if (resultSet.next()) {
-            String id = resultSet.getString(1);
-            String name = resultSet.getString(2);
-            String address = resultSet.getString(3);
-            String tele = resultSet.getString(4);
-
-            dto = new SupplierDto(id, name, address, tele);
-        }
-        return dto;
+    public Supplier search(String searchMovie) throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM supplier WHERE supplierId = ?", searchMovie);
+        rst.next();
+        return new Supplier(searchMovie, rst.getString(2), rst.getString(3), rst.getString(4));
     }
 
-    public boolean deleteSupplier(String supplierId) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "DELETE FROM supplier WHERE supplierId = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1, supplierId);
-
-        return pstm.executeUpdate() > 0;
+    public boolean delete(String supplierId) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("DELETE FROM supplier WHERE supplierId = ?", supplierId);
     }
 
-    public boolean updateSupplier(SupplierDto dto) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "UPDATE supplier SET name = ?, address = ?, tele = ? WHERE supplierId = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1, dto.getName());
-        pstm.setString(2, dto.getAddress());
-        pstm.setString(3, dto.getTele());
-        pstm.setString(4, dto.getSupplierId());
-
-        return pstm.executeUpdate() > 0;
+    public boolean update(Supplier dto) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("UPDATE supplier SET name = ?, address = ?, tele = ? WHERE supplierId = ?",
+                dto.getName(), dto.getAddress(), dto.getTele(), dto.getSupplierId());
     }
 
-    public boolean saveSupplier(SupplierDto dto) throws SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "INSERT INTO supplier VALUES(?,?,?,?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        pstm.setString(1, dto.getSupplierId());
-        pstm.setString(2, dto.getName());
-        pstm.setString(3, dto.getAddress());
-        pstm.setString(4, dto.getTele());
-
-        boolean isSaved = pstm.executeUpdate() > 0;
-
-        return isSaved;
+    public boolean save(Supplier dto) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO supplier VALUES(?,?,?,?)",
+                dto.getSupplierId(),dto.getName(),dto.getAddress(),dto.getTele());
     }
 
-    public int getAvailableSuppliersCount() {
+    public int getAvailableSuppliersCount() throws SQLException, ClassNotFoundException {
         int count = 0;
+        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM supplier");
         try {
-            Connection connection = DbConnection.getInstance().getConnection();
-            String sql = "SELECT COUNT(*) FROM supplier";
-            try (PreparedStatement pstm = connection.prepareStatement(sql);
-                 ResultSet resultSet = pstm.executeQuery()) {
-
-                if (resultSet.next()) {
-                    count = resultSet.getInt(1);
-                }
+            if (rst.next()) {
+                count = rst.getInt(1);
             }
         } catch (SQLException e) {
             e.printStackTrace(); // Handle other SQLExceptions appropriately
         }
-        return count;
+
+//        try {
+//            Connection connection = DbConnection.getInstance().getConnection();
+//            String sql = "SELECT COUNT(*) FROM supplier";
+//            try (PreparedStatement pstm = connection.prepareStatement(sql);
+//                 ResultSet resultSet = pstm.executeQuery()) {
+//
+//                if (resultSet.next()) {
+//                    count = resultSet.getInt(1);
+//                }
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace(); // Handle other SQLExceptions appropriately
+//        }
+//        return count;
     }
 }

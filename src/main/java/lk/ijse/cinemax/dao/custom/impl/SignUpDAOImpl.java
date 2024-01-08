@@ -1,7 +1,10 @@
 package lk.ijse.cinemax.dao.custom.impl;
 
+import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.SignUpDAO;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.SignUpDto;
+import lk.ijse.cinemax.entity.SignUp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,44 +13,42 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SignUpDAOImpl {
-    public static List<SignUpDto> loadAllUserIds() throws  SQLException{
-        Connection connection = DbConnection.getInstance().getConnection();
+public class SignUpDAOImpl implements SignUpDAO {
+    public ArrayList<SignUp> loadAll() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM user");
+        ArrayList<SignUp> list = new ArrayList<>();
 
-        String sql = "SELECT * FROM user";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-
-        List<SignUpDto> dtoList = new ArrayList<>();
-
-        ResultSet resultSet = pstm.executeQuery();
-        while (resultSet.next()){
-            dtoList.add(new SignUpDto(
-                            resultSet.getString(1),
-                            resultSet.getString(2),
-                            resultSet.getString(3),
-                            resultSet.getString(4),
-                            resultSet.getString(5)
+        while (rst.next()){
+            list.add(new SignUp(
+                            rst.getString(1),
+                            rst.getString(2),
+                            rst.getString(3),
+                            rst.getString(4),
+                            rst.getString(5)
                     )
             );
         }
-        return dtoList;
+        return list;
     }
 
-    public boolean saveUser(SignUpDto dto) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    public boolean save(SignUp dto) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO user VALUES(?,?,?,?,?)",
+                dto.getUserId(),dto.getFristName(),dto.getLastName(),dto.getUserName(),dto.getPassword());
+    }
 
-        String sql = "INSERT INTO user VALUES(?,?,?,?,?)";
-        PreparedStatement pstm = connection.prepareStatement(sql);
+    @Override
+    public boolean update(SignUp dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 
-        pstm.setString(1, dto.getUserId());
-        pstm.setString(2, dto.getFristName());
-        pstm.setString(3, dto.getLastName());
-        pstm.setString(4, dto.getUserName());
-        pstm.setString(5, dto.getPassword());
+    @Override
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 
-        boolean isSaved = pstm.executeUpdate() > 0;
-
-        return isSaved;
+    @Override
+    public SignUp search(String id) throws SQLException, ClassNotFoundException {
+        return null;
     }
 
     public String getLastUserId() throws SQLException{

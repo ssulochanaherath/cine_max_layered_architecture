@@ -1,183 +1,146 @@
 package lk.ijse.cinemax.dao.custom.impl;
 
-import lk.ijse.cinemax.db.DbConnection;
+import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.TicketDAO;
 import lk.ijse.cinemax.dto.*;
+import lk.ijse.cinemax.entity.Customer;
+import lk.ijse.cinemax.entity.ShowTime;
+import lk.ijse.cinemax.entity.Ticket;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketDAOImpl {
+public class TicketDAOImpl implements TicketDAO {
     private SeatDAOImpl seatModel = new SeatDAOImpl();
-    public List<CustomerDto> loadAllCustomerIds() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM customer";
-        try (PreparedStatement pstm = connection.prepareStatement(sql);
-             ResultSet resultSet = pstm.executeQuery()) {
+    public ArrayList<Customer> loadAllCustomerIds() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM customer");
+        ArrayList<Customer> allCustomer = new ArrayList<>();
 
-            List<CustomerDto> customerDtoList = new ArrayList<>();
-
-            while (resultSet.next()) {
-                customerDtoList.add(new CustomerDto(
-                        resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6)
-                ));
-            }
-
-            return customerDtoList;
+        while (rst.next()){
+            allCustomer.add(new Customer(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6)
+            ));
         }
+        return allCustomer;
     }
 
-    public List<MovieDto> loadAllMovieIds() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM movie";
-        try (PreparedStatement pstm = connection.prepareStatement(sql);
-             ResultSet resultSet = pstm.executeQuery()) {
+    public ArrayList<MovieDto> loadAllMovieIds() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM movie");
+        ArrayList<MovieDto> allMovie = new ArrayList<>();
 
-            List<MovieDto> movieDtoList = new ArrayList<>();
-
-            while (resultSet.next()) {
-                movieDtoList.add(new MovieDto(
-                        resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6)
-                ));
-            }
-
-            return movieDtoList;
+        while (rst.next()){
+            allMovie.add(new MovieDto(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6)
+            ));
         }
+        return allMovie;
     }
 
-    public List<SeatDto> loadAllSeatNos() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-        String sql = "SELECT * FROM seats WHERE status = 'available'";
-        try (PreparedStatement pstm = connection.prepareStatement(sql);
-             ResultSet resultSet = pstm.executeQuery()) {
+    public ArrayList<SeatDto> loadAllSeatNos() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM seats");
+        ArrayList<SeatDto> allSeat = new ArrayList<>();
 
-            List<SeatDto> seatsList = new ArrayList<>();
-
-            while (resultSet.next()) {
-                seatsList.add(new SeatDto(
-                        resultSet.getString(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5)
-                ));
-            }
-
-            return seatsList;
+        while (rst.next()){
+            allSeat.add(new SeatDto(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5)
+            ));
         }
+        return allSeat;
     }
 
 
-    public List<TicketDto> loadAllTickets() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "SELECT * FROM tickets";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
-
-        ArrayList<TicketDto> ticketDtoList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            ticketDtoList.add(
-                    new TicketDto(
-                            resultSet.getString(1),
-                            resultSet.getString(2),
-                            resultSet.getString(3),
-                            resultSet.getString(4),
-                            resultSet.getString(5),
-                            resultSet.getString(6)
-                    )
-            );
-        }
-        return ticketDtoList;
+    @Override
+    public boolean save(Ticket dto) throws SQLException, ClassNotFoundException {
+        return false;
     }
 
-    public String getLastTicketId() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    @Override
+    public boolean update(Ticket dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 
-        String query = "SELECT ticketId FROM tickets ORDER BY ticketId DESC LIMIT 1";
+    @Override
+    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+        return false;
+    }
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+    @Override
+    public Ticket search(String id) throws SQLException, ClassNotFoundException {
+        return null;
+    }
 
-            if (resultSet.next()) {
-                return resultSet.getString("ticketId");
-            } else {
-                // If no ticket has been generated yet, return an empty string
-                return "";
-            }
+    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM tickets");
+        ArrayList<Ticket> tickets = new ArrayList<>();
+
+        while(rst.next()){
+            tickets.add(new Ticket(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5),
+                    rst.getString(6)
+            ));
+        }
+        return tickets;
+    }
+
+    public String getLastTicketId() throws SQLException, ClassNotFoundException {
+        ResultSet rst =  SQLUtil.execute("SELECT ticketId FROM tickets ORDER BY ticketId DESC LIMIT 1");
+
+        if (rst.next()){
+            return rst.getString(1);
+        } else {
+            // If no ticket has been generated yet, return an empty string
+            return "";
         }
     }
 
-    public List<ShowTimeDto> loadAllShowtimeIds() throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
+    public ArrayList<ShowTime> loadAllShowtimeIds() throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT * FROM showtime");
+        ArrayList<ShowTime> showtimeDtoList = new ArrayList<>();
 
-        String sql = "SELECT * FROM showtime";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        ResultSet resultSet = pstm.executeQuery();
-
-        ArrayList<ShowTimeDto> showtimeDtoList = new ArrayList<>();
-
-        while (resultSet.next()) {
-            showtimeDtoList.add(
-                    new ShowTimeDto(
-                            resultSet.getString(1),
-                            resultSet.getString(2),
-                            resultSet.getString(3)
-                    )
-            );
+        while (rst.next()){
+            showtimeDtoList.add(new ShowTime(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3)
+            ));
         }
         return showtimeDtoList;
-
     }
 
-    public boolean saveTicket(Connection connection, TicketDto ticketDto) throws SQLException {
-
-        // Now, execute the SQL query within the provided connection
-        try (PreparedStatement statement = connection.prepareStatement("INSERT INTO tickets (ticketId, customerId, movieId, seatId, showTimeID, price) VALUES (?, ?, ?, ?, ?, ?)")) {
-            // Set the parameters
-            statement.setString(1, ticketDto.getTicketId());
-            statement.setString(2, ticketDto.getCustomerId());
-            statement.setString(3, ticketDto.getMovieId());
-            statement.setString(4, ticketDto.getSeatNo());
-            statement.setString(5, ticketDto.getShowTimeID());
-            statement.setString(6, ticketDto.getPrice());
-
-            // Execute the query
-            statement.executeUpdate();
-
-            return true;
-        }
+    public boolean save(Connection connection, Ticket ticket) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("INSERT INTO tickets (ticketId, customerId, movieId, seatId, showTimeID, price) VALUES (?, ?, ?, ?, ?, ?)",
+                ticket.getTicketId(), ticket.getCustomerId(), ticket.getMovieId(), ticket.getSeatNo(), ticket.getShowTimeID(), ticket.getPrice());
     }
 
-    public String getCustomerEmail(String selectedCustomerId) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-        String query = "SELECT email FROM customer WHERE customerId = ?";
+    public String getCustomerEmail(String selectedCustomerId) throws SQLException, ClassNotFoundException {
+        ResultSet rst = SQLUtil.execute("SELECT email FROM customer WHERE customerId = ?", selectedCustomerId);
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, selectedCustomerId);
-
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
-                    return resultSet.getString("email");
-                } else {
-                    // If no customer with the specified ID is found, return an empty string
-                    return "";
-                }
-            }
+        if (rst.next()){
+            return rst.getString("email");
+        } else {
+            // If no customer with the specified ID is found, return an empty string
+            return "";
         }
     }
 }
