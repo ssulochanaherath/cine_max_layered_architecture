@@ -71,6 +71,7 @@ public class SupplierDAOImpl implements SupplierDAO {
         } catch (SQLException e) {
             e.printStackTrace(); // Handle other SQLExceptions appropriately
         }
+        return count;
 
 //        try {
 //            Connection connection = DbConnection.getInstance().getConnection();
