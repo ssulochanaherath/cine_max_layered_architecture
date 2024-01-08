@@ -4,7 +4,6 @@ import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.ItemDAO;
 import lk.ijse.cinemax.dto.tm.CartTm;
 import lk.ijse.cinemax.entity.Item;
-import lk.ijse.cinemax.entity.Movie;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,7 +33,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
 
-    public Movie search(String code) throws SQLException, ClassNotFoundException {
+    public Item search(String code) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM item WHERE code = ?", code);
         rst.next();
         return new Item(

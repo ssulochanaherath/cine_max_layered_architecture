@@ -2,8 +2,8 @@ package lk.ijse.cinemax.dao.custom;
 
 import lk.ijse.cinemax.dao.CrudDAO;
 import lk.ijse.cinemax.dto.LoginDto;
+import lk.ijse.cinemax.entity.Item;
 import lk.ijse.cinemax.entity.Login;
-import lk.ijse.cinemax.entity.Movie;
 import lk.ijse.cinemax.entity.SignUp;
 
 import java.sql.SQLException;
@@ -19,7 +19,7 @@ public interface LoginDAO extends CrudDAO<Login> {
 
     boolean delete(String id) throws SQLException, ClassNotFoundException;
 
-    Movie search(String id) throws SQLException, ClassNotFoundException;
+    Item search(String id) throws SQLException, ClassNotFoundException;
 
     ArrayList<Login> loadAll() throws SQLException, ClassNotFoundException;
 
