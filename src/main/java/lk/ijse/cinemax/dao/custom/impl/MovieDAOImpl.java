@@ -4,7 +4,7 @@ import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.MovieDAO;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.MovieDto;
-import lk.ijse.cinemax.entity.Item;
+import lk.ijse.cinemax.entity.Customer;
 import lk.ijse.cinemax.entity.Movie;
 
 import java.sql.*;
@@ -55,7 +55,7 @@ public class MovieDAOImpl implements MovieDAO {
                 dto.getMovieName(),dto.getMovieGenre(),dto.getYear(),dto.getImagePath(),dto.getDescription(),dto.getMovieId());
     }
 
-    public Item search(String searchMovie) throws SQLException, ClassNotFoundException {
+    public Movie search(String searchMovie) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM movie WHERE movieId = ?", searchMovie);
         rst.next();
         return new Movie(searchMovie, rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getString(6));

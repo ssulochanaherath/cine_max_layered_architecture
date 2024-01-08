@@ -1,6 +1,6 @@
 package lk.ijse.cinemax.dao;
 
-import lk.ijse.cinemax.entity.Item;
+import lk.ijse.cinemax.entity.Customer;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public interface CrudDAO<T> extends SuperDAO {
 
     boolean delete(String id) throws SQLException, ClassNotFoundException;
 
-    Item search(String id) throws SQLException, ClassNotFoundException;
+    T search(String id) throws SQLException, ClassNotFoundException;
 
     ArrayList<T> loadAll() throws SQLException, ClassNotFoundException;
 

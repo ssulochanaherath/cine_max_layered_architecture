@@ -3,6 +3,7 @@ package lk.ijse.cinemax.dao.custom.impl;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.ItemDAO;
 import lk.ijse.cinemax.dto.tm.CartTm;
+import lk.ijse.cinemax.entity.Customer;
 import lk.ijse.cinemax.entity.Item;
 
 import java.sql.ResultSet;

@@ -3,7 +3,6 @@ package lk.ijse.cinemax.dao.custom.impl;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.PlaceOrderDAO;
 import lk.ijse.cinemax.dto.tm.CartTm;
-import lk.ijse.cinemax.entity.Item;
 import lk.ijse.cinemax.entity.PlaceOrder;
 
 import java.sql.SQLException;
@@ -41,7 +40,7 @@ public class OrderDetailDAOImpl implements PlaceOrderDAO {
     }
 
     @Override
-    public Item search(String id) throws SQLException, ClassNotFoundException {
+    public PlaceOrder search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 

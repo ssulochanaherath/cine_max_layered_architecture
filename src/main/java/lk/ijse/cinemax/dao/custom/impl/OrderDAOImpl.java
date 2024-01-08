@@ -3,7 +3,6 @@ package lk.ijse.cinemax.dao.custom.impl;
 import com.mysql.cj.x.protobuf.MysqlxCrud;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.OrderDAO;
-import lk.ijse.cinemax.entity.Item;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -54,7 +53,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public Item search(String id) throws SQLException, ClassNotFoundException {
+    public MysqlxCrud.Order search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
