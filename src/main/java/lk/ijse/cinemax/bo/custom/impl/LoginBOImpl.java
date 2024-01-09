@@ -1,5 +1,6 @@
 package lk.ijse.cinemax.bo.custom.impl;
 import lk.ijse.cinemax.bo.custom.LoginBO;
+import lk.ijse.cinemax.dao.DAOFactory;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.LoginDAO;
 import lk.ijse.cinemax.dto.LoginDto;
@@ -12,17 +13,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class LoginBOImpl implements LoginBO {
-    public LoginDto search(String userName, String password) throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("SELECT * FROM user WHERE userName = ? AND password = ?", userName, password);
-        if (rst.next()) {
-            LoginDto loginDto = new LoginDto();
-            loginDto.setUserName(rst.getString(1));
-            loginDto.setPassword(rst.getString(2));
 
-            return loginDto;
-        } else {
-            return null;
-        }
+    LoginDAO loginDAO = (LoginDAO) DAOFactory.getDaoFactory().getDao(DAOFactory.DAOTypes.LOGIN);
+    public LoginDto search(String userName, String password) throws SQLException, ClassNotFoundException {
+        LoginDto login = loginDAO.search(userName, password);
+        LoginDto loginDto = new LoginDto(
+                login.getUserName(),
+                login.getPassword()
+        );
+        return loginDto;
+
+//        ResultSet rst = SQLUtil.execute("SELECT * FROM user WHERE userName = ? AND password = ?", userName, password);
+//        if (rst.next()) {
+//            LoginDto loginDto = new LoginDto();
+//            loginDto.setUserName(rst.getString(1));
+//            loginDto.setPassword(rst.getString(2));
+//
+//            return loginDto;
+//        } else {
+//            return null;
+//        }
 
 //        Connection connection = DbConnection.getInstance().getConnection();
 //

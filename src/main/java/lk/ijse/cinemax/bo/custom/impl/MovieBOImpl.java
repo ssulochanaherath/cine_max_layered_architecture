@@ -1,6 +1,7 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
 import lk.ijse.cinemax.bo.custom.MovieBO;
+import lk.ijse.cinemax.dao.DAOFactory;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.MovieDAO;
 import lk.ijse.cinemax.db.DbConnection;
@@ -14,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MovieBOImpl implements MovieBO {
+
+    MovieDAO movieDAO = (MovieDAO) DAOFactory.getDaoFactory().getDao(DAOFactory.DAOTypes.MOVIE);
 
     public byte[] getImageData(String movieName) throws SQLException {
         Connection connection = DbConnection.getInstance().getConnection();
