@@ -1,7 +1,9 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
+import lk.ijse.cinemax.bo.custom.SeatBO;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.SeatDAO;
+import lk.ijse.cinemax.dto.SeatDto;
 import lk.ijse.cinemax.entity.Seat;
 
 import java.sql.Connection;
@@ -9,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SeatBOImpl implements SeatDAO {
+public class SeatBOImpl implements SeatBO {
 
     public boolean hideSeat(Connection connection, String seatId) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("UPDATE seats SET status = 'unavailable' WHERE seatId = ? AND status = 'available'", seatId);
@@ -53,27 +55,27 @@ public class SeatBOImpl implements SeatDAO {
     }
 
     @Override
-    public boolean save(Seat dto) throws SQLException, ClassNotFoundException {
+    public boolean saveSeats(SeatDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(Seat dto) throws SQLException, ClassNotFoundException {
+    public boolean updateSeats(SeatDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean deleteSeats(String id) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public Seat search(String id) throws SQLException, ClassNotFoundException {
+    public SeatDto searchSeats(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public ArrayList<Seat> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<SeatDto> loadAllSeats() throws SQLException, ClassNotFoundException {
         return null;
     }
 

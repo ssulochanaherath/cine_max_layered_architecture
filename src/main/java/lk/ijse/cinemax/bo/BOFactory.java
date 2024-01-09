@@ -1,27 +1,24 @@
 package lk.ijse.cinemax.bo;
 
-import lk.ijse.cinemax.bo.custom.impl.CustomerBOImpl;
-import lk.ijse.cinemax.bo.custom.impl.ItemBOImpl;
-import lk.ijse.cinemax.bo.custom.impl.LoginBOImpl;
-import lk.ijse.cinemax.bo.custom.impl.MovieBOImpl;
+import lk.ijse.cinemax.bo.custom.impl.*;
 
 public class BOFactory {
     private static BOFactory boFactory;
 
-    private BOFactory(){
+    private BOFactory() {
 
     }
 
-    public static BOFactory getBoFactory(){
+    public static BOFactory getBoFactory() {
         return (boFactory == null) ? boFactory = new BOFactory() : boFactory;
     }
 
-    public enum BOTypes{
-        CUSTOMER,ITEM,LOGIN,MOVIE,PLACEORDER,SEAT,SIGNUP,SUPPLIER,TICKET
+    public enum BOTypes {
+        CUSTOMER, ITEM, LOGIN, MOVIE, PLACEORDER, SEAT, SIGNUP, SUPPLIER, TICKET
     }
 
-    public SuperBO getBo(BOTypes boTypes){
-        switch (boTypes){
+    public SuperBO getBo(BOTypes boTypes) {
+        switch (boTypes) {
             case CUSTOMER:
                 return new CustomerBOImpl();
             case ITEM:
@@ -41,5 +38,7 @@ public class BOFactory {
             case TICKET:
                 return new TicketBOImpl();
             default:
+                return null;
+        }
     }
 }

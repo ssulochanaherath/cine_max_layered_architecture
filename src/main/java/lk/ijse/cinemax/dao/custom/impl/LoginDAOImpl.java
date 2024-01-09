@@ -2,9 +2,10 @@ package lk.ijse.cinemax.dao.custom.impl;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.LoginDAO;
 import lk.ijse.cinemax.dto.LoginDto;
-import lk.ijse.cinemax.entity.Customer;
+import lk.ijse.cinemax.dto.TicketDto;
 import lk.ijse.cinemax.entity.Login;
 import lk.ijse.cinemax.entity.SignUp;
+import lk.ijse.cinemax.entity.Ticket;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -60,12 +61,12 @@ public class LoginDAOImpl implements LoginDAO {
     }
 
     @Override
-    public Login search(String id) throws SQLException, ClassNotFoundException {
+    public TicketDto search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public ArrayList<Login> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 

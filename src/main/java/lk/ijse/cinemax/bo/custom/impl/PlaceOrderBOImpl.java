@@ -1,7 +1,8 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
-import lk.ijse.cinemax.dao.custom.PlaceOrderDAO;
+import lk.ijse.cinemax.bo.custom.PlaceOrderBO;
 import lk.ijse.cinemax.db.DbConnection;
+import lk.ijse.cinemax.dto.PlaceOrderDto;
 import lk.ijse.cinemax.entity.PlaceOrder;
 
 import java.sql.Connection;
@@ -9,16 +10,16 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class PlaceOrderBOImpl implements PlaceOrderDAO {
+public class PlaceOrderBOImpl implements PlaceOrderBO {
     private OrderBOImpl orderModel = new OrderBOImpl();
     private ItemBOImpl itemModel = new ItemBOImpl();
     private OrderDetailBOImpl orderDetailModel = new OrderDetailBOImpl();
-    public boolean placeOrder(PlaceOrder placeOrder) throws SQLException {
-        System.out.println(placeOrder);
+    public boolean placeOrder(PlaceOrderDto placeOrderDto) throws SQLException {
+        System.out.println(placeOrderDto);
 
-        String orderId = placeOrder.getOrderId();
-        String customerId = placeOrder.getCustomerId();
-        LocalDate date = placeOrder.getDate();
+        String orderId = placeOrderDto.getOrderId();
+        String customerId = placeOrderDto.getCustomerId();
+        LocalDate date = placeOrderDto.getDate();
 
         Connection connection = null;
         try {
@@ -27,9 +28,9 @@ public class PlaceOrderBOImpl implements PlaceOrderDAO {
 
             boolean isOrderSaved = orderModel.saveOrder(orderId, customerId, date);
             if (isOrderSaved) {
-                boolean isUpdated = itemModel.updateItem(placeOrder.getCartTmList());
+                boolean isUpdated = itemModel.updateItem(placeOrderDto.getCartTmList());
                 if (isUpdated) {
-                    boolean isOrderDetailSaved = orderDetailModel.saveOrderDetails(placeOrder.getOrderId(), placeOrder.getCartTmList());
+                    boolean isOrderDetailSaved = orderDetailModel.saveOrderDetails(placeOrderDto.getOrderId(), placeOrderDto.getCartTmList());
                     if (isOrderDetailSaved) {
                         connection.commit();
                     }
@@ -45,27 +46,27 @@ public class PlaceOrderBOImpl implements PlaceOrderDAO {
     }
 
     @Override
-    public boolean save(PlaceOrder dto) throws SQLException, ClassNotFoundException {
+    public boolean savePlaceOrder(PlaceOrderDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(PlaceOrder dto) throws SQLException, ClassNotFoundException {
+    public boolean updatePlaceOrder(PlaceOrderDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean deletePlaceOrder(String id) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public PlaceOrder search(String id) throws SQLException, ClassNotFoundException {
+    public PlaceOrderDto searchPlaceOrder(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public ArrayList<PlaceOrder> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<PlaceOrderDto> loadAllPlaceOrder() throws SQLException, ClassNotFoundException {
         return null;
     }
 }

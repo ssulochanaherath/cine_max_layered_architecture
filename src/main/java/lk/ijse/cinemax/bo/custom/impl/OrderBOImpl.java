@@ -1,15 +1,15 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud;
+import lk.ijse.cinemax.bo.custom.OrderBO;
 import lk.ijse.cinemax.dao.SQLUtil;
-import lk.ijse.cinemax.dao.custom.OrderDAO;
+import lk.ijse.cinemax.dto.PlaceOrderDto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class OrderBOImpl implements OrderDAO {
+public class OrderBOImpl implements OrderBO {
     public String getLastOrderId() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1");
 
@@ -22,7 +22,7 @@ public class OrderBOImpl implements OrderDAO {
     }
 
     @Override
-    public boolean save(String orderId, String customerId, LocalDate date) throws SQLException, ClassNotFoundException {
+    public boolean saveOrders(String orderId, String customerId, LocalDate date) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -39,27 +39,27 @@ public class OrderBOImpl implements OrderDAO {
     }
 
     @Override
-    public boolean save(MysqlxCrud.Order dto) throws SQLException, ClassNotFoundException {
+    public boolean saveOrders(PlaceOrderDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(MysqlxCrud.Order dto) throws SQLException, ClassNotFoundException {
+    public boolean updateOrders(PlaceOrderDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean deleteOrders(String id) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public MysqlxCrud.Order search(String id) throws SQLException, ClassNotFoundException {
+    public PlaceOrderDto searchOrders(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public ArrayList<MysqlxCrud.Order> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<PlaceOrderDto> loadAllOrders() throws SQLException, ClassNotFoundException {
         return null;
     }
 

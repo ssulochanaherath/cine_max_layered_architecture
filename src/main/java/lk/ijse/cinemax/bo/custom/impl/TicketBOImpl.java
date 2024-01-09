@@ -1,11 +1,10 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
+import lk.ijse.cinemax.bo.custom.TicketBO;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.TicketDAO;
-import lk.ijse.cinemax.dto.MovieDto;
-import lk.ijse.cinemax.dto.SeatDto;
+import lk.ijse.cinemax.dto.*;
 import lk.ijse.cinemax.entity.Customer;
-import lk.ijse.cinemax.entity.ShowTime;
 import lk.ijse.cinemax.entity.Ticket;
 
 import java.sql.Connection;
@@ -13,14 +12,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class TicketBOImpl implements TicketDAO {
+public class TicketBOImpl implements TicketBO {
     private SeatBOImpl seatModel = new SeatBOImpl();
-    public ArrayList<Customer> loadAllCustomerIds() throws SQLException, ClassNotFoundException {
+    public ArrayList<CustomerDto> loadAllCustomerIds() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM customer");
-        ArrayList<Customer> allCustomer = new ArrayList<>();
+        ArrayList<CustomerDto> allCustomer = new ArrayList<>();
 
         while (rst.next()){
-            allCustomer.add(new Customer(
+            allCustomer.add(new CustomerDto(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -67,31 +66,31 @@ public class TicketBOImpl implements TicketDAO {
 
 
     @Override
-    public boolean save(Ticket dto) throws SQLException, ClassNotFoundException {
+    public boolean saveTickets(TicketDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean update(Ticket dto) throws SQLException, ClassNotFoundException {
+    public boolean updateTickets(TicketDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public boolean delete(String id) throws SQLException, ClassNotFoundException {
+    public boolean deleteTickets(String id) throws SQLException, ClassNotFoundException {
         return false;
     }
 
     @Override
-    public Ticket search(String id) throws SQLException, ClassNotFoundException {
+    public TicketDto searchTickets(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
-    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<TicketDto> loadAllTickets() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM tickets");
-        ArrayList<Ticket> tickets = new ArrayList<>();
+        ArrayList<TicketDto> tickets = new ArrayList<>();
 
         while(rst.next()){
-            tickets.add(new Ticket(
+            tickets.add(new TicketDto(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3),
@@ -114,12 +113,12 @@ public class TicketBOImpl implements TicketDAO {
         }
     }
 
-    public ArrayList<ShowTime> loadAllShowtimeIds() throws SQLException, ClassNotFoundException {
+    public ArrayList<ShowTimeDto> loadAllShowtimeIds() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM showtime");
-        ArrayList<ShowTime> showtimeDtoList = new ArrayList<>();
+        ArrayList<ShowTimeDto> showtimeDtoList = new ArrayList<>();
 
         while (rst.next()){
-            showtimeDtoList.add(new ShowTime(
+            showtimeDtoList.add(new ShowTimeDto(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3)

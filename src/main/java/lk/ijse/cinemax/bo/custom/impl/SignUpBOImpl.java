@@ -1,8 +1,10 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
+import lk.ijse.cinemax.bo.custom.SignUpBO;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.SignUpDAO;
 import lk.ijse.cinemax.db.DbConnection;
+import lk.ijse.cinemax.dto.SignUpDto;
 import lk.ijse.cinemax.entity.SignUp;
 
 import java.sql.Connection;
@@ -11,13 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class SignUpBOImpl implements SignUpDAO {
-    public ArrayList<SignUp> loadAll() throws SQLException, ClassNotFoundException {
+public class SignUpBOImpl implements SignUpBO {
+    public ArrayList<SignUpDto> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM user");
-        ArrayList<SignUp> list = new ArrayList<>();
+        ArrayList<SignUpDto> list = new ArrayList<>();
 
         while (rst.next()){
-            list.add(new SignUp(
+            list.add(new SignUpDto(
                             rst.getString(1),
                             rst.getString(2),
                             rst.getString(3),
@@ -29,13 +31,13 @@ public class SignUpBOImpl implements SignUpDAO {
         return list;
     }
 
-    public boolean save(SignUp dto) throws SQLException, ClassNotFoundException {
+    public boolean save(SignUpDto dto) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("INSERT INTO user VALUES(?,?,?,?,?)",
                 dto.getUserId(),dto.getFristName(),dto.getLastName(),dto.getUserName(),dto.getPassword());
     }
 
     @Override
-    public boolean update(SignUp dto) throws SQLException, ClassNotFoundException {
+    public boolean update(SignUpDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 
@@ -45,7 +47,7 @@ public class SignUpBOImpl implements SignUpDAO {
     }
 
     @Override
-    public SignUp search(String id) throws SQLException, ClassNotFoundException {
+    public SignUpDto search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 

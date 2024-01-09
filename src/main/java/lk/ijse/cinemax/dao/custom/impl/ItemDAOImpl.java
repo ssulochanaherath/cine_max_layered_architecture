@@ -2,9 +2,10 @@ package lk.ijse.cinemax.dao.custom.impl;
 
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.ItemDAO;
+import lk.ijse.cinemax.dto.TicketDto;
 import lk.ijse.cinemax.dto.tm.CartTm;
-import lk.ijse.cinemax.entity.Customer;
 import lk.ijse.cinemax.entity.Item;
+import lk.ijse.cinemax.entity.Ticket;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
 
-    public ArrayList<Item> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM item");
         ArrayList<Item> itemList = new ArrayList<>();
 
@@ -34,7 +35,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
 
-    public Item search(String code) throws SQLException, ClassNotFoundException {
+    public TicketDto search(String code) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM item WHERE code = ?", code);
         rst.next();
         return new Item(

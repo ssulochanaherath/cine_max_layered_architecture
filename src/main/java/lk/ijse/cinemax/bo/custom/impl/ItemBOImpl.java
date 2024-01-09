@@ -1,6 +1,7 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
 import lk.ijse.cinemax.bo.custom.ItemBO;
+import lk.ijse.cinemax.dao.DAOFactory;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.ItemDAO;
 import lk.ijse.cinemax.dto.ItemDto;
@@ -13,45 +14,30 @@ import java.util.ArrayList;
 
 public class ItemBOImpl implements ItemBO {
 
-
+    ItemDAO itemDao = (ItemDAO) DAOFactory.getDaoFactory().getDao(DAOFactory.DAOTypes.ITEM);
     public ArrayList<ItemDto> loadAllItem() throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("SELECT * FROM item");
-        ArrayList<ItemDto> itemList = new ArrayList<>();
-
-        while(rst.next()){
-            itemList.add(new ItemDto(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getDouble(3),
-                    rst.getInt(4)
-            ));
+        ArrayList<Item> items = itemDao.loadAll();
+        ArrayList<ItemDto> itemDtos = new ArrayList<>();
+        for (Item item : items) {
+            itemDtos.add(new ItemDto(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand()));
         }
-        return itemList;
+        return itemDtos;
     }
 
 
     public ItemDto searchItem(String code) throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("SELECT * FROM item WHERE code = ?", code);
-        rst.next();
-        return new ItemDto(
-                rst.getString(1),
-                rst.getString(2),
-                rst.getDouble(3),
-                rst.getInt(4)
-        );
+        Item item = itemDao.search(code);
+        ItemDto itemDto = new ItemDto(item.getCode(), item.getDescription(), item.getUnitPrice(), item.getQtyOnHand());
+        return itemDto;
     }
 
     @Override
     public boolean saveItem(ItemDto dto) throws SQLException, ClassNotFoundException {
-        boolean isSaved = SQLUtil.execute("INSERT INTO item VALUES(?,?,?,?)",
-                dto.getCode(),dto.getDescription(),dto.getUnitPrice(),dto.getQtyOnHand());
-        return isSaved;
+        return itemDao.save(new Item(dto.getCode(), dto.getDescription(), dto.getUnitPrice(), dto.getQtyOnHand()));
     }
 
     public boolean updateItem(ItemDto itemDto) throws SQLException, ClassNotFoundException {
-        boolean isUpdated = SQLUtil.execute("UPDATE item SET description = ?, unit_price = ?, qty_on_hand = ? WHERE code = ?",
-                itemDto.getDescription(),itemDto.getUnitPrice(),itemDto.getQtyOnHand(),itemDto.getCode());
-        return isUpdated;
+        return itemDao.update(new Item(itemDto.getCode(), itemDto.getDescription(), itemDto.getUnitPrice(), itemDto.getQtyOnHand()));
     }
 
     public boolean updateItem(ArrayList<CartTm> cartTmList) throws SQLException, ClassNotFoundException {
@@ -66,8 +52,7 @@ public class ItemBOImpl implements ItemBO {
 
     @Override
     public boolean updateQtyItem(String code, int qty) throws SQLException, ClassNotFoundException {
-        boolean isUpdated = SQLUtil.execute("UPDATE item SET qty_on_hand = qty_on_hand - ? WHERE code = ?", qty, code);
-        return isUpdated;
+        return itemDao.updateQty(code, qty);
     }
 
     public String generateFoodId() throws SQLException, ClassNotFoundException {
@@ -99,12 +84,11 @@ public class ItemBOImpl implements ItemBO {
     }
 
     public boolean deleteItem(String code) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("DELETE FROM item WHERE code = ?", code);
+        return itemDao.delete(code);
     }
 
     public String getItemInfo(String column, String itemCode) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("SELECT " + column + " FROM item WHERE code = ?", itemCode);
-
+        return itemDao.getItemInfo(column, itemCode);
 
 //        String value = null;
 //        try {

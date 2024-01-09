@@ -3,15 +3,12 @@ package lk.ijse.cinemax.dao.custom.impl;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.TicketDAO;
 import lk.ijse.cinemax.dto.*;
-import lk.ijse.cinemax.entity.Customer;
-import lk.ijse.cinemax.entity.ShowTime;
-import lk.ijse.cinemax.entity.Ticket;
+import lk.ijse.cinemax.entity.*;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TicketDAOImpl implements TicketDAO {
     private SeatDAOImpl seatModel = new SeatDAOImpl();
@@ -67,6 +64,16 @@ public class TicketDAOImpl implements TicketDAO {
 
 
     @Override
+    public boolean save(TicketDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
+    public boolean update(TicketDto dto) throws SQLException, ClassNotFoundException {
+        return false;
+    }
+
+    @Override
     public boolean save(Ticket dto) throws SQLException, ClassNotFoundException {
         return false;
     }
@@ -82,7 +89,7 @@ public class TicketDAOImpl implements TicketDAO {
     }
 
     @Override
-    public Ticket search(String id) throws SQLException, ClassNotFoundException {
+    public TicketDto search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
@@ -114,12 +121,12 @@ public class TicketDAOImpl implements TicketDAO {
         }
     }
 
-    public ArrayList<ShowTime> loadAllShowtimeIds() throws SQLException, ClassNotFoundException {
+    public ArrayList<ShowTimeDto> loadAllShowtimeIds() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM showtime");
-        ArrayList<ShowTime> showtimeDtoList = new ArrayList<>();
+        ArrayList<ShowTimeDto> showtimeDtoList = new ArrayList<>();
 
         while (rst.next()){
-            showtimeDtoList.add(new ShowTime(
+            showtimeDtoList.add(new ShowTimeDto(
                     rst.getString(1),
                     rst.getString(2),
                     rst.getString(3)

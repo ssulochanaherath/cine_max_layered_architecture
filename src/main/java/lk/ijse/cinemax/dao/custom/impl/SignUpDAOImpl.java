@@ -3,18 +3,18 @@ package lk.ijse.cinemax.dao.custom.impl;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.SignUpDAO;
 import lk.ijse.cinemax.db.DbConnection;
-import lk.ijse.cinemax.dto.SignUpDto;
+import lk.ijse.cinemax.dto.TicketDto;
 import lk.ijse.cinemax.entity.SignUp;
+import lk.ijse.cinemax.entity.Ticket;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SignUpDAOImpl implements SignUpDAO {
-    public ArrayList<SignUp> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM user");
         ArrayList<SignUp> list = new ArrayList<>();
 
@@ -47,7 +47,7 @@ public class SignUpDAOImpl implements SignUpDAO {
     }
 
     @Override
-    public SignUp search(String id) throws SQLException, ClassNotFoundException {
+    public TicketDto search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
