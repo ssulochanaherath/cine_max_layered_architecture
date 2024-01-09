@@ -12,7 +12,7 @@ public class PlaceOrder {
     private String customerId;
     private List<CartTm> cartTmList = new ArrayList<>();
 
-    public PlaceOrder() {
+    public PlaceOrder(String orderId, String code, int qty, double unitPrice) {
     }
 
     public PlaceOrder(String orderId, LocalDate date, String customerId, List<CartTm> cartTmList) {

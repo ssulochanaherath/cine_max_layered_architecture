@@ -1,7 +1,9 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
 import lk.ijse.cinemax.bo.custom.OrderDetailBO;
+import lk.ijse.cinemax.dao.DAOFactory;
 import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.PlaceOrderDAO;
 import lk.ijse.cinemax.dto.PlaceOrderDto;
 import lk.ijse.cinemax.dto.tm.CartTm;
 import lk.ijse.cinemax.entity.PlaceOrder;
@@ -11,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailBOImpl implements OrderDetailBO {
+
+    PlaceOrderDAO placeOrderDAO = (PlaceOrderDAO) DAOFactory.getDaoFactory().getDao(DAOFactory.DAOTypes.PLACEORDER);
     public boolean saveOrderDetails(String orderId, List<CartTm> cartTmList) throws SQLException, ClassNotFoundException {
         for(CartTm tm : cartTmList) {
             if(!saveOrderDetails(orderId, tm)) {
@@ -21,8 +25,14 @@ public class OrderDetailBOImpl implements OrderDetailBO {
     }
 
     public boolean saveOrderDetails(String orderId, CartTm tm) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("INSERT INTO order_detail VALUES(?, ?, ?, ?)",
-                orderId, tm.getCode(), tm.getQty(), tm.getUnitPrice());
+        return placeOrderDAO.save(new PlaceOrder(
+                orderId,
+                tm.getCode(),
+                tm.getQty(),
+                tm.getUnitPrice()
+        ));
+//        return SQLUtil.execute("INSERT INTO order_detail VALUES(?, ?, ?, ?)",
+//                orderId, tm.getCode(), tm.getQty(), tm.getUnitPrice());
     }
 
     public boolean saveOrderDetails(PlaceOrderDto dto) throws SQLException, ClassNotFoundException {

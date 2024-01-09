@@ -1,6 +1,7 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
 import lk.ijse.cinemax.bo.custom.SeatBO;
+import lk.ijse.cinemax.dao.DAOFactory;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.SeatDAO;
 import lk.ijse.cinemax.dto.SeatDto;
@@ -13,10 +14,13 @@ import java.util.ArrayList;
 
 public class SeatBOImpl implements SeatBO {
 
-    public boolean hideSeat(Connection connection, String seatId) throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("UPDATE seats SET status = 'unavailable' WHERE seatId = ? AND status = 'available'", seatId);
+    SeatDAO seatDAO = (SeatDAO) DAOFactory.getDaoFactory().getDao(DAOFactory.DAOTypes.SEAT);
 
-        return rst.next();
+    public boolean hideSeat(Connection connection, String seatId) throws SQLException, ClassNotFoundException {
+        return seatDAO.hideSeat(connection, seatId);
+//        ResultSet rst = SQLUtil.execute("UPDATE seats SET status = 'unavailable' WHERE seatId = ? AND status = 'available'", seatId);
+//
+//        return rst.next();
 
 
 //        String query = "UPDATE seats SET status = 'unavailable' WHERE seatId = ? AND status = 'available'";
@@ -30,12 +34,13 @@ public class SeatBOImpl implements SeatBO {
     }
 
     public int getAvailableSeatsCount() throws SQLException, ClassNotFoundException {
-        int count = 0;
-        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM seats WHERE status = 'available'");
-        if (rst.next()) {
-            count = rst.getInt(1);
-        }
-        return count;
+        return seatDAO.getAvailableSeatsCount();
+//        int count = 0;
+//        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM seats WHERE status = 'available'");
+//        if (rst.next()) {
+//            count = rst.getInt(1);
+//        }
+//        return count;
 
 //        int count = 0;
 //        try {
