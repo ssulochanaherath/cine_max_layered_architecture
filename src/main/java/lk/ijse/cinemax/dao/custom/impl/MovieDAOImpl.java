@@ -11,20 +11,21 @@ import java.util.ArrayList;
 
 public class MovieDAOImpl implements MovieDAO {
 
-    public static byte[] getImageData(String movieName) throws SQLException {
-        Connection connection = DbConnection.getInstance().getConnection();
-
-        String sql = "SELECT image FROM movie WHERE movieName = ?";
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        pstm.setString(1, movieName);
-
-        ResultSet resultSet = pstm.executeQuery();
-
-        if (resultSet.next()) {
-            return resultSet.getBytes(1);
-        }
-
-        return null;
+    public byte[] getImageData(String movieName) throws SQLException, ClassNotFoundException {
+        return SQLUtil.execute("SELECT image FROM movie WHERE movieName = ?", movieName);
+//        Connection connection = DbConnection.getInstance().getConnection();
+//
+//        String sql = "SELECT image FROM movie WHERE movieName = ?";
+//        PreparedStatement pstm = connection.prepareStatement(sql);
+//        pstm.setString(1, movieName);
+//
+//        ResultSet resultSet = pstm.executeQuery();
+//
+//        if (resultSet.next()) {
+//            return resultSet.getBytes(1);
+//        }
+//
+//        return null;
     }
 
     public boolean save(Movie dto) throws SQLException, ClassNotFoundException {

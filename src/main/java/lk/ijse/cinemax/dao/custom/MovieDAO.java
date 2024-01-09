@@ -12,4 +12,6 @@ public interface MovieDAO extends CrudDAO<Movie> {
     MovieDto getMovieName(String movieName) throws SQLException, ClassNotFoundException;
 
     int getAvailableMoviesCount() throws SQLException, ClassNotFoundException;
+
+    byte[] getImageData(String movieName) throws SQLException, ClassNotFoundException;
 }

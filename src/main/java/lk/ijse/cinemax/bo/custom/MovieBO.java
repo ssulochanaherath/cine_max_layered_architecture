@@ -19,7 +19,7 @@ public interface MovieBO extends SuperBO {
 
     ArrayList<MovieDto> loadAllMovies() throws SQLException, ClassNotFoundException;
 
-    byte[] getImageData(String movieName) throws SQLException;
+    byte[] getImageData(String movieName) throws SQLException, ClassNotFoundException;
 
     public String generateMovieId() throws SQLException, ClassNotFoundException;
 
