@@ -1,7 +1,9 @@
 package lk.ijse.cinemax.bo.custom.impl;
 
 import lk.ijse.cinemax.bo.custom.OrderBO;
+import lk.ijse.cinemax.dao.DAOFactory;
 import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.OrderDAO;
 import lk.ijse.cinemax.dto.PlaceOrderDto;
 
 import java.sql.ResultSet;
@@ -10,15 +12,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class OrderBOImpl implements OrderBO {
-    public String getLastOrderId() throws SQLException, ClassNotFoundException {
-        ResultSet rst = SQLUtil.execute("SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1");
 
-        if (rst.next()) {
-            return rst.getString(1);
-        } else {
-            // If no customer has been generated yet, return an empty string
-            return "";
-        }
+    OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDao(DAOFactory.DAOTypes.PLACEORDER);
+
+    public String getLastOrderId() throws SQLException, ClassNotFoundException {
+        return orderDAO.getLastOrderId();
+
+//        ResultSet rst = SQLUtil.execute("SELECT order_id FROM orders ORDER BY order_id DESC LIMIT 1");
+//
+//        if (rst.next()) {
+//            return rst.getString(1);
+//        } else {
+//            // If no customer has been generated yet, return an empty string
+//            return "";
+//        }
     }
 
     @Override
@@ -64,7 +71,8 @@ public class OrderBOImpl implements OrderBO {
     }
 
     public boolean saveOrder(String orderId, String customerId, LocalDate date) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("INSERT INTO orders VALUES(?, ?, ?)",
-                orderId, customerId, date);
+        return orderDAO.save(orderId, customerId, date);
+//        return SQLUtil.execute("INSERT INTO orders VALUES(?, ?, ?)",
+//                orderId, customerId, date);
     }
 }
