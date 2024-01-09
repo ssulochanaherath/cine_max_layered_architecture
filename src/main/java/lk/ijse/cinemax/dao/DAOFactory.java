@@ -1,5 +1,6 @@
 package lk.ijse.cinemax.dao;
 
+import lk.ijse.cinemax.dao.custom.CustomerDAO;
 import lk.ijse.cinemax.dao.custom.impl.*;
 
 public class DAOFactory {
