@@ -4,9 +4,8 @@ import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.MovieDAO;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.MovieDto;
-import lk.ijse.cinemax.dto.TicketDto;
 import lk.ijse.cinemax.entity.Movie;
-import lk.ijse.cinemax.entity.Ticket;
+import lk.ijse.cinemax.entity.Supplier;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class MovieDAOImpl implements MovieDAO {
                 dto.getMovieId(),dto.getMovieName(),dto.getMovieGenre(),dto.getYear(),dto.getImagePath(),dto.getDescription());
     }
 
-    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Supplier> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM movie");
         ArrayList<Movie> allMovie = new ArrayList<>();
 
@@ -56,7 +55,7 @@ public class MovieDAOImpl implements MovieDAO {
                 dto.getMovieName(),dto.getMovieGenre(),dto.getYear(),dto.getImagePath(),dto.getDescription(),dto.getMovieId());
     }
 
-    public TicketDto search(String searchMovie) throws SQLException, ClassNotFoundException {
+    public Supplier search(String searchMovie) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM movie WHERE movieId = ?", searchMovie);
         rst.next();
         return new Movie(searchMovie, rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getString(6));

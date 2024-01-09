@@ -2,9 +2,8 @@ package lk.ijse.cinemax.dao.custom.impl;
 
 import lk.ijse.cinemax.dao.custom.PlaceOrderDAO;
 import lk.ijse.cinemax.db.DbConnection;
-import lk.ijse.cinemax.dto.TicketDto;
 import lk.ijse.cinemax.entity.PlaceOrder;
-import lk.ijse.cinemax.entity.Ticket;
+import lk.ijse.cinemax.entity.Supplier;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -62,12 +61,12 @@ public class PlaceOrderDAOImpl implements PlaceOrderDAO {
     }
 
     @Override
-    public TicketDto search(String id) throws SQLException, ClassNotFoundException {
+    public Supplier search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Supplier> loadAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 }

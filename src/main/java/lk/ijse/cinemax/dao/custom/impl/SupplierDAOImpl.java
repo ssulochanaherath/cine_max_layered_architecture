@@ -2,9 +2,7 @@ package lk.ijse.cinemax.dao.custom.impl;
 
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.SupplierDAO;
-import lk.ijse.cinemax.dto.TicketDto;
 import lk.ijse.cinemax.entity.Supplier;
-import lk.ijse.cinemax.entity.Ticket;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +21,7 @@ public class SupplierDAOImpl implements SupplierDAO {
         }
     }
 
-    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Supplier> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM supplier");
         ArrayList<Supplier> suppliers = new ArrayList<>();
 
@@ -38,7 +36,7 @@ public class SupplierDAOImpl implements SupplierDAO {
         return suppliers;
     }
 
-    public TicketDto search(String searchMovie) throws SQLException, ClassNotFoundException {
+    public Supplier search(String searchMovie) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM supplier WHERE supplierId = ?", searchMovie);
         rst.next();
         return new Supplier(searchMovie, rst.getString(2), rst.getString(3), rst.getString(4));

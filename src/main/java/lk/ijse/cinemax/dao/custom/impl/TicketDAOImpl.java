@@ -89,11 +89,11 @@ public class TicketDAOImpl implements TicketDAO {
     }
 
     @Override
-    public TicketDto search(String id) throws SQLException, ClassNotFoundException {
+    public Supplier search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
-    public ArrayList<Ticket> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Supplier> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM tickets");
         ArrayList<Ticket> tickets = new ArrayList<>();
 
