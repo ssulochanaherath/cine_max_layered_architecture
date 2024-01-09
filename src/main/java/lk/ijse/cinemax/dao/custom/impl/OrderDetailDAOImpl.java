@@ -1,6 +1,7 @@
 package lk.ijse.cinemax.dao.custom.impl;
 
 import lk.ijse.cinemax.dao.SQLUtil;
+import lk.ijse.cinemax.dao.custom.OrderDetailDAO;
 import lk.ijse.cinemax.dao.custom.PlaceOrderDAO;
 import lk.ijse.cinemax.dto.tm.CartTm;
 import lk.ijse.cinemax.entity.PlaceOrder;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetailDAOImpl implements PlaceOrderDAO {
+public class OrderDetailDAOImpl implements OrderDetailDAO {
     public boolean saveOrderDetails(String orderId, List<CartTm> cartTmList) throws SQLException, ClassNotFoundException {
         for(CartTm tm : cartTmList) {
             if(!saveOrderDetails(orderId, tm)) {
@@ -19,7 +20,7 @@ public class OrderDetailDAOImpl implements PlaceOrderDAO {
         return true;
     }
 
-    private boolean saveOrderDetails(String orderId, CartTm tm) throws SQLException, ClassNotFoundException {
+    public boolean saveOrderDetails(String orderId, CartTm tm) throws SQLException, ClassNotFoundException {
         return SQLUtil.execute("INSERT INTO order_detail VALUES(?, ?, ?, ?)",
                 orderId, tm.getCode(), tm.getQty(), tm.getUnitPrice());
     }

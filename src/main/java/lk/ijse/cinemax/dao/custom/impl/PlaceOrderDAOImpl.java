@@ -14,12 +14,12 @@ public class PlaceOrderDAOImpl implements PlaceOrderDAO {
     private OrderDAOImpl orderModel = new OrderDAOImpl();
     private ItemDAOImpl itemModel = new ItemDAOImpl();
     private OrderDetailDAOImpl orderDetailModel = new OrderDetailDAOImpl();
-    public boolean placeOrder(PlaceOrderDto placeOrderDto) throws SQLException {
-        System.out.println(placeOrderDto);
+    public boolean placeOrder(PlaceOrder placeOrder) throws SQLException {
+        System.out.println(placeOrder);
 
-        String orderId = placeOrderDto.getOrderId();
-        String customerId = placeOrderDto.getCustomerId();
-        LocalDate date = placeOrderDto.getDate();
+        String orderId = placeOrder.getOrderId();
+        String customerId = placeOrder.getCustomerId();
+        LocalDate date = placeOrder.getDate();
 
         Connection connection = null;
         try {
@@ -28,9 +28,9 @@ public class PlaceOrderDAOImpl implements PlaceOrderDAO {
 
             boolean isOrderSaved = orderModel.saveOrder(orderId, customerId, date);
             if (isOrderSaved) {
-                boolean isUpdated = itemModel.updateItem(placeOrderDto.getCartTmList());
+                boolean isUpdated = itemModel.updateItem(placeOrder.getCartTmList());
                 if (isUpdated) {
-                    boolean isOrderDetailSaved = orderDetailModel.saveOrderDetails(placeOrderDto.getOrderId(), placeOrderDto.getCartTmList());
+                    boolean isOrderDetailSaved = orderDetailModel.saveOrderDetails(placeOrder.getOrderId(), placeOrder.getCartTmList());
                     if (isOrderDetailSaved) {
                         connection.commit();
                     }

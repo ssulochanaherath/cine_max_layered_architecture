@@ -46,8 +46,8 @@ public class PlaceOrder {
         this.customerId = customerId;
     }
 
-    public List<CartTm> getCartTmList() {
-        return cartTmList;
+    public ArrayList<CartTm> getCartTmList() {
+        return (ArrayList<CartTm>) cartTmList;
     }
 
     public void setCartTmList(List<CartTm> cartTmList) {
