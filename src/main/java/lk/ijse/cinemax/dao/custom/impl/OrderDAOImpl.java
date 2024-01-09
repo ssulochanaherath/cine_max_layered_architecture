@@ -4,7 +4,6 @@ import com.mysql.cj.x.protobuf.MysqlxCrud;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.OrderDAO;
 import lk.ijse.cinemax.dto.PlaceOrderDto;
-import lk.ijse.cinemax.entity.Supplier;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -95,12 +94,12 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public Supplier search(String id) throws SQLException, ClassNotFoundException {
+    public MysqlxCrud.Order search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public ArrayList<Supplier> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<MysqlxCrud.Order> loadAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 

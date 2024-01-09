@@ -2,8 +2,9 @@ package lk.ijse.cinemax.dao.custom.impl;
 
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.SeatDAO;
+import lk.ijse.cinemax.dto.PlaceOrderDto;
 import lk.ijse.cinemax.entity.Seat;
-import lk.ijse.cinemax.entity.Supplier;
+import lk.ijse.cinemax.entity.Ticket;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -69,12 +70,12 @@ public class SeatDAOImpl implements SeatDAO {
     }
 
     @Override
-    public Supplier search(String id) throws SQLException, ClassNotFoundException {
+    public Seat search(String id) throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public ArrayList<Supplier> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Seat> loadAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 

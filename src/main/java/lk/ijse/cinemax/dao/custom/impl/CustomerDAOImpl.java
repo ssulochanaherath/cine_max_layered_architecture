@@ -3,7 +3,6 @@ package lk.ijse.cinemax.dao.custom.impl;
 import lk.ijse.cinemax.dao.SQLUtil;
 import lk.ijse.cinemax.dao.custom.CustomerDAO;
 import lk.ijse.cinemax.entity.Customer;
-import lk.ijse.cinemax.entity.Supplier;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -45,13 +44,13 @@ public class CustomerDAOImpl implements CustomerDAO {
         return SQLUtil.execute("DELETE FROM customer WHERE customerId = ?", customerId);
     }
 
-    public Supplier search(String seachId) throws SQLException, ClassNotFoundException {
+    public Customer search(String seachId) throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM customer WHERE customerId = ?", seachId);
         rst.next();
         return new Customer(seachId, rst.getString(2), rst.getString(3), rst.getString(4), rst.getString(5), rst.getString(6));
     }
 
-    public ArrayList<Supplier> loadAll() throws SQLException, ClassNotFoundException {
+    public ArrayList<Customer> loadAll() throws SQLException, ClassNotFoundException {
         ResultSet rst = SQLUtil.execute("SELECT * FROM customer");
         ArrayList<Customer> allCustomer = new ArrayList<>();
 
