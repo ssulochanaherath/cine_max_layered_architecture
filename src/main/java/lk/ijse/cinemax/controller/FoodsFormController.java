@@ -16,14 +16,20 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.CustomerBO;
+import lk.ijse.cinemax.bo.custom.ItemBO;
+import lk.ijse.cinemax.bo.custom.OrderBO;
+import lk.ijse.cinemax.bo.custom.PlaceOrderBO;
 import lk.ijse.cinemax.dto.CustomerDto;
 import lk.ijse.cinemax.dto.ItemDto;
 import lk.ijse.cinemax.dto.PlaceOrderDto;
 import lk.ijse.cinemax.dto.tm.CartTm;
-import lk.ijse.cinemax.model.CustomerModel;
-import lk.ijse.cinemax.model.ItemModel;
-import lk.ijse.cinemax.model.OrderModel;
-import lk.ijse.cinemax.model.PlaceOrderModel;
+import lk.ijse.cinemax.entity.Customer;
+//import lk.ijse.cinemax.model.CustomerModel;
+//import lk.ijse.cinemax.model.ItemModel;
+//import lk.ijse.cinemax.model.OrderModel;
+//import lk.ijse.cinemax.model.PlaceOrderModel;
 
 
 import javax.mail.*;
@@ -39,6 +45,10 @@ import java.util.List;
 import java.util.Properties;
 
 public class FoodsFormController {
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.CUSTOMER);
+    ItemBO itemBO = (ItemBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.ITEM);
+    OrderBO orderBO = (OrderBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.ORDER);
+    PlaceOrderBO placeOrderBO = (PlaceOrderBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.PLACEORDER);
     public JFXTextField txtQty;
     public JFXButton btnAddToCart;
     public TableView tblOrderCart;
@@ -68,10 +78,10 @@ public class FoodsFormController {
 
     public JFXComboBox<String> cmbCustomerId;
     public JFXComboBox<String> cmbItemCode;
-    private CustomerModel customerModel = new CustomerModel();
-    private ItemModel itemModel = new ItemModel();
-    private OrderModel orderModel = new OrderModel();
-    private PlaceOrderModel placeOrderModel = new PlaceOrderModel();
+//    private CustomerModel customerModel = new CustomerModel();
+//    private ItemModel itemModel = new ItemModel();
+//    private OrderModel orderModel = new OrderModel();
+//    private PlaceOrderModel placeOrderModel = new PlaceOrderModel();
     private ObservableList<CartTm> obList = FXCollections.observableArrayList();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
@@ -234,13 +244,15 @@ public class FoodsFormController {
     private void loadItemCodes() {
         ObservableList<String> obList = FXCollections.observableArrayList();
         try {
-            List<ItemDto> itemDtos = itemModel.loadAllItems();
+            List<ItemDto> itemDtos = itemBO.loadAllItem();
 
             for (ItemDto dto : itemDtos) {
                 obList.add(dto.getCode());
             }
             cmbItemCode.setItems(obList);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -249,26 +261,30 @@ public class FoodsFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDto> idList = customerModel.getAllCustomer();
+            ArrayList<Customer> idList = customerBO.getAllCustomer();
 
-            for (CustomerDto dto : idList) {
+            for (Customer dto : idList) {
                 obList.add(dto.getUserId());
             }
 
             cmbCustomerId.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void generateOrderId() {
         try {
-            String lastId = orderModel.getLastOrderId();
+            String lastId = orderBO.getLastOrderId();
 
             String newId = generateNextOrderId(lastId, "O");
 
             txtOrderId.setText(newId);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -344,7 +360,7 @@ public class FoodsFormController {
         //System.out.println("Place order form controller: " + cartTmList);
         var placeOrderDto = new PlaceOrderDto(orderId, date, customerId, cartTmList);
         try {
-            boolean isSuccess = placeOrderModel.placeOrder(placeOrderDto);
+            boolean isSuccess = placeOrderBO.placeOrder(placeOrderDto);
             if (isSuccess) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Order Success!").show();
 
@@ -408,11 +424,13 @@ public class FoodsFormController {
 
         txtQty.requestFocus();
         try {
-            ItemDto dto = itemModel.searchItem(code);
+            ItemDto dto = itemBO.searchItem(code);
             txtDescription.setText(dto.getDescription());
             txtUnitPrice.setText(String.valueOf(dto.getUnitPrice()));
             txtQtyOnHand.setText(String.valueOf(dto.getQtyOnHand()));
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -425,11 +443,13 @@ public class FoodsFormController {
         String id = cmbCustomerId.getValue();
 //        CustomerModel customerModel = new CustomerModel();
         try {
-            CustomerDto customerDto = customerModel.searchCustomer(id);
+            CustomerDto customerDto = customerBO.searchCustomer(id);
             txtCustomerName.setText(customerDto.getCustomerName());
             txtCustomerEmail.setText(customerDto.getCustomerEmail());
 
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

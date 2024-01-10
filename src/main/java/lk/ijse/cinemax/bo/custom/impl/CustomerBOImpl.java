@@ -75,7 +75,7 @@ public class CustomerBOImpl implements CustomerBO {
     }
 
 
-    public String getLastIdCustomer() throws SQLException, ClassNotFoundException {
+    public String getLastCustomerId() throws SQLException, ClassNotFoundException {
         return customerDAO.getLastId();
 
 //        ResultSet rst = SQLUtil.execute("SELECT customerId FROM customer ORDER BY customerId DESC LIMIT 1");

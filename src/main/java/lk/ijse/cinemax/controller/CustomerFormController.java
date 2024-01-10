@@ -14,19 +14,27 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.CustomerBO;
+import lk.ijse.cinemax.bo.custom.SignUpBO;
 import lk.ijse.cinemax.dto.CustomerDto;
 import lk.ijse.cinemax.dto.SignUpDto;
 import lk.ijse.cinemax.dto.tm.CustomerTm;
-import lk.ijse.cinemax.model.CustomerModel;
-import lk.ijse.cinemax.model.SignUpModel;
+import lk.ijse.cinemax.entity.Customer;
+//import lk.ijse.cinemax.model.CustomerModel;
+//import lk.ijse.cinemax.model.SignUpModel;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerFormController {
+
+    CustomerBO customerBO = (CustomerBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.CUSTOMER);
+    SignUpBO signUpBO = (SignUpBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.SIGNUP);
     public TableView<CustomerTm>tblCustomer;
     public TableColumn colUserId;
     public TableColumn colCustomerId;
@@ -47,9 +55,8 @@ public class CustomerFormController {
     public JFXTextField txtCustomerEmail;
     public TableColumn colCustomerEmail;
 
-    private CustomerModel cusModel = new CustomerModel();
-
-    private SignUpModel signUpModel = new SignUpModel();
+//    private CustomerModel cusModel = new CustomerModel();
+//    private SignUpModel signUpModel = new SignUpModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -195,7 +202,7 @@ public class CustomerFormController {
         var dto = new CustomerDto(userId,customerId,customerName,customerAddress,customerTelephone,customerEmail);
 
         try {
-            boolean isSaved = cusModel.saveCustomer(dto);
+            boolean isSaved = customerBO.saveCustomer(dto);
 
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Saved Customer!").show();
@@ -203,6 +210,8 @@ public class CustomerFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -219,13 +228,15 @@ public class CustomerFormController {
 
     private void generateCustomerid(){
         try {
-            String lastId = cusModel.getLastCustomerId();
+            String lastId = customerBO.getLastCustomerId();
 
             String newId = generateNextId(lastId, "C");
 
             txtCustomerId.setText(newId);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -243,7 +254,7 @@ public class CustomerFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<SignUpDto> idLIst = signUpModel.loadAllUserIds();
+            List<SignUpDto> idLIst = SignUpBO.loadAll();
 
             for (SignUpDto dto : idLIst) {
                 obList.add(dto.getUserId());
@@ -251,18 +262,20 @@ public class CustomerFormController {
             txtUserId.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void loadAllCustomer() {
-        var model = new CustomerModel();
+        //var model = new CustomerModel();
 
         ObservableList<CustomerTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDto> dtoList = model.getAllCustomer();
+            ArrayList<Customer> dtoList = customerBO.getAllCustomer();
 
-            for (CustomerDto dto : dtoList) {
+            for (Customer dto : dtoList) {
                 obList.add(
                         new CustomerTm(
                                 dto.getUserId(),
@@ -276,6 +289,8 @@ public class CustomerFormController {
             }
             tblCustomer.setItems(obList);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -310,13 +325,15 @@ public class CustomerFormController {
         var dto = new CustomerDto(userId,customerId,customerName,customerAddress,customerTelephone,customerEmail);
 
         try {
-            boolean isUpdated = cusModel.updateCustomer(dto);
+            boolean isUpdated = customerBO.updateCustomer(dto);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Updated Customer!").show();
                 clearFields();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -325,7 +342,7 @@ public class CustomerFormController {
         String customerId = txtCustomerId.getText();
 
         try {
-            boolean isDeleted = cusModel.deleteCustomer(customerId);
+            boolean isDeleted = customerBO.deleteCustomer(customerId);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Deleted Customer!").show();
                 loadAllCustomer();
@@ -335,6 +352,8 @@ public class CustomerFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -346,7 +365,7 @@ public class CustomerFormController {
         String seachId = txtCustomerSearch.getText();
 
         try {
-            CustomerDto customerDto = cusModel.searchCustomer(seachId);
+            CustomerDto customerDto = customerBO.searchCustomer(seachId);
 
             if (customerDto != null) {
                 txtUserId.setValue(customerDto.getUserId());
@@ -361,6 +380,8 @@ public class CustomerFormController {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

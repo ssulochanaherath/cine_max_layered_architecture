@@ -3,6 +3,7 @@ package lk.ijse.cinemax.bo.custom;
 import lk.ijse.cinemax.bo.SuperBO;
 import lk.ijse.cinemax.dto.*;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public interface TicketBO extends SuperBO {
 
     String getCustomerEmail(String selectedCustomerId) throws SQLException, ClassNotFoundException;
 
-    boolean saveTickets(TicketDto dto) throws SQLException, ClassNotFoundException;
+    boolean saveTickets(Connection connection, TicketDto dto) throws SQLException, ClassNotFoundException;
 
     boolean updateTickets(TicketDto dto) throws SQLException, ClassNotFoundException;
 

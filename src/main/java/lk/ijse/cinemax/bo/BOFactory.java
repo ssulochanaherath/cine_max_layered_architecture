@@ -14,7 +14,7 @@ public class BOFactory {
     }
 
     public enum BOTypes {
-        CUSTOMER, ITEM, LOGIN, MOVIE, PLACEORDER, SEAT, SIGNUP, SUPPLIER, TICKET
+        CUSTOMER, ITEM, LOGIN, MOVIE, PLACEORDER, SEAT, SIGNUP, SUPPLIER, TICKET, ORDER
     }
 
     public SuperBO getBo(BOTypes boTypes) {

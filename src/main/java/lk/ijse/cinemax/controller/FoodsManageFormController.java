@@ -15,10 +15,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.ItemBO;
 import lk.ijse.cinemax.dto.ItemDto;
 import lk.ijse.cinemax.dto.SupplierDto;
 import lk.ijse.cinemax.dto.tm.ItemTm;
-import lk.ijse.cinemax.model.ItemModel;
+//import lk.ijse.cinemax.model.ItemModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,6 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class FoodsManageFormController {
+    ItemBO itemBO = (ItemBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.ITEM);
     public TableView tblItem;
     public TableColumn colCode;
     public TableColumn colDescription;
@@ -42,7 +45,7 @@ public class FoodsManageFormController {
     public Label txtDate;
     public Label txtTime;
     private AnchorPane root;
-    private ItemModel itemModel = new ItemModel();
+    //private ItemModel itemModel = new ItemModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -177,12 +180,14 @@ public class FoodsManageFormController {
 
     private void generateFoodId() {
         try {
-            String lastFoodId = itemModel.generateFoodId();
+            String lastFoodId = itemBO.generateFoodId();
 
             String newFoodId = generateNewFoodId(lastFoodId, "F");
 
             txtCode.setText(newFoodId);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -229,13 +234,15 @@ public class FoodsManageFormController {
 
 //        var model = new ItemModel();
         try {
-            boolean isSaved = itemModel.saveItem(dto);
+            boolean isSaved = itemBO.saveItem(dto);
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "item saved!").show();
                 clearFields();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -244,7 +251,7 @@ public class FoodsManageFormController {
 //        var model = new ItemModel();
         ObservableList<ItemTm> obList = FXCollections.observableArrayList();
         try {
-            List<ItemDto> dtoList = itemModel.loadAllItems();
+            List<ItemDto> dtoList = itemBO.loadAllItem();
 
             for (ItemDto dto : dtoList) {
                 obList.add(new ItemTm(
@@ -258,6 +265,8 @@ public class FoodsManageFormController {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -270,12 +279,14 @@ public class FoodsManageFormController {
 
 //        var model = new ItemModel();
         try {
-            boolean isUpdated = itemModel.updateItem(new ItemDto(code, description, unitPrice, qtyOnHand));
+            boolean isUpdated = itemBO.updateItem(new ItemDto(code, description, unitPrice, qtyOnHand));
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "item updated").show();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -285,7 +296,7 @@ public class FoodsManageFormController {
         String code = txtCode.getText();
 
         try {
-            ItemDto dto = itemModel.searchItem(code);
+            ItemDto dto = itemBO.searchItem(code);
             if (dto != null) {
                 setFields(dto);
             } else {
@@ -293,6 +304,8 @@ public class FoodsManageFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -316,7 +329,7 @@ public class FoodsManageFormController {
         String searchMovie = txtMovieSearch.getText();
 
         try {
-            ItemDto itemDto = itemModel.searchItem(searchMovie);
+            ItemDto itemDto = itemBO.searchItem(searchMovie);
 
             if (itemDto != null) {
                 txtCode.setText(itemDto.getCode());
@@ -329,6 +342,8 @@ public class FoodsManageFormController {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -337,7 +352,7 @@ public class FoodsManageFormController {
         String code = txtCode.getText();
 
         try {
-            boolean isDeleted = itemModel.deleteItem(code);
+            boolean isDeleted = itemBO.deleteItem(code);
 
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Deleted Supplier!").show();
@@ -347,6 +362,8 @@ public class FoodsManageFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }

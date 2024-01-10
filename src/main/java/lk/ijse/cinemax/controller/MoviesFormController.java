@@ -12,9 +12,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.MovieBO;
+import lk.ijse.cinemax.bo.custom.TicketBO;
 import lk.ijse.cinemax.dto.MovieDto;
-import lk.ijse.cinemax.model.MovieModel;
-import lk.ijse.cinemax.model.TicketModel;
+//import lk.ijse.cinemax.model.MovieModel;
+//import lk.ijse.cinemax.model.TicketModel;
 import javafx.scene.image.Image;
 
 import java.net.URL;
@@ -28,6 +31,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class MoviesFormController implements Initializable {
+    MovieBO movieBO = (MovieBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.MOVIE);
+    TicketBO ticketBO = (TicketBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.TICKET);
     public TextField txtMovieName;
     public ImageView imgOne;
     public ImageView imgTwo;
@@ -37,8 +42,8 @@ public class MoviesFormController implements Initializable {
     public ImageView imgSix;
     public Label txtDate;
     public Label txtTime;
-    private TicketModel ticketModel = new TicketModel();
-    private MovieModel movieModel = new MovieModel();
+//    private TicketModel ticketModel = new TicketModel();
+//    private MovieModel movieModel = new MovieModel();
     private MovieDto movieDto = new MovieDto();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
@@ -386,7 +391,7 @@ public class MoviesFormController implements Initializable {
 
     private void loadImageHobbit() {
         try {
-            byte[] imageBytes = MovieModel.getImageData("Hobbit");
+            byte[] imageBytes = movieBO.getImageData("Hobbit");
 
             if (imageBytes != null) {
                 Image image = new Image(new ByteArrayInputStream(imageBytes));
@@ -394,12 +399,14 @@ public class MoviesFormController implements Initializable {
             }
         } catch (SQLException e) {
             handleSQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void loadImageSherlock() {
         try {
-            byte[] imageBytes = MovieModel.getImageData("Sherlock Holmes");
+            byte[] imageBytes = movieBO.getImageData("Sherlock Holmes");
 
             if (imageBytes != null) {
                 Image image = new Image(new ByteArrayInputStream(imageBytes));
@@ -407,12 +414,14 @@ public class MoviesFormController implements Initializable {
             }
         } catch (SQLException e) {
             handleSQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void loadImageTopGun() {
         try {
-            byte[] imageBytes = MovieModel.getImageData("Top Gun");
+            byte[] imageBytes = movieBO.getImageData("Top Gun");
 
             if (imageBytes != null) {
                 Image image = new Image(new ByteArrayInputStream(imageBytes));
@@ -420,12 +429,14 @@ public class MoviesFormController implements Initializable {
             }
         } catch (SQLException e) {
             handleSQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void loadImagePirates() {
         try {
-            byte[] imageBytes = MovieModel.getImageData("Pirates");
+            byte[] imageBytes = movieBO.getImageData("Pirates");
 
             if (imageBytes != null) {
                 Image image = new Image(new ByteArrayInputStream(imageBytes));
@@ -433,12 +444,14 @@ public class MoviesFormController implements Initializable {
             }
         } catch (SQLException e) {
             handleSQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void loadImageMission() {
         try {
-            byte[] imageBytes = MovieModel.getImageData("Mission Impossible");
+            byte[] imageBytes = movieBO.getImageData("Mission Impossible");
 
             if (imageBytes != null) {
                 Image image = new Image(new ByteArrayInputStream(imageBytes));
@@ -446,12 +459,14 @@ public class MoviesFormController implements Initializable {
             }
         } catch (SQLException e) {
             handleSQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     private void loadImageAvengers() {
         try {
-            byte[] imageBytes = MovieModel.getImageData("Avengers");
+            byte[] imageBytes = movieBO.getImageData("Avengers");
 
             if (imageBytes != null) {
                 Image image = new Image(new ByteArrayInputStream(imageBytes));
@@ -459,6 +474,8 @@ public class MoviesFormController implements Initializable {
             }
         } catch (SQLException e) {
             handleSQLException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

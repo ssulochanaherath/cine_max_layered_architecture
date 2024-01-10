@@ -13,11 +13,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.SeatBO;
+import lk.ijse.cinemax.bo.custom.TicketBO;
 import lk.ijse.cinemax.db.DbConnection;
 import lk.ijse.cinemax.dto.*;
 import lk.ijse.cinemax.dto.tm.TicketTm;
-import lk.ijse.cinemax.model.SeatModel;
-import lk.ijse.cinemax.model.TicketModel;
+//import lk.ijse.cinemax.model.SeatModel;
+//import lk.ijse.cinemax.model.TicketModel;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -33,6 +36,8 @@ import java.util.List;
 import java.util.Properties;
 
 public class TicketFormController {
+    SeatBO seatBO = (SeatBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.SEAT);
+    TicketBO ticketBO = (TicketBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.TICKET);
     public JFXComboBox<String> cmbCustomerIds;
     public JFXTextField txtTicketId;
     public JFXComboBox<String> cmbMovieId;
@@ -49,9 +54,9 @@ public class TicketFormController {
     public JFXTextField txtCustomerEmail;
     public Label txtDate;
     public Label txtTime;
-    private TicketModel ticketModel = new TicketModel();
-
-    private SeatModel seatModel = new SeatModel();
+//    private TicketModel ticketModel = new TicketModel();
+//
+//    private SeatModel seatModel = new SeatModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception {
         Node source = (Node) event.getSource();
@@ -210,7 +215,7 @@ public class TicketFormController {
     private void generateTicketId() {
         try {
             // Retrieve the last generated ticket ID from the database or file
-            String lastTicketId = ticketModel.getLastTicketId();
+            String lastTicketId = ticketBO.getLastTicketId();
 
             // Generate the next ticket ID
             String newTicketId = generateNextId(lastTicketId, "T");
@@ -219,6 +224,8 @@ public class TicketFormController {
             txtTicketId.setText(newTicketId);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -233,12 +240,12 @@ public class TicketFormController {
     }
 
     private void loadAllTickets() {
-        var model = new TicketModel();
+        //var model = new TicketModel();
 
         ObservableList<TicketTm> ticketTms = FXCollections.observableArrayList();
 
         try {
-            List<TicketDto> ticketList = model.loadAllTickets();
+            List<TicketDto> ticketList = ticketBO.loadAllTickets();
 
             for (TicketDto ticketDto : ticketList) {
                 ticketTms.add(
@@ -256,6 +263,8 @@ public class TicketFormController {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -272,7 +281,7 @@ public class TicketFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<CustomerDto> customerList = ticketModel.loadAllCustomerIds(); // Assume there is a method to load all customer details
+            List<CustomerDto> customerList = ticketBO.loadAllCustomerIds(); // Assume there is a method to load all customer details
 
             for (CustomerDto dto : customerList) {
                 obList.add(dto.getUserId());
@@ -283,10 +292,12 @@ public class TicketFormController {
             cmbCustomerIds.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, selectedCustomerId) -> {
                 if (selectedCustomerId != null) {
                     try {
-                        String customerEmail = ticketModel.getCustomerEmail(selectedCustomerId); // Assume there is a method to get customer email by ID
+                        String customerEmail = ticketBO.getCustomerEmail(selectedCustomerId); // Assume there is a method to get customer email by ID
                         txtCustomerEmail.setText(customerEmail);
                     } catch (SQLException e) {
                         e.printStackTrace();
+                        throw new RuntimeException(e);
+                    } catch (ClassNotFoundException e) {
                         throw new RuntimeException(e);
                     }
                 }
@@ -294,6 +305,8 @@ public class TicketFormController {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -319,7 +332,7 @@ public class TicketFormController {
         ObservableList<String> obmList = FXCollections.observableArrayList();
 
         try {
-            List<MovieDto> movieList = ticketModel.loadAllMovieIds();
+            List<MovieDto> movieList = ticketBO.loadAllMovieIds();
 
             for (MovieDto dto : movieList) {
                 obmList.add(dto.getMovieId());
@@ -328,6 +341,8 @@ public class TicketFormController {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -335,7 +350,7 @@ public class TicketFormController {
         ObservableList<String> obsList = FXCollections.observableArrayList();
 
         try {
-            List<SeatDto> seatList = ticketModel.loadAllSeatNos();
+            List<SeatDto> seatList = ticketBO.loadAllSeatNos();
 
             for (SeatDto dto : seatList) {
                 obsList.add(dto.getSeatId());
@@ -343,6 +358,8 @@ public class TicketFormController {
             cmbSeatIds.setItems(obsList);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -448,10 +465,10 @@ public class TicketFormController {
             connection.setAutoCommit(false);
 
             // Perform ticket booking
-            boolean isBooked = ticketModel.saveTicket(connection, dto);
+            boolean isBooked = ticketBO.saveTickets(connection, dto);
 
             // Perform seat hide
-            boolean isHide = seatModel.hideSeat(connection, seatId);
+            boolean isHide = seatBO.hideSeat(connection, seatId);
 
             if (isBooked && isHide) {
                 connection.commit();
@@ -483,6 +500,8 @@ public class TicketFormController {
 
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         } finally {
             try {
                 if (connection != null) {
@@ -542,10 +561,10 @@ public class TicketFormController {
         txtCustomerEmail.clear();
     }
 
-    public void cmbLoadShowtimeIds(ActionEvent event) throws SQLException{
+    public void cmbLoadShowtimeIds(ActionEvent event) throws SQLException, ClassNotFoundException {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
-        List<ShowTimeDto> idList = ticketModel.loadAllShowtimeIds();
+        List<ShowTimeDto> idList = ticketBO.loadAllShowtimeIds();
 
         for (ShowTimeDto dto : idList) {
             obList.add(dto.getShowTimeId());

@@ -12,9 +12,11 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.SupplierBO;
 import lk.ijse.cinemax.dto.SupplierDto;
 import lk.ijse.cinemax.dto.tm.SupplierTm;
-import lk.ijse.cinemax.model.SupplierModel;
+//import lk.ijse.cinemax.model.SupplierModel;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -23,6 +25,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SupplierFormController {
+    SupplierBO supplierBO = (SupplierBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.SUPPLIER);
     public TextField txtMovieSearch;
     public TableView tblSupplier;
     public TableColumn colSupplierId;
@@ -35,7 +38,7 @@ public class SupplierFormController {
     public JFXTextField txtSupplierAddress;
     public Label txtDate;
     public Label txtTime;
-    private SupplierModel supplierModel = new SupplierModel();
+    //private SupplierModel supplierModel = new SupplierModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -182,12 +185,12 @@ public class SupplierFormController {
     }
 
     private void loadAllSupplier() {
-        var supplierModel = new SupplierModel();
+        //var supplierModel = new SupplierModel();
 
         ObservableList<SupplierTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<SupplierDto> dtoList = supplierModel.loadAllSupplier();
+            List<SupplierDto> dtoList = supplierBO.loadAllSuppliers();
 
             for (SupplierDto dto : dtoList) {
                 obList.add(
@@ -202,6 +205,8 @@ public class SupplierFormController {
             tblSupplier.setItems(obList);
         } catch (SQLException e) {
             throw  new RuntimeException();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -214,12 +219,14 @@ public class SupplierFormController {
 
     private void generateSupplierId() {
         try {
-            String lastSupplierId = supplierModel.generateSupplierId();
+            String lastSupplierId = supplierBO.generateSupplierId();
 
             String newSupplierId = generateNewSupplierId(lastSupplierId, "S");
 
             txtSupplierId.setText(newSupplierId);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -238,7 +245,7 @@ public class SupplierFormController {
         String searchMovie  = txtMovieSearch.getText();
 
         try {
-            SupplierDto supplierDto = supplierModel.searchSupplier(searchMovie);
+            SupplierDto supplierDto = supplierBO.searchSuppliers(searchMovie);
 
             if(supplierDto != null){
                 txtSupplierId.setText(supplierDto.getSupplierId());
@@ -251,6 +258,8 @@ public class SupplierFormController {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -262,7 +271,7 @@ public class SupplierFormController {
         String supplierId = txtSupplierId.getText();
 
         try {
-            boolean isDeleted = supplierModel.deleteSupplier(supplierId);
+            boolean isDeleted = supplierBO.deleteSuppliers(supplierId);
 
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Deleted Supplier!").show();
@@ -272,6 +281,8 @@ public class SupplierFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -285,7 +296,7 @@ public class SupplierFormController {
         var dto = new SupplierDto(supplierId, name, address, tele);
 
         try {
-            boolean isUpdated = supplierModel.updateSupplier(dto);
+            boolean isUpdated = supplierBO.updateSuppliers(dto);
 
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Updated Supplier!").show();
@@ -293,6 +304,8 @@ public class SupplierFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -306,7 +319,7 @@ public class SupplierFormController {
         var dto = new SupplierDto(supplierId, name, address, tele);
 
         try {
-            boolean isSaved = supplierModel.saveSupplier(dto);
+            boolean isSaved = supplierBO.saveSuppliers(dto);
 
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Saved Supplier!").show();
@@ -314,6 +327,8 @@ public class SupplierFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }

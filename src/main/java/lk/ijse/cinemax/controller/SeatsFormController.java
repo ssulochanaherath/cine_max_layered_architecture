@@ -12,9 +12,12 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.SeatBO;
+import lk.ijse.cinemax.bo.custom.TicketBO;
 import lk.ijse.cinemax.dto.SeatDto;
-import lk.ijse.cinemax.model.SeatModel;
-import lk.ijse.cinemax.model.TicketModel;
+//import lk.ijse.cinemax.model.SeatModel;
+//import lk.ijse.cinemax.model.TicketModel;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -23,12 +26,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SeatsFormController {
-
+    SeatBO seatBO = (SeatBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.SEAT);
+    TicketBO ticketBO = (TicketBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.TICKET);
     public JFXComboBox cmbSeatId;
     public Label txtDate;
     public Label txtTime;
-    private SeatModel seatModel = new SeatModel();
-    private TicketModel ticketModel = new TicketModel();
+//    private SeatModel seatModel = new SeatModel();
+//    private TicketModel ticketModel = new TicketModel();
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
         Stage oldStage = (Stage) source.getScene().getWindow();

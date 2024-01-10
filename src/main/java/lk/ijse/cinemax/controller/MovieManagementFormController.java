@@ -15,9 +15,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.MovieBO;
 import lk.ijse.cinemax.dto.MovieDto;
 import lk.ijse.cinemax.dto.tm.MovieTm;
-import lk.ijse.cinemax.model.MovieModel;
+//import lk.ijse.cinemax.model.MovieModel;
 
 import javax.swing.*;
 import java.io.File;
@@ -30,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class MovieManagementFormController {
+    MovieBO movieBO = (MovieBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.MOVIE);
     public JFXTextField txtMovieId;
     public JFXTextField txtMovieName;
     public JFXTextField txtYear;
@@ -47,7 +50,7 @@ public class MovieManagementFormController {
     public JFXTextField txtDescription;
     public TableColumn colDescription;
 
-    private MovieModel movieModel = new MovieModel();
+    //private MovieModel movieModel = new MovieModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -198,7 +201,7 @@ public class MovieManagementFormController {
         dto.setImagePath(selectedImageFile != null ? selectedImageFile.getAbsolutePath() : null);
 
         try {
-            boolean isSaved = movieModel.saveMovie(dto);
+            boolean isSaved = movieBO.saveMovies(dto);
 
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Saved Movie!").show();
@@ -207,7 +210,7 @@ public class MovieManagementFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        } catch (IOException e) {
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
@@ -234,13 +237,15 @@ public class MovieManagementFormController {
 
     private void generateMovieId() {
         try {
-            String lastMovieId = movieModel.generateMovieId();
+            String lastMovieId = movieBO.generateMovieId();
 
             String newMovieId = generateNewMovieId(lastMovieId, "M");
 
             txtMovieId.setText(newMovieId);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }
@@ -255,12 +260,12 @@ public class MovieManagementFormController {
     }
 
     private void loadAllMovie() {
-        var movieModel = new MovieModel();
+        //var movieModel = new MovieModel();
 
         ObservableList<MovieTm> obList = FXCollections.observableArrayList();
 
         try {
-            List<MovieDto> dtoList = movieModel.loadAllMovies();
+            List<MovieDto> dtoList = movieBO.loadAllMovies();
 
             for (MovieDto dto : dtoList) {
                 obList.add(
@@ -277,6 +282,8 @@ public class MovieManagementFormController {
             tblMovies.setItems(obList);
         } catch (SQLException e) {
             throw new RuntimeException();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -324,13 +331,15 @@ public class MovieManagementFormController {
         dto.setImagePath(selectedImageFile != null ? selectedImageFile.getAbsolutePath() : null);
 
         try {
-            boolean isUpdated = movieModel.updateMovie(dto);
+            boolean isUpdated = movieBO.updateMovies(dto);
             if (isUpdated) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Updated Movie!").show();
                 clearFields();
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
         initialize();
     }
@@ -339,7 +348,7 @@ public class MovieManagementFormController {
         String movieId = txtMovieId.getText();
 
         try {
-            boolean isDeleted = movieModel.deleteMovie(movieId);
+            boolean isDeleted = movieBO.deleteMovies(movieId);
             if (isDeleted) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Movie Deleted!").show();
                 loadAllMovie();
@@ -348,6 +357,8 @@ public class MovieManagementFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -356,7 +367,7 @@ public class MovieManagementFormController {
         String searchMovie = txtMovieSearch.getText();
 
         try {
-            MovieDto movieDto = movieModel.searchMovie(searchMovie);
+            MovieDto movieDto = movieBO.searchMovies(searchMovie);
 
             if (movieDto != null) {
                 txtMovieId.setText(movieDto.getMovieId());
@@ -369,6 +380,8 @@ public class MovieManagementFormController {
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

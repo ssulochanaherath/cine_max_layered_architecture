@@ -9,13 +9,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.LoginBO;
 import lk.ijse.cinemax.dto.LoginDto;
-import lk.ijse.cinemax.model.LoginModel;
+//import lk.ijse.cinemax.model.LoginModel;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class LoginFormController {
+    LoginBO loginBO = (LoginBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.LOGIN);
     public TextField txtUserName;
     public TextField txtPassword;
 //    public AnchorPane rootNode;
@@ -39,10 +42,10 @@ public class LoginFormController {
         String userName = txtUserName.getText();
         String password = txtPassword.getText();
 
-        LoginModel loginModel = new LoginModel();
+        //LoginModel loginModel = new LoginModel();
 
         try{
-            LoginDto loginDto = loginModel.searchUser (userName, password);
+            LoginDto loginDto = loginBO.search (userName, password);
 
             if (loginDto != null) {
                 clearFields();

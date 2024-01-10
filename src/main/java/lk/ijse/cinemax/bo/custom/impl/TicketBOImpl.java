@@ -104,7 +104,7 @@ public class TicketBOImpl implements TicketBO {
 
 
     @Override
-    public boolean saveTickets(TicketDto dto) throws SQLException, ClassNotFoundException {
+    public boolean saveTickets(Connection connection, TicketDto dto) throws SQLException, ClassNotFoundException {
         return false;
     }
 

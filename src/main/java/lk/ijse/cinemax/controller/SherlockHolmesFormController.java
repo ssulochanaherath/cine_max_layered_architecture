@@ -12,8 +12,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.MovieBO;
 import lk.ijse.cinemax.dto.MovieDto;
-import lk.ijse.cinemax.model.MovieModel;
+//import lk.ijse.cinemax.model.MovieModel;
 
 import java.io.ByteArrayInputStream;
 import java.sql.SQLException;
@@ -22,6 +24,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class SherlockHolmesFormController {
+    MovieBO movieBO = (MovieBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.MOVIE);
     public Label txtDate;
     public Label txtTime;
     public ImageView movieImage;
@@ -30,7 +33,7 @@ public class SherlockHolmesFormController {
     public Label txtGenre;
     public JFXTextArea txtDescription;
     public Label txtId;
-    private MovieModel movieModel = new MovieModel();
+    //private MovieModel movieModel = new MovieModel();
 
     public void btnLogOutOnAction(MouseEvent event) throws Exception{
         Node source = (Node) event.getSource();
@@ -195,7 +198,7 @@ public class SherlockHolmesFormController {
 
     public void loadMovieData(String movieName) {
         try {
-            MovieDto movieDto = movieModel.getMovieName(movieName);
+            MovieDto movieDto = movieBO.getMovieName(movieName);
 
             if (movieDto != null) {
                 // Set movie details to the labels
@@ -206,7 +209,7 @@ public class SherlockHolmesFormController {
                 txtDescription.setText(movieDto.getDescription());
 
                 // Set the movie image
-                byte[] imageData = MovieModel.getImageData(movieName);
+                byte[] imageData = movieBO.getImageData(movieName);
                 if (imageData != null) {
                     Image image = new Image(new ByteArrayInputStream(imageData));
                     movieImage.setImage(image);
@@ -223,6 +226,8 @@ public class SherlockHolmesFormController {
         } catch (SQLException e) {
             // Handle SQL exception
             e.printStackTrace(); // You might want to handle this more gracefully in a production environment
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -9,8 +9,13 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.ItemBO;
+import lk.ijse.cinemax.bo.custom.MovieBO;
+import lk.ijse.cinemax.bo.custom.SeatBO;
+import lk.ijse.cinemax.bo.custom.SupplierBO;
 import lk.ijse.cinemax.db.DbConnection;
-import lk.ijse.cinemax.model.*;
+//import lk.ijse.cinemax.model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +26,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class DashboardFormController implements Initializable {
+    SupplierBO supplierBO = (SupplierBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.SUPPLIER);
+    ItemBO itemBO = (ItemBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.ITEM);
+    MovieBO movieBO = (MovieBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.MOVIE);
+    SeatBO seatBO = (SeatBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.SEAT);
+
     public Label txtDate;
     public Label txtSeatsCount;
     public Label txtMovieCount;
@@ -174,8 +184,8 @@ public class DashboardFormController implements Initializable {
 
     private void availableSuppliers() {
         try {
-            SupplierModel supplierModel = new SupplierModel();
-            int availableSuppliersCount = supplierModel.getAvailableSuppliersCount();
+            //SupplierModel supplierModel = new SupplierModel();
+            int availableSuppliersCount = supplierBO.getAvailableSuppliersCount();
 
             if (availableSuppliersCount > 0) {
                 txtSuppliers.setText(String.valueOf(availableSuppliersCount));
@@ -193,8 +203,8 @@ public class DashboardFormController implements Initializable {
 
     private void showItemInfo(String column, Label targetTextField, String itemCode) {
         try {
-            ItemModel itemModel = new ItemModel();
-            String value = itemModel.getItemInfo(column, itemCode);
+            //ItemModel itemModel = new ItemModel();
+            String value = itemBO.getItemInfo(column, itemCode);
 
             if (value != null) {
                 targetTextField.setText(value);
@@ -213,8 +223,8 @@ public class DashboardFormController implements Initializable {
 
     private void availableMovies() {
         try {
-            MovieModel movieModel = new MovieModel();
-            int availableMoviesCount = movieModel.getAvailableMoviesCount();
+            //MovieModel movieModel = new MovieModel();
+            int availableMoviesCount = movieBO.getAvailableMoviesCount();
 
             if (availableMoviesCount > 0) {
                 txtMovieCount.setText(String.valueOf(availableMoviesCount));
@@ -232,8 +242,8 @@ public class DashboardFormController implements Initializable {
 
     public void availableSeats() {
         try {
-            SeatModel seatModel = new SeatModel();
-            int availableSeatsCount = seatModel.getAvailableSeatsCount();
+            //SeatModel seatModel = new SeatModel();
+            int availableSeatsCount = seatBO.getAvailableSeatsCount();
 
             if (availableSeatsCount > 0) {
                 txtSeatsCount.setText(String.valueOf(availableSeatsCount));

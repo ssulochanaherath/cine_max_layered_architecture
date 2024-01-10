@@ -11,13 +11,16 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import lk.ijse.cinemax.model.SignUpModel;
+//import lk.ijse.cinemax.model.SignUpModel;
+import lk.ijse.cinemax.bo.BOFactory;
+import lk.ijse.cinemax.bo.custom.SignUpBO;
 import lk.ijse.cinemax.dto.SignUpDto;
 
 import java.awt.*;
 import java.sql.SQLException;
 
 public class SignupFormController {
+    SignUpBO signUpBO = (SignUpBO) BOFactory.getBoFactory().getBo(BOFactory.BOTypes.SIGNUP);
 
     public TextField txtUserId;
     public TextField txtFristName;
@@ -26,7 +29,7 @@ public class SignupFormController {
     public TextField txtPassword;
 
 
-    private SignUpModel signUpModel = new SignUpModel();
+    //private SignUpModel signUpModel = new SignUpModel();
 
     public void initialize() {
         generateUserId();
@@ -34,7 +37,7 @@ public class SignupFormController {
 
     private void generateUserId() {
         try {
-            String lastId = signUpModel.getLastUserId();
+            String lastId = signUpBO.getLastUserId();
 
             String newId = generateNextId(lastId, "U");
 
@@ -100,7 +103,7 @@ public class SignupFormController {
         var dto = new SignUpDto(userId,fristName,lastName,userName,password);
 
         try {
-            boolean isSaved = signUpModel.saveUser(dto);
+            boolean isSaved = signUpBO.save(dto);
 
             if (isSaved) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Successfully Created An Account!").show();
@@ -108,6 +111,8 @@ public class SignupFormController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
