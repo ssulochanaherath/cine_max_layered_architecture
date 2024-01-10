@@ -17,7 +17,9 @@ public interface SignUpBO extends SuperBO {
 
     SignUpDto search(String id) throws SQLException, ClassNotFoundException;
 
-    ArrayList<SignUpDto> loadAll() throws SQLException, ClassNotFoundException;
+    static ArrayList<SignUpDto> loadAll() throws SQLException, ClassNotFoundException {
+        return null;
+    }
 
     public String getLastUserId() throws SQLException;
 }
