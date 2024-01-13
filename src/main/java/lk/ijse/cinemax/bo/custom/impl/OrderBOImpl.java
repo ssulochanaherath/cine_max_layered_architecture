@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class OrderBOImpl implements OrderBO {
 
-    OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDao(DAOFactory.DAOTypes.PLACEORDER);
+    OrderDAO orderDAO = (OrderDAO) DAOFactory.getDaoFactory().getDao(DAOFactory.DAOTypes.ORDER);
 
     public String getLastOrderId() throws SQLException, ClassNotFoundException {
         return orderDAO.getLastOrderId();

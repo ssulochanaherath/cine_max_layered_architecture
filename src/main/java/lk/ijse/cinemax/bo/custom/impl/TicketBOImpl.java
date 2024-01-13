@@ -75,9 +75,10 @@ public class TicketBOImpl implements TicketBO {
     }
 
     public ArrayList<SeatDto> loadAllSeatNos() throws SQLException, ClassNotFoundException {
-    ArrayList<Seat> seat = seatDAO.loadAll();
-    ArrayList<SeatDto> seatDtos = new ArrayList<>();
-    for (Seat s : seat) {
+        /*ArrayList<SeatDto> seatDtos = new ArrayList<>();
+        ArrayList<Seat> seat = seatDAO.loadAll();
+
+        for (Seat s : seat) {
         seatDtos.add(new SeatDto(
                 s.getSeatId(),
                 s.getSeatNo(),
@@ -86,7 +87,7 @@ public class TicketBOImpl implements TicketBO {
                 s.getStatus()
         ));
     }
-    return seatDtos;
+    return seatDtos;*/
 //        ResultSet rst = SQLUtil.execute("SELECT * FROM seats");
 //        ArrayList<SeatDto> allSeat = new ArrayList<>();
 //
@@ -100,7 +101,27 @@ public class TicketBOImpl implements TicketBO {
 //            ));
 //        }
 //        return allSeat;
+        ArrayList<SeatDto> seatDtos = new ArrayList<>();
+
+        if (seatDAO != null) {
+            ArrayList<Seat> seat = seatDAO.loadAll();
+
+            for (Seat s : seat) {
+                seatDtos.add(new SeatDto(
+                        s.getSeatId(),
+                        s.getSeatNo(),
+                        s.getVertical(),
+                        s.getHorizontal(),
+                        s.getStatus()
+                ));
+            }
+        } else {
+            System.err.println("seatDAO is null");
+        }
+
+        return seatDtos;
     }
+
 
 
     @Override

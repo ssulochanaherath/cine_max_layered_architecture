@@ -5,6 +5,8 @@ import lk.ijse.cinemax.dao.custom.ItemDAO;
 import lk.ijse.cinemax.dto.tm.CartTm;
 import lk.ijse.cinemax.entity.Item;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -108,7 +110,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     public String getItemInfo(String column, String itemCode) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("SELECT " + column + " FROM item WHERE code = ?", itemCode);
+        //return SQLUtil.execute("SELECT " + column + " FROM item WHERE code = ?", itemCode);
 
 
 //        String value = null;
@@ -129,5 +131,38 @@ public class ItemDAOImpl implements ItemDAO {
 //            e.printStackTrace(); // Handle other SQLExceptions appropriately
 //        }
 //        return value;
+        String result = null;
+
+        Connection connection = null /* obtain a connection */ ;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        if (connection != null) {
+            String query = "SELECT " + column + " FROM item WHERE code = ?";
+            preparedStatement = connection.prepareStatement(query);
+
+            if (preparedStatement != null) {
+                preparedStatement.setString(1, itemCode);
+                resultSet = preparedStatement.executeQuery();
+
+                if (resultSet != null && resultSet.next()) {
+                    // Assuming the column is of type String; adjust accordingly
+                    result = resultSet.getString(column);
+                }
+            }
+        }
+
+        // Close resources in reverse order of opening
+        if (resultSet != null) {
+            resultSet.close();
+        }
+        if (preparedStatement != null) {
+            preparedStatement.close();
+        }
+        if (connection != null) {
+            connection.close();
+        }
+
+        return result;
     }
 }

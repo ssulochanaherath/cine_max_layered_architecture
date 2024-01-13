@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class MovieDAOImpl implements MovieDAO {
 
     public byte[] getImageData(String movieName) throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("SELECT image FROM movie WHERE movieName = ?", movieName);
+        //return SQLUtil.execute("SELECT image FROM movie WHERE movieName = ?", movieName);
 //        Connection connection = DbConnection.getInstance().getConnection();
 //
 //        String sql = "SELECT image FROM movie WHERE movieName = ?";
@@ -26,6 +26,19 @@ public class MovieDAOImpl implements MovieDAO {
 //        }
 //
 //        return null;
+        byte[] imageData = null;
+
+        ResultSet resultSet = SQLUtil.execute("SELECT image FROM movie WHERE movieName = ?", movieName);
+
+        if (resultSet.next()) {
+            Blob blob = resultSet.getBlob("image");
+
+            if (blob != null) {
+                imageData = blob.getBytes(1, (int) blob.length());
+            }
+        }
+
+        return imageData;
     }
 
     public boolean save(Movie dto) throws SQLException, ClassNotFoundException {
@@ -66,7 +79,13 @@ public class MovieDAOImpl implements MovieDAO {
     }
 
     public String generateMovieId() throws SQLException, ClassNotFoundException {
-        return SQLUtil.execute("SELECT movieId FROM movie ORDER BY movieId DESC LIMIT 1");
+        //return SQLUtil.execute("SELECT movieId FROM movie ORDER BY movieId DESC LIMIT 1");
+        ResultSet rst = SQLUtil.execute("SELECT movieId FROM movie ORDER BY movieId DESC LIMIT 1;");
+        if(rst.next()){
+            return rst.getString("movieId");
+        }else{
+            return null;
+        }
     }
 
     public MovieDto getMovieName(String movieName) throws SQLException, ClassNotFoundException {
@@ -89,7 +108,7 @@ public class MovieDAOImpl implements MovieDAO {
 
     public int getAvailableMoviesCount() throws SQLException, ClassNotFoundException {
         int count = 0;
-        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM movie WHERE imagePath IS NOT NULL");
+        ResultSet rst = SQLUtil.execute("SELECT COUNT(*) FROM movie WHERE image IS NOT NULL");
         try {
             if (rst.next()) {
                 count =  rst.getInt(1);

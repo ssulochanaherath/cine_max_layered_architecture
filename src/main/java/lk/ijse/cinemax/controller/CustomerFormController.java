@@ -254,10 +254,12 @@ public class CustomerFormController {
         ObservableList<String> obList = FXCollections.observableArrayList();
 
         try {
-            List<SignUpDto> idLIst = SignUpBO.loadAll();
+            List<SignUpDto> idList = SignUpBO.loadAll();
 
-            for (SignUpDto dto : idLIst) {
-                obList.add(dto.getUserId());
+            if (idList != null) {
+                for (SignUpDto dto : idList) {
+                    obList.add(dto.getUserId());
+                }
             }
             txtUserId.setItems(obList);
         } catch (SQLException e) {

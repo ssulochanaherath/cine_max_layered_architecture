@@ -277,11 +277,15 @@ public class FoodsFormController {
 
     private void generateOrderId() {
         try {
+
             String lastId = orderBO.getLastOrderId();
+            if(lastId != null){
+                String newId = generateNextOrderId(lastId, "O");
+                txtOrderId.setText(newId);
+            }else{
+                System.out.println("Last order id is null");
+            }
 
-            String newId = generateNextOrderId(lastId, "O");
-
-            txtOrderId.setText(newId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } catch (ClassNotFoundException e) {
